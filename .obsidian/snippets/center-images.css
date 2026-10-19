@@ -1,0 +1,22 @@
+/* Centra solo gli embed immagine con "center" nell'alt */
+
+/* Reading view e Live Preview: centra il contenitore dell'embed */
+.internal-embed.image-embed[alt*="center"] {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Live Preview: centra anche la riga che contiene l'embed */
+.cm-line:has(> .internal-embed.image-embed[alt*="center"]) {
+  text-align: center;
+}
+
+/* Immagini markdown standard ![center|300](url) */
+img[alt*="center"] {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

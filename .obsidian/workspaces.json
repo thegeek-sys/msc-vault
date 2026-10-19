@@ -1,157 +1,106 @@
 {
   "workspaces": {
-    "haskell": {
+    "security": {
       "main": {
-        "id": "fcce393b4e935028",
+        "id": "a310d496b77309dd",
         "type": "split",
         "children": [
           {
-            "id": "ca40eae8d1203fac",
+            "id": "3144d8953b013007",
             "type": "tabs",
             "children": [
               {
-                "id": "408c4254bd3ae0d3",
+                "id": "f9d9550fc634db1e",
                 "type": "leaf",
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "Programming languages/Programming languages.md",
+                    "file": "class/Security/Security.md",
                     "mode": "source",
                     "source": false
                   },
                   "icon": "lucide-file",
-                  "title": "Programming languages"
+                  "title": "Security"
                 }
               },
               {
-                "id": "9cb05f898ff21616",
+                "id": "6972a0d77097f973",
                 "type": "leaf",
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "Programming languages/Haskell/Haskell.md",
+                    "file": "class/Security/Symmetric Cryptography.md",
                     "mode": "source",
                     "source": false
                   },
                   "icon": "lucide-file",
-                  "title": "Haskell"
+                  "title": "Symmetric Cryptography"
                 }
               },
               {
-                "id": "71efb49c6dfd7418",
+                "id": "8bd4ffd7a7b77cbd",
                 "type": "leaf",
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "Funzioni di ordine superiore.md",
+                    "file": "class/Security/Introduction.md",
                     "mode": "source",
                     "source": false
                   },
                   "icon": "lucide-file",
-                  "title": "Funzioni di ordine superiore"
+                  "title": "Introduction"
                 }
               },
               {
-                "id": "fccc73ca802593f5",
+                "id": "58e8a7a61b066b0c",
                 "type": "leaf",
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "Programming languages/Haskell/Strutture dati.md",
+                    "file": "flet-notes/2026-10-19-security.md",
                     "mode": "source",
                     "source": false
                   },
                   "icon": "lucide-file",
-                  "title": "Strutture dati"
-                }
-              },
-              {
-                "id": "9d98c06213965959",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "Programming languages/Haskell/Classi e istanze.md",
-                    "mode": "source",
-                    "source": false
-                  },
-                  "icon": "lucide-file",
-                  "title": "Classi e istanze"
-                }
-              },
-              {
-                "id": "af41a6c8bdd4a752",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "Programming languages/Haskell/Funzioni e pattern matching.md",
-                    "mode": "source",
-                    "source": false
-                  },
-                  "icon": "lucide-file",
-                  "title": "Funzioni e pattern matching"
-                }
-              },
-              {
-                "id": "36bd6894784bf49a",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "Programming languages/Haskell/Foundamentals.md",
-                    "mode": "source",
-                    "source": false
-                  },
-                  "icon": "lucide-file",
-                  "title": "Foundamentals"
-                }
-              },
-              {
-                "id": "68c06984edb11d93",
-                "type": "leaf",
-                "state": {
-                  "type": "release-notes",
-                  "state": {
-                    "currentVersion": "1.12.7"
-                  },
-                  "icon": "lucide-book-up",
-                  "title": "Release Notes 1.12.7"
+                  "title": "2026-10-19-security"
                 }
               }
-            ]
+            ],
+            "currentTab": 3
           }
         ],
         "direction": "vertical"
       },
       "left": {
-        "id": "0481b4fa999e40b7",
+        "id": "739eb186ea4cc9ff",
         "type": "split",
         "children": [
           {
-            "id": "b3e310efa6fe5be3",
+            "id": "fc9b7766e60f736f",
             "type": "tabs",
             "children": [
               {
-                "id": "85bcbe3bb505bfd3",
+                "id": "fcfdffc5998424df",
                 "type": "leaf",
                 "state": {
                   "type": "file-explorer",
                   "state": {
                     "sortOrder": "alphabetical",
-                    "autoReveal": false
+                    "autoReveal": false,
+                    "showSearch": false,
+                    "searchQuery": ""
                   },
                   "icon": "lucide-folder-closed",
                   "title": "Files"
                 }
               },
               {
-                "id": "7e37bee405d0a323",
+                "id": "5190919fd846522b",
                 "type": "leaf",
                 "state": {
                   "type": "search",
                   "state": {
-                    "query": "@",
+                    "query": "",
                     "matchingCase": false,
                     "explainSearch": false,
                     "collapseAll": false,
@@ -163,7 +112,7 @@
                 }
               },
               {
-                "id": "7e79a21f4ed3953b",
+                "id": "57a6f16a51dac635",
                 "type": "leaf",
                 "state": {
                   "type": "bookmarks",
@@ -179,20 +128,19 @@
         "width": 300
       },
       "right": {
-        "id": "5bdfc0f5d848a517",
+        "id": "7604b1047f3aeeab",
         "type": "split",
         "children": [
           {
-            "id": "0e3b8432a13839aa",
+            "id": "0fe92bbf693fa7b5",
             "type": "tabs",
             "children": [
               {
-                "id": "64fab36f4ea02ee7",
+                "id": "bfbbd5fd43d0ae44",
                 "type": "leaf",
                 "state": {
                   "type": "backlink",
                   "state": {
-                    "file": "Funzioni di ordine superiore.md",
                     "collapseAll": false,
                     "extraContext": false,
                     "sortOrder": "alphabetical",
@@ -202,25 +150,24 @@
                     "unlinkedCollapsed": true
                   },
                   "icon": "links-coming-in",
-                  "title": "Backlinks for Funzioni di ordine superiore"
+                  "title": "Backlinks"
                 }
               },
               {
-                "id": "c3962d216286dd50",
+                "id": "0f5b3e90a2068488",
                 "type": "leaf",
                 "state": {
                   "type": "outgoing-link",
                   "state": {
-                    "file": "Funzioni di ordine superiore.md",
                     "linksCollapsed": false,
                     "unlinkedCollapsed": true
                   },
                   "icon": "links-going-out",
-                  "title": "Outgoing links from Funzioni di ordine superiore"
+                  "title": "Outgoing links"
                 }
               },
               {
-                "id": "47f571a7ad00612c",
+                "id": "c4b4bd8fbb2d9bc1",
                 "type": "leaf",
                 "state": {
                   "type": "tag",
@@ -235,200 +182,31 @@
                 }
               },
               {
-                "id": "70660d0306d13337",
+                "id": "9841eb45a0a16fec",
                 "type": "leaf",
                 "state": {
-                  "type": "outline",
-                  "state": {
-                    "file": "Funzioni di ordine superiore.md",
-                    "followCursor": false,
-                    "showSearch": false,
-                    "searchQuery": ""
-                  },
-                  "icon": "lucide-list",
-                  "title": "Outline of Funzioni di ordine superiore"
-                }
-              }
-            ]
-          }
-        ],
-        "direction": "horizontal",
-        "width": 300,
-        "collapsed": true
-      },
-      "left-ribbon": {
-        "hiddenItems": {
-          "switcher:Open quick switcher": false,
-          "graph:Open graph view": false,
-          "canvas:Create new canvas": false,
-          "daily-notes:Open today's daily note": false,
-          "templates:Insert template": false,
-          "command-palette:Open command palette": false,
-          "random-note:Open random note": false,
-          "audio-recorder:Start/stop recording": false,
-          "workspaces:Manage workspace layouts": false,
-          "bases:Create new base": false,
-          "table-editor-obsidian:Advanced Tables Toolbar": false,
-          "vscode-editor:Create Code File": false,
-          "omnisearch:Omnisearch": false
-        }
-      },
-      "active": "85bcbe3bb505bfd3",
-      "mtime": "2026-03-26T21:44:05+01:00"
-    },
-    "multicore": {
-      "main": {
-        "id": "fcce393b4e935028",
-        "type": "split",
-        "children": [
-          {
-            "id": "ca40eae8d1203fac",
-            "type": "tabs",
-            "children": [
-              {
-                "id": "408c4254bd3ae0d3",
-                "type": "leaf",
-                "pinned": true,
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "Class/Multicore/Multicore.md",
-                    "mode": "source",
-                    "source": false
-                  },
-                  "pinned": true,
-                  "icon": "lucide-file",
-                  "title": "Multicore"
-                }
-              }
-            ]
-          }
-        ],
-        "direction": "vertical"
-      },
-      "left": {
-        "id": "0481b4fa999e40b7",
-        "type": "split",
-        "children": [
-          {
-            "id": "b3e310efa6fe5be3",
-            "type": "tabs",
-            "children": [
-              {
-                "id": "85bcbe3bb505bfd3",
-                "type": "leaf",
-                "state": {
-                  "type": "file-explorer",
-                  "state": {
-                    "sortOrder": "alphabetical",
-                    "autoReveal": false
-                  },
-                  "icon": "lucide-folder-closed",
-                  "title": "Files"
-                }
-              },
-              {
-                "id": "7e37bee405d0a323",
-                "type": "leaf",
-                "state": {
-                  "type": "search",
-                  "state": {
-                    "query": "@",
-                    "matchingCase": false,
-                    "explainSearch": false,
-                    "collapseAll": false,
-                    "extraContext": false,
-                    "sortOrder": "alphabetical"
-                  },
-                  "icon": "lucide-search",
-                  "title": "Search"
-                }
-              },
-              {
-                "id": "7e79a21f4ed3953b",
-                "type": "leaf",
-                "state": {
-                  "type": "bookmarks",
-                  "state": {},
-                  "icon": "lucide-bookmark",
-                  "title": "Bookmarks"
-                }
-              }
-            ]
-          }
-        ],
-        "direction": "horizontal",
-        "width": 300
-      },
-      "right": {
-        "id": "5bdfc0f5d848a517",
-        "type": "split",
-        "children": [
-          {
-            "id": "0e3b8432a13839aa",
-            "type": "tabs",
-            "children": [
-              {
-                "id": "64fab36f4ea02ee7",
-                "type": "leaf",
-                "state": {
-                  "type": "backlink",
-                  "state": {
-                    "file": "Funzioni di ordine superiore.md",
-                    "collapseAll": false,
-                    "extraContext": false,
-                    "sortOrder": "alphabetical",
-                    "showSearch": false,
-                    "searchQuery": "",
-                    "backlinkCollapsed": false,
-                    "unlinkedCollapsed": true
-                  },
-                  "icon": "links-coming-in",
-                  "title": "Backlinks for Funzioni di ordine superiore"
-                }
-              },
-              {
-                "id": "c3962d216286dd50",
-                "type": "leaf",
-                "state": {
-                  "type": "outgoing-link",
-                  "state": {
-                    "file": "Funzioni di ordine superiore.md",
-                    "linksCollapsed": false,
-                    "unlinkedCollapsed": true
-                  },
-                  "icon": "links-going-out",
-                  "title": "Outgoing links from Funzioni di ordine superiore"
-                }
-              },
-              {
-                "id": "47f571a7ad00612c",
-                "type": "leaf",
-                "state": {
-                  "type": "tag",
+                  "type": "all-properties",
                   "state": {
                     "sortOrder": "frequency",
-                    "useHierarchy": true,
                     "showSearch": false,
                     "searchQuery": ""
                   },
-                  "icon": "lucide-tags",
-                  "title": "Tags"
+                  "icon": "lucide-ghost",
+                  "title": "all-properties"
                 }
               },
               {
-                "id": "70660d0306d13337",
+                "id": "833109e034757ab5",
                 "type": "leaf",
                 "state": {
                   "type": "outline",
                   "state": {
-                    "file": "Funzioni di ordine superiore.md",
                     "followCursor": false,
                     "showSearch": false,
                     "searchQuery": ""
                   },
                   "icon": "lucide-list",
-                  "title": "Outline of Funzioni di ordine superiore"
+                  "title": "Outline"
                 }
               }
             ]
@@ -440,24 +218,25 @@
       },
       "left-ribbon": {
         "hiddenItems": {
+          "random-note:Open random note": false,
+          "audio-recorder:Start/stop recording": false,
+          "workspaces:Manage workspace layouts": false,
           "switcher:Open quick switcher": false,
           "graph:Open graph view": false,
           "canvas:Create new canvas": false,
           "daily-notes:Open today's daily note": false,
           "templates:Insert template": false,
           "command-palette:Open command palette": false,
-          "random-note:Open random note": false,
-          "audio-recorder:Start/stop recording": false,
-          "workspaces:Manage workspace layouts": false,
           "bases:Create new base": false,
           "table-editor-obsidian:Advanced Tables Toolbar": false,
           "vscode-editor:Create Code File": false,
-          "omnisearch:Omnisearch": false
+          "omnisearch:Omnisearch": false,
+          "obsidian-git:Open Git source control": false
         }
       },
-      "active": "408c4254bd3ae0d3",
-      "mtime": "2026-03-26T21:44:24+01:00"
+      "active": "58e8a7a61b066b0c",
+      "mtime": "2026-10-19T15:01:37+02:00"
     }
   },
-  "active": "multicore"
+  "active": "security"
 }
