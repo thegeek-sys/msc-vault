@@ -50,9 +50,37 @@
               "icon": "lucide-file",
               "title": "2026-10-19-security"
             }
+          },
+          {
+            "id": "3506b804ff265fbc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "class/class.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "class"
+            }
+          },
+          {
+            "id": "30aca6e11fa5dbfc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "flet-notes/2026-10-20-ai.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2026-10-20-ai"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -111,8 +139,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "7604b1047f3aeeab",
@@ -220,24 +247,26 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "6972a0d77097f973",
+  "active": "30aca6e11fa5dbfc",
   "lastOpenFiles": [
+    "class/Artificial Intelligence/Artificial Intelligence.md",
+    "flet-notes/2026-10-20-ai.md",
+    "class/class.md",
+    "class/Artificial Intelligence",
+    "class/Security/Security.md",
+    "class/Security/Symmetric Cryptography.md",
     "files/Pasted image 20261019203611.png",
     "files/Pasted image 20261019200102.png",
     "files/Pasted image 20261019192036.png",
     "files/Pasted image 20261019190746.png",
     "flet-notes/2026-10-19-security.md",
-    "class/Security/Symmetric Cryptography.md",
     "files/Pasted image 20261019183203.png",
     "files/Pasted image 20261019181528.png",
     "files/Pasted image 20261019175336.png",
     "files/Pasted image 20261019164858.png",
     "files/Pasted image 20261019160827.png",
     "files/Pasted image 20261019154556.png",
-    "files/Pasted image 20261019154202.png",
     "class/Security/Introduction.md",
-    "class/Security/Security.md",
-    "class/class.md",
     "flet-notes/2026-10-14-security.md",
     "class/Security",
     "files",
