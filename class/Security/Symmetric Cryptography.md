@@ -2,6 +2,34 @@
 Class: "[[Security]]"
 ---
 ---
+## Index
+- [[#Introduction|Introduction]]
+	- [[#Introduction#Goals of Cryptrography|Goals of Cryptrography]]
+		- [[#Goals of Cryptrography#Confidentiality|Confidentiality]]
+		- [[#Goals of Cryptrography#Integrity|Integrity]]
+- [[#Kerckhoff’s Principle|Kerckhoff’s Principle]]
+		- [[#Goals of Cryptrography#Cryptorgraphic keys|Cryptorgraphic keys]]
+- [[#Randomness in security|Randomness in security]]
+	- [[#Randomness in security#True Randomness vs. Pseudorandomness|True Randomness vs. Pseudorandomness]]
+- [[#Symmetric Cryptography|Symmetric Cryptography]]
+	- [[#Symmetric Cryptography#One-Time Pad (OTP)|One-Time Pad (OTP)]]
+- [[#Block ciphers|Block ciphers]]
+	- [[#Block ciphers#Naive encryption via block cipher|Naive encryption via block cipher]]
+- [[#Advanced Encryption Standard|Advanced Encryption Standard]]
+- [[#Modes of operation|Modes of operation]]
+	- [[#Modes of operation#Electronic Code Book (ECB)|Electronic Code Book (ECB)]]
+		- [[#Electronic Code Book (ECB)#Drawbacks|Drawbacks]]
+	- [[#Modes of operation#Cipher Block Chaining (CBC)|Cipher Block Chaining (CBC)]]
+		- [[#Cipher Block Chaining (CBC)#Properties|Properties]]
+	- [[#Modes of operation#Counter (CTR)|Counter (CTR)]]
+		- [[#Counter (CTR)#Properties|Properties]]
+- [[#Message Authentication Code (MAC)|Message Authentication Code (MAC)]]
+	- [[#Message Authentication Code (MAC)#Naive MAC from a block cipher|Naive MAC from a block cipher]]
+- [[#Hash functions|Hash functions]]
+	- [[#Hash functions#Hash-and-MAC|Hash-and-MAC]]
+- [[#Authenticated encryption|Authenticated encryption]]
+	- [[#Authenticated encryption#Authenticated encryption with associated data (AEAD)|Authenticated encryption with associated data (AEAD)]]
+---
 ## Introduction
 ### Goals of Cryptrography
 
@@ -322,21 +350,25 @@ The [[Symmetric Cryptography#Naive MAC from a block cipher|naive MAC]] only work
 >
 >Currently it is still considered secure even with some weaknesses in the hash function (e.g. HASH-SHA1 is still considered secure).
 
-To sum it up in order to use the naive MAC (there are other types of MAC functions that make you use arbitrarily-long messages) you can either:
+To sum it up in order to use the *naive* MAC (there are other types of MAC functions that make you use arbitrarily-long messages) you can either:
 - hash the message and then apply the MAC function
 - use the HMAC
 
 ---
 ## Authenticated encryption
-In order to obtain confidentiality and integrity with symmetric encryption you need to combine encryption and a MAC, but not every combination is secure. Let’s analyze all the possible combinations:
-- **encrypt-and-MAC** → $c:=\text{End}_{k_{e}}(m), t:=\text{MAC}_{k_{m}}(m)$, the MAC is not designed for secrecy and may leak information about $m$ (e.g. repeated messages)
-- **MAC-then-encrypt** → $t:=\text{MAC}_{k_{m}}(m), c:=\text{Enc}_{k_{e}}(m\mid\mid t)$, prone to padding-oracle attacks (successfully used against TLS)
-- **encrypt-then-MAC** → $c:=Enc_{k_{e}}(m), t:=\text{MAC}_{k_{m}}(c)$, sound with independent keys $k_{e}\neq k_{m}$
+In order to obtain confidentiality and integrity with symmetric encryption you need to combine encryption and a MAC, but not every combination is secure.
+
+In order to achieve this goal we need two independent keys $k_{e}$ to encrypt, and $k_{m}$ for the MAC and we suppose that they do not change during a single communication (i.e. two parties exchange messages without changing the key). When it comes to $\text{MAC}_{k_{m}}$ we address any kind of *secure* MAC protocol (e.g. HMAC, CMAC etc.).
+
+Let’s now analyze all the possible combinations:
+- **encrypt-and-MAC** → $c:=\text{Enc}_{k_{e}}(m), t:=\text{MAC}_{k_{m}}(m)$ and send them together, the MAC is not designed for secrecy and may leak information about $m$ (e.g. in repeated messages the MAC is the same - we use the same key - while the encryption is different because the nonce/IV change every time).
+- **MAC-then-encrypt** → $t:=\text{MAC}_{k_{m}}(m), c:=\text{Enc}_{k_{e}}(m\mid\mid t)$, prone to padding-oracle attacks (successfully used against TLS). In fact the receiver could be deciphering data chosen by the attacker; with CBC the deciphering checks the padding, and if the receiver replies in a different way when the padding is wrong, the attacker may be able to reconstruct the plaintext by sending many modified ciphertext and observing the reactions of the receiver.
+- **encrypt-then-MAC** → $c:=Enc_{k_{e}}(m), t:=\text{MAC}_{k_{m}}(c)$, sound with independent keys $k_{e}\neq k_{m}$. In this way the receiver verifies the tag before deciphering, and if it doesn’t match trashes everything before touching the ciphertext.
 
 The general rule is that different instances of cryptographic primitives should use independent keys.
 
 ### Authenticated encryption with associated data (AEAD)
-There are modes that provide confidentiality and integrity in one operation (e.g. Galois/Counter Mode - GCM, which is a CTR-mode encryption plus an authentication tag computed during encryption, it is easy to parallelize and any bit flip in the ciphertext is detected).
+There are modes that provide confidentiality and integrity in one operation. One prime example is **GCM** (Galois/Counter Mode): the same as CTR, but computes an authentication tag when ciphering. When deciphering the tag is verified and if it doesn’t match, the result is rejected. In GCM every bit flip is detected, so it’s not possible the attack seen for CTR, and its possible to parallelize both encryption and decryption (just like in CTR).
 
 For *associated data* we refer to authenticated but not encrypted data (e.g. packet headers).
 

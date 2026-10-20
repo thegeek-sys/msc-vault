@@ -1,17 +1,17 @@
 {
-  "workspaces:load": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "R"
-    }
-  ],
   "workspaces:open-modal": [
     {
       "modifiers": [
         "Mod"
+      ],
+      "key": "R"
+    }
+  ],
+  "workspaces:save-and-load": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
       ],
       "key": "R"
     }

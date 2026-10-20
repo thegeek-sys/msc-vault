@@ -2,6 +2,12 @@
 Class: "[[Security]]"
 ---
 ---
+## Index
+- [[#What is security?|What is security?]]
+- [[#Model|Model]]
+	- [[#Model#Attacker model|Attacker model]]
+- [[#Defenses and Security Guarantees|Defenses and Security Guarantees]]
+---
 ## What is security?
 A system is _secure_ with respect to: 
 - a **system model** → what the system is and does
