@@ -15,5 +15,13 @@
       ],
       "key": "R"
     }
+  ],
+  "command-palette:open": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "P"
+    }
   ]
 }
