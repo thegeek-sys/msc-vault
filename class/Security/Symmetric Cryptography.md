@@ -341,3 +341,4 @@ There are modes that provide confidentiality and integrity in one operation (e.g
 For *associated data* we refer to authenticated but not encrypted data (e.g. packet headers).
 
 AES-GCM and ChaCha20-Poly1305 are the standard choices today (e.g., in TLS 1.3), but like CTR it’s not possible to reuse a nonce under the same key.
+
