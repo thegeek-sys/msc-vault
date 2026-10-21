@@ -77,10 +77,21 @@ The encryption shown in the picture guarantees confidentiality (Alice encrypts u
 
 ---
 ## RSA
-**RSA** (Rivest, Shamir, Adleman, 1977) is the most famous asymmetric cryptography scheme. As already said each party has a pair of keys, so that everybody can encrypt for you, but only you can decrypt.
+**RSA** (Rivest, Shamir, Adleman, 1977) is the most famous asymmetric cryptography scheme. As already said each party has a pair of keys $(pk,sk)$ where $pk=(e,n)$ and $sk=(d,n)$ and $n$ is the RSA modulus, so that everybody can encrypt for you, but only you can decrypt.
+
+![[Pasted image 20261021181435.png]]
+
+$$
+\begin{align}
+\text{encrypt:}\quad c=m^{e} \text{ mod }n\\
+\text{decrypt:}\quad m=c^{d}\text{ mod }n
+\end{align}
+$$
+where $m<n$ and $d$ is the multiplicative inverse of $e \text{ mod } \varphi(n)$
 
 >[!tldr] Number theory background
 >- *Fermat’s little theorem* → $x^{p}\equiv x\pmod{p}$ for a prime $p$
+>- then we have → $x^{p}\cdot x^{-1}\equiv x\cdot x^{-1}\pmod{p}\to x^{(p-1)}\equiv 1 \pmod{p}$ where $(p-1)$ is exactly $\varphi(p)$, follows the Euler’s theorem below
 >- *Euler’s theorem* → $x^{\varphi(n)}\equiv 1\pmod{n}$ if $x$ and $n$ are coprime
 >- for RSA moduli $n=pq$ (distinct primes $p$, $q$) → $\varphi(n)=\varphi(p)\cdot \varphi (q)=(p-1)(q-1)$
 >- $x^{k\varphi(n)+1}\equiv x\pmod{n}$ for *all* $x$ and integers $k$
@@ -88,5 +99,46 @@ The encryption shown in the picture guarantees confidentiality (Alice encrypts u
 ### Key generation
 1. choose two large primes $p$ and $q$
 2. compute $n=p\cdot q$ and $z=\varphi(n)=(p-1)(q-1)$
-3. choose $e<z$ coprime to $z$ → **the public key is $(e,n)$**
-4. find $d$ with $e\cdot d\equiv 1 \pmod{z}$ (using Euler’s theorem itself) → *the private key is $(d,n)$*
+3. choose $e<z$ coprime to $z$ → *the public key is $(e,n)$*
+4. find $d$ with $e\cdot d\equiv 1 \pmod{z}$ (using Euclidean algorithm) → *the private key is $(d,n)$*
+
+>[!question] Why decryption works
+>Seen that $e\cdot d\equiv 1\pmod{\varphi(n)}$ it means that $e\cdot d=k\cdot \varphi(n)+1$ for some $k$.
+>
+>Furthermore $x^{k\varphi(n)+1}= (x^{\varphi(n)})^{k}\cdot x \overset{\text{Euler}}{=}1^{k}\cdot x=x \pmod{n}$
+>$$(m^{e})^{d}=m^{ed}=m^{k\varphi(n)+1}\equiv m\pmod{n}$$
+
+>[!example]
+>Key generation:
+>- $p=5$, $q=11$ → $n=55$, $\varphi(n)=4\cdot 10=40$
+>- $e=3$ (coprime to $40$)
+>- $d=27$, since $3\cdot 27=81=2\cdot 40+1$ where $k=2$ and $\varphi(55)=40$
+>
+>Finally:
+>- encrypt $m=7$ → $c=7^{3}\text{ mod }55=13$
+>- decrypt $c=13$ → $m=13^{27}\text{ mod }55=7$
+>
+>In real-world keys $n$ has $2048$ bits or more
+
+### Security
+Encrypting with RSA is fairly easy ($c=m^{e}\text{ mod }n$), but decrypting without $d$ requires to compute $e$-th root modulo $n$, and for a composite $n$ (number which has at least one divider other $1$ and itself) this operation is hard (in the previous example would mean finding $x$ with $x^{3}\equiv 13 \pmod{55}$).
+
+The best known method would be to factor $n$ into $p$ and $q$, and then generating the keys.
+
+>[!info] Another method to find $p$ and $q$ using $\varphi(n)$
+>However also knowing $\varphi(n)$ is equivalent as knowing the factorization of $n$; we have 
+>$$
+>\begin{align}
+>\varphi(n)&=(p-1)(q-1)=pq-p-q+1= \\
+>&=n-p-q+1\to \boxed{p+q=n-\varphi(n)+1}
+>\end{align}
+>$$
+>At this point, it is possible to solve the following equation:
+>$$
+>t^{2}-(p+q)t+pq=(t-p)(t-q)=0
+>$$
+>
+>So I just have to solve the equation for $t$ and I will obtain $p$ and $q$ (possible because I know both $p+q$ and $pq=n$).
+
+For this reason it’s suggested to use a big $n$ in order to make it harder the factorization process (at least $2048$ bits, the biggest number ever factorized was $829$ bits in 2020).
+

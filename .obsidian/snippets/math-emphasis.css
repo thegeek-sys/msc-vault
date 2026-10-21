@@ -1,9 +1,15 @@
-/* Corsivo: formule nelle righe con testo enfatizzato */
-.markdown-source-view.mod-cm6 .cm-line:has(.cm-em) .math {
+/* Corsivo: formule dentro *...* */
+.markdown-source-view.mod-cm6 .cm-line
+> .cm-em.cm-formatting-em
+~ .math:has(~ .cm-em.cm-formatting-em) {
     font-style: italic !important;
+    color: var(--italic-color) !important;
 }
 
-/* Grassetto: formule nelle righe con testo in grassetto */
-.markdown-source-view.mod-cm6 .cm-line:has(.cm-strong) .math {
+/* Grassetto: formule dentro **...** */
+.markdown-source-view.mod-cm6 .cm-line
+> .cm-strong.cm-formatting-strong
+~ .math:has(~ .cm-strong.cm-formatting-strong) {
     font-weight: bold !important;
+    color: var(--bold-color) !important;
 }
