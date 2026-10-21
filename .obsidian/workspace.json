@@ -24,31 +24,17 @@
             }
           },
           {
-            "id": "6972a0d77097f973",
+            "id": "e3e8752b09ce8da9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "class/Security/Symmetric Cryptography.md",
+                "file": "class/Security/Asymmetric Cryptography.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Symmetric Cryptography"
-            }
-          },
-          {
-            "id": "8bd4ffd7a7b77cbd",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "class/Security/Introduction.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Introduction"
+              "title": "Asymmetric Cryptography"
             }
           },
           {
@@ -66,7 +52,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -125,8 +111,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "7604b1047f3aeeab",
@@ -234,13 +219,19 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "46594874379ee560",
+  "active": "e3e8752b09ce8da9",
   "lastOpenFiles": [
     "class/Security/Symmetric Cryptography.md",
-    "flet-notes/2026-10-21-sec.md",
     "class/Security/Introduction.md",
-    "class/Artificial Intelligence/Classical Planning Problems and State Spaces.md",
     "class/Security/Security.md",
+    "class/Security/Asymmetric Cryptography.md",
+    "flet-notes/2026-10-21-sec.md",
+    "files/Pasted image 20261021172753.png",
+    "files/Pasted image 20261021171207.png",
+    "files/Pasted image 20261021165628.png",
+    "files/Pasted image 20261021163733.png",
+    "files/Pasted image 20261021162012.png",
+    "class/Artificial Intelligence/Classical Planning Problems and State Spaces.md",
     "flet-notes/2026-10-20-ai.md",
     "class/class.md",
     "index.md",
@@ -252,11 +243,6 @@
     "files/Pasted image 20261019192036.png",
     "files/Pasted image 20261019190746.png",
     "files/Pasted image 20261019183203.png",
-    "files/Pasted image 20261019181528.png",
-    "files/Pasted image 20261019175336.png",
-    "files/Pasted image 20261019164858.png",
-    "files/Pasted image 20261019160827.png",
-    "files/Pasted image 20261019154556.png",
     "flet-notes/2026-10-14-security.md",
     "class/Security",
     "files",

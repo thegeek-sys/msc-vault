@@ -300,6 +300,8 @@ A cryptographic hash function $H(m)$ is deterministic, takes input of any length
 >
 >For this reason in hash functions a $d$-bit hash, a generic attack needs about $2^{d/2}$ messages to find a collision so the output must not be too short. A practical example is the SHA-1 (160 bits) where the best attacks need about $2^{61}-2^{63}$ operations instead of the generic $2^{80}$.
 >
+>However for an attacker is much harder, given an hash, to find another message with the same hash.
+>
 >The current standard for hash function is SHA-2 (e.g. SHA-256) and SHA-3 (Keccak).
 >
 >>[!tldr]- Security of hash functions over time
@@ -319,7 +321,9 @@ To sum it up:
 >The only use of the has is to address an accidental corruption, not an adversary
 
 ### Hash-and-MAC
-The [[Symmetric Cryptography#Naive MAC from a block cipher|naive MAC]] only works if the message fits into a block. In order to overcome this limit, first of all we compress the message using an hash function (creating a fixed length hash) and then the $\text{MAC}_{k}$ is computed on the hash. In this way it’s possible to manage messages of any length.
+A basic block-cipher MAC ([[Symmetric Cryptography#Naive MAC from a block cipher|naive MAC]]) construction may only process a single block. To support arbitrary-length messages, we need a construction designed for multiple blocks or a suitable hash-based MAC.
+
+In order to overcome this limit, first of all we compress the message using an hash function (creating a fixed length hash) and then the $\text{MAC}_{k}$ is computed on the hash. In this way it’s possible to manage messages of any length.
 
 ![[Pasted image 20261019200102.png]]
 
@@ -327,6 +331,10 @@ The [[Symmetric Cryptography#Naive MAC from a block cipher|naive MAC]] only work
 >Someone could ask “why don’t we directly hash key and data together, $t=H(k\mid\mid m)$?”, but with Merkle-Damgard hashes (SHA-1, SHA-256) it’s vulnerable to **length extension attacks**.
 >
 >The final digest coincide with the internal state after the last block. An attacker that knows $H(k\mid\mid m)$ and the length of $k\mid\mid m$ can then resume the computation from the exact state where the original computation stopped and add some data.
+>
+>![[Pasted image 20261021162012.png|350]]
+>
+>The output of the hash function is exactly the $n$-th step, so the computation can directly resume from this point.
 >
 >In particular this attack proceeds as it follows:
 >1. **Compute the padding** → the padding appended to $k\mid\mid m$ depends only on the length, which the attacker knows. Call it $\text{pad}$.
@@ -351,7 +359,7 @@ The [[Symmetric Cryptography#Naive MAC from a block cipher|naive MAC]] only work
 >Currently it is still considered secure even with some weaknesses in the hash function (e.g. HASH-SHA1 is still considered secure).
 
 To sum it up in order to use the *naive* MAC (there are other types of MAC functions that make you use arbitrarily-long messages) you can either:
-- hash the message and then apply the MAC function
+- a suitable hash-then-MAC construction → compute $H(m)$ and authenticate the digest using a secure MAC
 - use the HMAC
 
 ---

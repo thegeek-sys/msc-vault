@@ -1,0 +1,9 @@
+/* Corsivo: formule nelle righe con testo enfatizzato */
+.markdown-source-view.mod-cm6 .cm-line:has(.cm-em) .math {
+    font-style: italic !important;
+}
+
+/* Grassetto: formule nelle righe con testo in grassetto */
+.markdown-source-view.mod-cm6 .cm-line:has(.cm-strong) .math {
+    font-weight: bold !important;
+}
