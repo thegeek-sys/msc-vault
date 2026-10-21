@@ -251,20 +251,21 @@
                 }
               },
               {
-                "id": "30aca6e11fa5dbfc",
+                "id": "7c421a5c8bb29a8c",
                 "type": "leaf",
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "flet-notes/2026-10-20-ai.md",
+                    "file": "class/Artificial Intelligence/Classical Planning Problems and State Spaces.md",
                     "mode": "source",
                     "source": false
                   },
                   "icon": "lucide-file",
-                  "title": "2026-10-20-ai"
+                  "title": "Classical Planning Problems and State Spaces"
                 }
               }
-            ]
+            ],
+            "currentTab": 1
           }
         ],
         "direction": "vertical"
@@ -323,8 +324,7 @@
           }
         ],
         "direction": "horizontal",
-        "width": 300,
-        "collapsed": true
+        "width": 300
       },
       "right": {
         "id": "7604b1047f3aeeab",
@@ -432,9 +432,9 @@
           "obsidian-git:Open Git source control": false
         }
       },
-      "active": "f9d9550fc634db1e",
-      "mtime": "2026-10-20T17:37:11+02:00"
+      "active": "7c421a5c8bb29a8c",
+      "mtime": "2026-10-21T12:11:02+02:00"
     }
   },
-  "active": "ai"
+  "active": "security"
 }

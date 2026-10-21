@@ -368,7 +368,7 @@ Let’s now analyze all the possible combinations:
 The general rule is that different instances of cryptographic primitives should use independent keys.
 
 ### Authenticated encryption with associated data (AEAD)
-There are modes that provide confidentiality and integrity in one operation. One prime example is **GCM** (Galois/Counter Mode): the same as CTR, but computes an authentication tag when ciphering. When deciphering the tag is verified and if it doesn’t match, the result is rejected. In GCM every bit flip is detected, so it’s not possible the attack seen for CTR, and its possible to parallelize both encryption and decryption (just like in CTR).
+There are modes that provide confidentiality and integrity in one operation. One prime example is **GCM** (Galois/Counter Mode): the same as CTR, but computes an authentication tag when ciphering. (da capire se è corretto TODO) When deciphering the tag is verified and if it doesn’t match, the result is rejected. In GCM every bit flip is detected, so it’s not possible the attack seen for CTR, and its possible to parallelize both encryption and decryption (just like in CTR).
 
 For *associated data* we refer to authenticated but not encrypted data (e.g. packet headers).
 
