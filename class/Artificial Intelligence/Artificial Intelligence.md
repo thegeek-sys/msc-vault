@@ -1,1 +1,3 @@
-- [[Classical Planning Problems and State Spaces]]
+- [[Basics, and Blind Search]]
+- [[Heuristic search]]
+- 

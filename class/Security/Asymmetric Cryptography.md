@@ -2,6 +2,18 @@
 Class: "[[Security]]"
 ---
 ---
+## Index
+- [[#Key exchange|Key exchange]]
+- [[#Diffie-Hellman|Diffie-Hellman]]
+	- [[#Diffie-Hellman#Security|Security]]
+- [[#Asymmetric Cryptography|Asymmetric Cryptography]]
+- [[#RSA|RSA]]
+	- [[#RSA#Key generation|Key generation]]
+	- [[#RSA#Security|Security]]
+	- [[#RSA#Alternatives to RSA: elliptic curves|Alternatives to RSA: elliptic curves]]
+- [[#Hybrid encryption|Hybrid encryption]]
+- [[#Digital signatures|Digital signatures]]
+---
 ## Key exchange
 Symmetric encryption and MACs need a shared secret for each pair of parties ($n$ parties need $n(n-1)/2$ keys), so for a real-world application it would mean storing thousands of different keys.
 
@@ -151,3 +163,55 @@ The solution is to use **randomized padding** (e.g. OAEP), that make the encrypt
 
 >[!question] Would you rather want a small e or a small d?
 >Neither should be too small. A small $d$ can be recovered easily; a small $e$ allows taking the $e$-th root if no modular reduction occurred
+
+### Alternatives to RSA: elliptic curves
+So far we’ve just used cycle groups in modular arithmetic. The **elliptic curves** (*EC*) are another class of groups, whose elements are points in a curve.
+
+For well chosen curves (weak curves makes the discrete logarithm easy, typically we use standardized curves like P-256, Curve25519/Ed25519, secp256k1) there is no known sub-exponential algorithms for the discrete logarithm. Furthermore it needs much smaller keys compared to RSA (a EC key is $256$ bit long and gives almost $128$ bits of security, comparable to a RSA key of $3072$ bit).
+
+Elliptic curves cryptography uses the discrete logarithm problem generalized for the curves (e.g. ECDH, ECDSA, EdDSA, etc.).
+
+>[!tldr] Outlook, post-quantum cryptography
+>The Shor algorithm, on a sufficiently large quantum computer, efficiently computes both factorization and discrete logarithms, breaking:
+>- RSA
+>- Diffie-Hellman
+>- elliptic curves
+>- Symmetric crypto and hashes → are only mildly affected (sufficient to use $256$ bits keys)
+>
+>Even if a quantum-computer still doesn’t exists, as of today we need to protect ourselves against this attack due to “harvest now, decrypt later” (recorded traffic could be decrypted in the future).
+>
+>The solution is the *NIST standardized post-quantum schemes* of 2024, which presented *ML-KEM* (Kyber) for key exchange and *ML-DSA* (Dilithium) for signatures.
+>
+>However have been already deployed solutions in hybrid mode (classical + post-quantum) (e.g. in TLS key exchange).
+
+---
+## Hybrid encryption
+Both symmetric and asymmetric encryption have advantages and disadvantages.
+
+|            | Pro                          | Cons                                              |
+| ---------- | ---------------------------- | ------------------------------------------------- |
+| Symmetric  | fast                         | needs $n(n-1)/2$ keys to exchange in a secure way |
+| Asymmetric | public keys can be published | slow                                              |
+To overcome the limits of both parties the idea would be to combine both: encrypt symmetric key using asymmetric encryption, and the data symmetrically.
+
+![[Pasted image 20261022142843.png|470]]
+
+---
+## Digital signatures
+When using MACs (HMAC, CBC-MAC, etc.) they require a shared key (means $n(n-1)/2$ keys for $n$ parties) but there is no non-repudiation policy, so either party could have created the tag.
+
+The solution is to use **digital signatures** based on asymmetric cryptography: use the $sk$ to sign and the $pk$ for the verification. In this way only the holder of the private key and sign (non-repudiation), and everyone can verify a signature using the signer’s public key.
+
+>[!info] Using RSA for digital signatures
+>Alice’s private key $(d,n)$ (and $p$, $q$), public key $(e,n)$, secure hash function $H$.
+>
+>In order to sign $\sigma=H(m)^{d}\text{ mod }n$, and to verify $H(m)\overset{?}{=}\sigma^{e} \text{ mod }n$.
+>
+>![[Pasted image 20261022144409.png]]
+>
+>In practice it corresponds to RSA-PSS (with randomized padding), ECDSA, Ed25519.
+>
+>>[!question] Why sign $H(m)$?
+>>The first reason is *efficiency*: asymmetric cryptography is slow, so it is faster to only encrypt a short hash.
+>>
+>>Furthermore without hashing signature leak information (by using $\sigma=m^{d}$ anyone can obtain the message $m=\sigma^{e}$, as $e$ is public) and can be forged (given $\sigma=m^{d}$, then $\sigma^{x}=(m^{d})^{x}=(m^{x})^{d}$, so $\sigma^{x}$ is a valid signature of $m^{x}$).
