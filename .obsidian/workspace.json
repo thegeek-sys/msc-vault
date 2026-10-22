@@ -14,45 +14,45 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "class/Security/Security.md",
+                "file": "class/Artificial Intelligence/Artificial Intelligence.md",
                 "mode": "source",
                 "source": false
               },
               "pinned": true,
               "icon": "lucide-file",
-              "title": "Security"
+              "title": "Artificial Intelligence"
             }
           },
           {
-            "id": "e3e8752b09ce8da9",
+            "id": "7c421a5c8bb29a8c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "class/Security/Asymmetric Cryptography.md",
+                "file": "class/Artificial Intelligence/Classical Planning Problems and State Spaces.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Asymmetric Cryptography"
+              "title": "Classical Planning Problems and State Spaces"
             }
           },
           {
-            "id": "46594874379ee560",
+            "id": "476eb347f1dfbe0b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "flet-notes/2026-10-21-sec.md",
+                "file": "flet-notes/2026-10-22-ai.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-10-21-sec"
+              "title": "2026-10-22-ai"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -220,31 +220,32 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "e3e8752b09ce8da9",
+  "active": "476eb347f1dfbe0b",
   "lastOpenFiles": [
+    "files/IMG_3710.jpeg",
+    "files/IMG_3709.jpeg",
+    "class/Artificial Intelligence/Classical Planning Problems and State Spaces.md",
+    "class/Artificial Intelligence/Artificial Intelligence.md",
+    "flet-notes/2026-10-22-ai.md",
+    "class/Security/Asymmetric Cryptography.md",
     "files/Pasted image 20261021181435.png",
     "class/Security/Symmetric Cryptography.md",
     "class/Security/Introduction.md",
     "class/Security/Security.md",
-    "class/Security/Asymmetric Cryptography.md",
     "flet-notes/2026-10-21-sec.md",
     "files/Pasted image 20261021172753.png",
     "files/Pasted image 20261021171207.png",
     "files/Pasted image 20261021165628.png",
     "files/Pasted image 20261021163733.png",
     "files/Pasted image 20261021162012.png",
-    "class/Artificial Intelligence/Classical Planning Problems and State Spaces.md",
     "flet-notes/2026-10-20-ai.md",
     "class/class.md",
     "index.md",
-    "class/Artificial Intelligence/Artificial Intelligence.md",
     "flet-notes/2026-10-19-security.md",
     "class/Artificial Intelligence",
     "files/Pasted image 20261019203611.png",
     "files/Pasted image 20261019200102.png",
     "files/Pasted image 20261019192036.png",
-    "files/Pasted image 20261019190746.png",
-    "files/Pasted image 20261019183203.png",
     "flet-notes/2026-10-14-security.md",
     "class/Security",
     "files",

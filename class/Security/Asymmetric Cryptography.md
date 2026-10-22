@@ -142,3 +142,12 @@ The best known method would be to factor $n$ into $p$ and $q$, and then generati
 
 For this reason it’s suggested to use a big $n$ in order to make it harder the factorization process (at least $2048$ bits, the biggest number ever factorized was $829$ bits in 2020).
 
+Other then this **naive RSA is insecure**:
+- it is *deterministic* → the same $m$ always give the same $c$ (chose plaintext attacks, attacker encrypts $m$ with $pk$ and then compares)
+- it is *malleable* → $c\cdot r^{e}=(m\cdot r)^{e}$ (chosen ciphertext attacks, get $c\cdot r^{e}$ decrypted, receive $m\cdot r$, divide by $r$)
+- small messages with small $e$ are dangerous → if $m^{3}<n$ and $e=3$, there is no modular reduction (it’s enough the $e$-th ordinary root, common choice today $e=65537$)
+
+The solution is to use **randomized padding** (e.g. OAEP), that make the encryption probabilistic.
+
+>[!question] Would you rather want a small e or a small d?
+>Neither should be too small. A small $d$ can be recovered easily; a small $e$ allows taking the $e$-th root if no modular reduction occurred
