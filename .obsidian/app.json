@@ -10,5 +10,6 @@
   },
   "newFileLocation": "current",
   "newFileFolderPath": "files",
-  "attachmentFolderPath": "files"
+  "attachmentFolderPath": "files",
+  "newLinkFormat": "shortest"
 }

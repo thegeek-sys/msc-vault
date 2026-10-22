@@ -1,4 +1,4 @@
 # WiSe 2026/2027
-- [[Security]]
-- [[Artificial Intelligence]]
+- [[Security/Security|Security]]
+- [[Artificial Intelligence/Artificial Intelligence|Artificial Intelligence]]
 - 
