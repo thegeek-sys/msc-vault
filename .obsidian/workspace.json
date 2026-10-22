@@ -57,12 +57,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "class/class.md",
+                "file": "index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "class"
+              "title": "index"
             }
           }
         ],
@@ -236,6 +236,8 @@
   "active": "b74fd9dd8f5e2289",
   "lastOpenFiles": [
     "class/Artificial Intelligence/Artificial Intelligence.md",
+    "index.md",
+    "class/class.md",
     "flet-notes/2026-10-22-ai.md",
     "files/IMG_3710.jpeg",
     "files/IMG_3709.jpeg",
@@ -252,8 +254,6 @@
     "files/Pasted image 20261021163733.png",
     "files/Pasted image 20261021162012.png",
     "flet-notes/2026-10-20-ai.md",
-    "class/class.md",
-    "index.md",
     "flet-notes/2026-10-19-security.md",
     "class/Artificial Intelligence",
     "files/Pasted image 20261019203611.png",
