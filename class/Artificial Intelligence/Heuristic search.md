@@ -29,10 +29,12 @@ In the **heuristic search** the knowledge of expanding a state $s$ is given in t
 >[!info] **Definition** (heuristic function)
 >Let $\Theta=(S,A,c,T,I,S^{G})$ be a state space. A **heuristic function** for $\Theta$ is a function $h:S\to \mathbb{R}^{+}_{0}\cup \{\infty\}$ (we use $\infty$ for the cases where the goal states are not reachable from the current state).
 >
->Its value $h(s)$ for a state $s$ is referred to as the state’s *heuristic value* or *$h$ value*.
+>Its value $h(s)$ for a state $s$ is referred to as the state’s *heuristic value* or *$h$ value*. It’s an estimation of the cost of the path from $s\in S$ to $s'\in S^{G}$.
 
 >[!info] **Definition** (remaning cost, $h^{*}$)
 >Let $\Theta=(S,A,c,T,I,S^{G})$ be a state space. The **remaining cost** of $s \in S$ is the cost of an optimal plan for $s$, or $\infty$ if there exist no plan for $s$. The *perfect heuristic* for $\Theta$, written $h^{*}$, assigns every $s\in S$ its remaining cost as the heuristic value.
+>
+>It’s the exact cost of the path from $s\in S$ to $s'\in S^{G}$.
 
 Heuristic functions $h$ estimate remaining cost $h^{*}$.
 
@@ -51,7 +53,9 @@ Heuristic functions $h$ estimate remaining cost $h^{*}$.
 >- **consistent** → if for all transitions $s\overset{a}{\to}s'$, $h(s)\leq h(s')+c(a)$
 >
 >>[!note] Clarification
->>The intuition for consistency if that no matte which action is performed, the difference between $h(s)$ (original state) and $h(s')$ can’t be more than the actual cost of the action $c(a)$ (upon taking a step with cost $c(a)$, its estimate does not decrease by more than $c(a)$).
+>>The intuition for consistency if that no matter which action is performed, the difference between $h(s)$ (original state) and $h(s')$ can’t be more than the actual cost of the action $c(a)$ (upon taking a step with cost $c(a)$, its estimate does not decrease by more than $c(a)$).
+>>
+>>![[Pasted image 20261023165936.png|350]]
 
 >[!info] **Proposition**
 >1. If $h$ is admissible, then $h$ is goal-aware
@@ -61,8 +65,18 @@ Heuristic functions $h$ estimate remaining cost $h^{*}$.
 >>[!success] Proof
 >>For the first two claim is obvious: if is admissible then for each $s$, $h(s)\leq h^{*}(s)$ then if $s\in S^{G}$ then $h^{*}(s)=0$ then $h(s)=0$. The same applies for goal-aware.
 >>
+>>For the third proposition let $s\in S$ any state. We have two cases:
+>>1. $h^{*}+\infty$ → there is no plan for $s$, so $h(s)\leq \infty=h^{*}(s)$ is trivially verified
+>>2. $h^{*}(s)<\infty$ → there is an optimal plan
 >>
-
+>>In order to prove point (2) we proceed by induction backwards $i=n,n-1,\dots,0$ on:
+>>$$h(s_{i})\leq \sum^{n}_{j=i+1}c(a_{j})$$
+>>(the estimated cost by $h$ from $s_{i}$ to goal state is less than the sum of the single actual costs)
+>>
+>>- base ($i=n$) → the sum is empty ($=0$), because $s_{n}$ is a goal state, for the goal-awareness $h(s_{n})=0\leq 0$
+>>- step ($i\to i-1$) → assume the proposition for $i$; the transition $s_{i-1}\overset{a_{i}}{\to}s_{i}$ exists, so by consistency, $h(s_{i-1})\le h(s_i)+c(a_i)\le \sum^{n}_{j=i+1}c(a_{j})+c(a_{i}) =\sum_{j=i}^{n}c(a_j)$. 
+>>
+>>For $i=0$ this gives $h(s)\le h^*(s)$. $\blacksquare$
 
 ### The eternal trade-off
 In principle, the “estimation of the remaining cost” is an arbitrary function, in practice we want it to be **accurate** (a constant function $h(x)=0$ is not informative), i.e., close to the actual remaining cost.
