@@ -26,18 +26,43 @@ In the **heuristic search** the knowledge of expanding a state $s$ is given in t
 ---
 ## Heuristic functions
 
->[!info] Definition (heuristic function)
+>[!info] **Definition** (heuristic function)
 >Let $\Theta=(S,A,c,T,I,S^{G})$ be a state space. A **heuristic function** for $\Theta$ is a function $h:S\to \mathbb{R}^{+}_{0}\cup \{\infty\}$ (we use $\infty$ for the cases where the goal states are not reachable from the current state).
 >
 >Its value $h(s)$ for a state $s$ is referred to as the state’s *heuristic value* or *$h$ value*.
 
->[!info] Definition (remaning cost, $h^{*}$)
+>[!info] **Definition** (remaning cost, $h^{*}$)
 >Let $\Theta=(S,A,c,T,I,S^{G})$ be a state space. The **remaining cost** of $s \in S$ is the cost of an optimal plan for $s$, or $\infty$ if there exist no plan for $s$. The *perfect heuristic* for $\Theta$, written $h^{*}$, assigns every $s\in S$ its remaining cost as the heuristic value.
 
 Heuristic functions $h$ estimate remaining cost $h^{*}$.
 
 >[!note]
 >The value of $h$ depends only on the state $s$, not on the search node (i.e., the path we took to reach $s$). I’ll sometimes abuse notation writing “$h(n)$” instead of “$h(n.State)$”.
+
+### Properties
+
+>[!info] **Definition** (Safe/Goal-Aware/Admissible/Consistent)
+>Let $\Theta=(S,A,c,T,I,S^{G})$ be a state space and let $h$ be a heuristic for $\Theta$.
+>
+>The heuristic is called:
+>- **safe** → if $\forall s\in S$, $h(s)=\infty$ implies $h^{*}(s)=\infty$
+>- **goal-aware** → if $h(s)=0$ for all goal states $s\in S^{G}$
+>- **admissible** → if $\forall s \in S,\,\,h(s)\leq h^{*}(s)$
+>- **consistent** → if for all transitions $s\overset{a}{\to}s'$, $h(s)\leq h(s')+c(a)$
+>
+>>[!note] Clarification
+>>The intuition for consistency if that no matte which action is performed, the difference between $h(s)$ (original state) and $h(s')$ can’t be more than the actual cost of the action $c(a)$ (upon taking a step with cost $c(a)$, its estimate does not decrease by more than $c(a)$).
+
+>[!info] **Proposition**
+>1. If $h$ is admissible, then $h$ is goal-aware
+>2. If $h$ is admissible, then $h$ is safe
+>3. If $h$ is consistent and goal-aware, then $h$ is admissible
+>
+>>[!success] Proof
+>>For the first two claim is obvious: if is admissible then for each $s$, $h(s)\leq h^{*}(s)$ then if $s\in S^{G}$ then $h^{*}(s)=0$ then $h(s)=0$. The same applies for goal-aware.
+>>
+>>
+
 
 ### The eternal trade-off
 In principle, the “estimation of the remaining cost” is an arbitrary function, in practice we want it to be **accurate** (a constant function $h(x)=0$ is not informative), i.e., close to the actual remaining cost.
@@ -77,4 +102,23 @@ To achieve this goal, given a problem $\Pi$, a heuristic function $h$ for $\Pi$ 
 >Heuristic function $h$: Manhattan distance (here 36)
 >
 >The **Manhattan distance** between two points is the sum of the absolute differences of their coordinates, i.e. the distance travelled when moving only horizontally and vertically (as along the streets of a grid, without diagonal moves). For the 15-puzzle is the sum, over all tiles (excluding the blank), of the Manhattan distance between the tile’s current position and its goal position. It is the exact solution cost of the relaxed problem in which every tile can move independently to any adjacent cell, and it is therefore admissible.
+
+>[!bug] Heuristic function pitfalls: path planning
+>In the problem of path planning the situation is not as easy as in the previous examples.
+>
+>![[Pasted image 20261023125438.png]]
+>
+>In this picture we can observe $h^{*}$ (the actual remaining cost from each cell, taking obstacles into account). So that $h^{*}(I)=24$.
+>
+>Let’s now try to apply the Manhattan Distance to the previous example
+>
+>![[Pasted image 20261023125814.png]]
+>
+>In this case the topology is quite easy, so the Manhattan Distance is quite informative (few obstacles so the $h$ values are close to $h^{*}$ values). Even tho, if we reach $(3,8)$ with $h(2,8)=10$ and instead of trying to go down towards the goal, we go right the path is going to be much longer despite the numbers are getting smaller.
+>
+>![[Pasted image 20261023130256.png]]
+>
+>In this case, the topology seems more difficult because there are obstacles that forces you to take longer paths. The formula for $h$ is the same, but right now many cells have an $h$ value much lower than $h^{*}$ because the right path is another one.
+>
+>The Manhattan Distance ignores the obstacles, so its quality depends on the topology of the problem. With appropriately chosen walls, the research is drawn towards cells that seems closer to the goal but are dead eends.
 
