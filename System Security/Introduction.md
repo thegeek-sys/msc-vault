@@ -4,7 +4,7 @@ Class: "[[System Security]]"
 ---
 ## Reasoning about security
 ### What is a system?
-A system is an interconnected collection of components organized to accomplish some function while operating within a defined trust boundary. It interacts with other systems and its environment: hardware, software, humans and the physical world.
+A system is an interconnected collection of co mponents organized to accomplish some function while operating within a defined trust boundary. It interacts with other systems and its environment: hardware, software, humans and the physical world.
 
 ![[Pasted image 20261024212146.png]]
 
