@@ -137,7 +137,7 @@ Encrypting with RSA is fairly easy ($c=m^{e}\text{ mod }n$), but decrypting with
 
 The best known method would be to factor $n$ into $p$ and $q$, and then generating the keys.
 
->[!info] Another method to find $p$ and $q$ using $\varphi(n)$
+>[!info] Another method to find $p$ and $q$ using $\varphi(n)$ and $n$
 >However also knowing $\varphi(n)$ is equivalent as knowing the factorization of $n$; we have 
 >$$
 >\begin{align}
@@ -157,7 +157,7 @@ For this reason it’s suggested to use a big $n$ in order to make it harder the
 Other then this **naive RSA is insecure**:
 - it is *deterministic* → the same $m$ always give the same $c$ (chose plaintext attacks, attacker encrypts $m$ with $pk$ and then compares)
 - it is *malleable* → $c\cdot r^{e}=(m\cdot r)^{e}$ (chosen ciphertext attacks, get $c\cdot r^{e}$ decrypted, receive $m\cdot r$, divide by $r$)
-- small messages with small $e$ are dangerous → if $m^{3}<n$ and $e=3$, there is no modular reduction (it’s enough the $e$-th ordinary root, common choice today $e=65537$)
+- small messages with small $e$ are dangerous → if $m^{3}<n$ and $e=3$, there is no modular reduction (it’s enough the $e$-th ordinary root, common choice today $e=65537$, using bigger $e$ would mean difficult/slow exponentiation operations)
 
 The solution is to use **randomized padding** (e.g. OAEP), that make the encryption probabilistic.
 
