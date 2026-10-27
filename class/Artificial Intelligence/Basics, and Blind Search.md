@@ -28,7 +28,7 @@ To talk about **classical planning** we first have to introduce some terminologi
 - *stochastic* → the effects of the actions can be uncertain or probabilistic
 - *single-agent* → just one agent plans his actions
 - *multi-agent* → multiple agents interact with the environment
- 
+ **
 And classical planning is *deterministic*, *stochastic*, *fully-observable* (you can acknowledge at every moment in which state it is), *static* (the changes can only by applied by us) and *discrete* (usually finite. It is indeed the simplest form of sequential decision making and the **plan** is the path from the unique initial state to a goal state.
 
 Furthermore we can consider this kind of problems “relatively” simple (their general formulation is PSPACE-complete) but relevant. In further pages there will be stochastic multi-agent settings, which require (much) more complex plans prescribing how to act in every possible state (i.e. how to reach to every possible event/opponent move).

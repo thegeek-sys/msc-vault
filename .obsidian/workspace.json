@@ -50,9 +50,23 @@
               "icon": "lucide-file",
               "title": "Heuristic search"
             }
+          },
+          {
+            "id": "5b94de16293af874",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "flet-notes/2026-10-27-ai.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2026-10-27-ai"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -128,14 +142,14 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "flet-notes/2026-10-27-ai.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
                 "backlinkCollapsed": false,
-                "unlinkedCollapsed": true,
-                "file": "class/Artificial Intelligence/Basics, and Blind Search.md"
+                "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
               "title": "Backlinks"
@@ -221,10 +235,20 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ef7bcc4edee590d6",
+  "active": "5b94de16293af874",
   "lastOpenFiles": [
-    "class/Artificial Intelligence/Artificial Intelligence.md",
+    "class/Artificial Intelligence/Basics, and Blind Search.md",
+    "flet-notes/2026-10-27-ai.md",
+    "files/IMG_3758.jpeg",
+    "files/IMG_3757.jpeg",
+    "files/IMG_3755 1.jpeg",
     "class/Artificial Intelligence/Heuristic search.md",
+    "files/IMG_3755.jpeg",
+    "files/IMG_3754 2.jpeg",
+    "files/IMG_3754 1.jpeg",
+    "files/IMG_3754.jpeg",
+    "files/IMG_3754.heic",
+    "class/Artificial Intelligence/Artificial Intelligence.md",
     "class/Security/Cryptographic Protocols.md",
     "flet-notes/2026-10-26-sec.md",
     "files/Pasted image 20261026173640.png",
@@ -232,13 +256,6 @@
     "class/Security/Symmetric Cryptography.md",
     "class/Security/Security.md",
     "files/Pasted image 20261026170644.png",
-    "files/Pasted image 20261026170516.png",
-    "files/Pasted image 20261026165632.png",
-    "files/Pasted image 20261026165115.png",
-    "files/Pasted image 20261026164904.png",
-    "files/Pasted image 20261026164702.png",
-    "files/Pasted image 20261026164315.png",
-    "files/Pasted image 20261026163740.png",
     "class/Security/Asymmetric Cryptography.md",
     "flet-notes/2026-10-23-syssec.md",
     "System Security/Introduction.md",
@@ -247,7 +264,6 @@
     "flet-notes/2026-10-22-ai.md",
     "class/class.md",
     "class/System Security",
-    "class/Artificial Intelligence/Basics, and Blind Search.md",
     "flet-notes/2026-10-21-sec.md",
     "index.md",
     "class/Security/Introduction.md",
