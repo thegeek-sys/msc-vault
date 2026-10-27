@@ -2,13 +2,33 @@
 Class: "[[Artificial Intelligence]]"
 ---
 ---
+## Index
+- [[#Introduction|Introduction]]
+- [[#Some example of classical planning problems|Some example of classical planning problems]]
+	- [[#Some example of classical planning problems#Finding a route in a map|Finding a route in a map]]
+	- [[#Some example of classical planning problems#The “15-puzzle”|The “15-puzzle”]]
+	- [[#Some example of classical planning problems#FreeCell|FreeCell]]
+	- [[#Some example of classical planning problems#Finding bugs (in automata network)|Finding bugs (in automata network)]]
+- [[#Classical planning terminology|Classical planning terminology]]
+- [[#State spaces|State spaces]]
+- [[#Specifications|Specifications]]
+	- [[#Specifications#Simulator specification|Simulator specification]]
+	- [[#Specifications#Symbolic (aka declarative) specification|Symbolic (aka declarative) specification]]
+	- [[#Specifications#Enumerative specification|Enumerative specification]]
+- [[#Search concepts|Search concepts]]
+- [[#Blind search|Blind search]]
+	- [[#Blind search#Iterative deepening search|Iterative deepening search]]
+		- [[#Iterative deepening search#Guarantees and complexity|Guarantees and complexity]]
+	- [[#Blind search#Unit-cost search|Unit-cost search]]
+		- [[#Unit-cost search#Guarantees and complexity|Guarantees and complexity]]
+---
 ## Introduction
 To talk about **classical planning** we first have to introduce some terminologies:
 - *deterministic* → for each action there is only one outcome
 - *stochastic* → the effects of the actions can be uncertain or probabilistic
 - *single-agent* → just one agent plans his actions
 - *multi-agent* → multiple agents interact with the environment
-
+ 
 And classical planning is *deterministic*, *stochastic*, *fully-observable* (you can acknowledge at every moment in which state it is), *static* (the changes can only by applied by us) and *discrete* (usually finite. It is indeed the simplest form of sequential decision making and the **plan** is the path from the unique initial state to a goal state.
 
 Furthermore we can consider this kind of problems “relatively” simple (their general formulation is PSPACE-complete) but relevant. In further pages there will be stochastic multi-agent settings, which require (much) more complex plans prescribing how to act in every possible state (i.e. how to reach to every possible event/opponent move).

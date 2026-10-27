@@ -14,41 +14,41 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "class/Security/Security.md",
+                "file": "class/Artificial Intelligence/Artificial Intelligence.md",
                 "mode": "source",
                 "source": false
               },
               "pinned": true,
               "icon": "lucide-file",
-              "title": "Security"
+              "title": "Artificial Intelligence"
             }
           },
           {
-            "id": "ad70cb6032b7438c",
+            "id": "ef7bcc4edee590d6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "class/Security/Cryptographic Protocols.md",
+                "file": "class/Artificial Intelligence/Basics, and Blind Search.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Cryptographic Protocols"
+              "title": "Basics, and Blind Search"
             }
           },
           {
-            "id": "49eb7c520882678c",
+            "id": "1ec2ec809b68b3b1",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "flet-notes/2026-10-26-sec.md",
+                "file": "class/Artificial Intelligence/Heuristic search.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-10-26-sec"
+              "title": "Heuristic search"
             }
           }
         ],
@@ -134,7 +134,8 @@
                 "showSearch": false,
                 "searchQuery": "",
                 "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
+                "unlinkedCollapsed": true,
+                "file": "class/Artificial Intelligence/Basics, and Blind Search.md"
               },
               "icon": "links-coming-in",
               "title": "Backlinks"
@@ -220,14 +221,16 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ad70cb6032b7438c",
+  "active": "ef7bcc4edee590d6",
   "lastOpenFiles": [
+    "class/Artificial Intelligence/Artificial Intelligence.md",
+    "class/Artificial Intelligence/Heuristic search.md",
+    "class/Security/Cryptographic Protocols.md",
+    "flet-notes/2026-10-26-sec.md",
     "files/Pasted image 20261026173640.png",
     "files/Pasted image 20261026172744.png",
-    "flet-notes/2026-10-26-sec.md",
     "class/Security/Symmetric Cryptography.md",
     "class/Security/Security.md",
-    "class/Security/Cryptographic Protocols.md",
     "files/Pasted image 20261026170644.png",
     "files/Pasted image 20261026170516.png",
     "files/Pasted image 20261026165632.png",
@@ -236,14 +239,11 @@
     "files/Pasted image 20261026164702.png",
     "files/Pasted image 20261026164315.png",
     "files/Pasted image 20261026163740.png",
-    "files/Pasted image 20261026162157.png",
     "class/Security/Asymmetric Cryptography.md",
     "flet-notes/2026-10-23-syssec.md",
     "System Security/Introduction.md",
     "System Security",
     "class/System Security/System Security.md",
-    "class/Artificial Intelligence/Heuristic search.md",
-    "class/Artificial Intelligence/Artificial Intelligence.md",
     "flet-notes/2026-10-22-ai.md",
     "class/class.md",
     "class/System Security",

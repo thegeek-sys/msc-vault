@@ -63,10 +63,10 @@ Heuristic functions $h$ estimate remaining cost $h^{*}$.
 >3. If $h$ is consistent and goal-aware, then $h$ is admissible
 >
 >>[!success] Proof
->>For the first two claim is obvious: if is admissible then for each $s$, $h(s)\leq h^{*}(s)$ then if $s\in S^{G}$ then $h^{*}(s)=0$ then $h(s)=0$. The same applies for goal-aware.
+>>For the first two claim is obvious: if is admissible then for each $s$, $h(s)\leq h^{*}(s)$ then if $s\in S^{G}$ then $h^{*}(s)=0$ then $h(s)=0$. The same applies for safe.
 >>
 >>For the third proposition let $s\in S$ any state. We have two cases:
->>1. $h^{*}+\infty$ → there is no plan for $s$, so $h(s)\leq \infty=h^{*}(s)$ is trivially verified
+>>1. $h^{*}(s)=\infty$ → there is no plan for $s$, so $h(s)\leq \infty=h^{*}(s)$ is trivially verified
 >>2. $h^{*}(s)<\infty$ → there is an optimal plan
 >>
 >>In order to prove point (2) we proceed by induction backwards $i=n,n-1,\dots,0$ on:
