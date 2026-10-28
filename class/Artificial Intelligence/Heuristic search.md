@@ -2,6 +2,16 @@
 Class: "[[Artificial Intelligence]]"
 ---
 ---
+## Index
+- [[#Heuristic functions|Heuristic functions]]
+	- [[#Heuristic functions#Properties|Properties]]
+		- [[#Properties#Additional properties|Additional properties]]
+	- [[#Heuristic functions#The eternal trade-off|The eternal trade-off]]
+- [[#Greedy Best-First Search (GBFS)|Greedy Best-First Search (GBFS)]]
+- [[#A*|A*]]
+	- [[#A*#Variants|Variants]]
+	- [[#A*#Provable performance? GBFS vs. A*|Provable performance? GBFS vs. A*]]
+---
 ## Introduction
 In the problem of finding a route from Saarbrucken to Bucharest, we can use various approaches. By using BFS would mean “look at all locations 10km distant from SB, look at all locations 20km distant from SB”, by using DFS “just keep choosing arbitrary roads, following through until you hit an ocean, then back up”.
 
@@ -326,6 +336,34 @@ In this case we have an open list ordered by ascending $g+h$, and the duplicates
 >>Finally, with Lemma (A), this implies that $\overrightarrow{s}(A^{*}, \Theta)$ is an optimal plan for $\Theta$, which is what we needed to prove.
 >>$\begin{flalign}&& \blacksquare\end{flalign}$
 
+### Variants
+Our variant of $A^{*}$ does duplicate elimination but not **re-opening**. Re-opening consists of checking, when generating a node $n$ containing state $s$ that is already in the closed list, whether the new path to $s$ is cheaper. If so, remove $s$ from the closed list and insert $n$ into the open list.
 
+However with a consistent heuristic, this cannot happen so we don’t need re-opening to achieve optimality. Given an admissible but inconsistent $h$, if we either don’t use elimination at all, or use duplicate elimination with re-opening, then $A^{*}$ is optimal as well. Hence the well-known statement **“$A^{*}$ is optimal if $h$ is admissible”**
 
+>[!warning]
+>For our variant, being admissible is not enough for optimality. We need consistency.
+
+### Provable performance? GBFS vs. A*
+GBFS and $A^{*}$ share one weakness, but their characteristic failure modes are opposite.
+- **shared** → both are guided by $h$, so a flat heuristic gives no guidance. With 0-cost actions $h^*$ is flat and both degrade to blind search.
+- **ideal case $h = h^*$** → GBFS needs no extra condition, $A^{*}$ does.
+
+|                       | GBFS                                                                    | A\*                                                                       |
+| --------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Goal                  | just *reach* a goal                                                     | *prove* the plan is optimal                                               |
+| With $h=h^*$, $c > 0$ | every $h$-decreasing step lies on an optimal path ⇒ any tie-break works | all nodes on optimal paths have $f = C^*$ ⇒ a plateau of equal candidates |
+| Linear?               | yes                                                                     | only with tie-breaking by smaller $h$                                     |
+
+GBFS's linearity is paid for with a possibly terrible plan; $A^{*}$’s extra work is the price of optimality, not a defect.
+
+However if $h$ is “almost perfect” (i.e., $h^{*}(n)-h(n)\leq k$ for a constant $k$)
+- GBFS ignores $g$, so a **local minimum** traps it: the dead-end street looks close to the goal, and it must fill the whole thing before escaping.
+- A\* must expand every node with $f < C^*$. On an easy topology this is pure overhead (it searches the "upper right corner" GBFS skips).
+- With a **bad heuristic**, $g$ becomes an advantage: as A\* goes deeper into the dead end, $g$ grows and $f$ worsens, so the dead end stops looking attractive. GBFS has no such brake.
+
+**Rule of thumb:** good heuristic ⇒ GBFS tends to be faster; very bad heuristic ⇒ $g + h$ guides better and A\* wins.
+
+>[!example] $A^{*}$ ($g+h$), “difficult topology”
+>![[Pasted image 20261028192427.png]]
 
