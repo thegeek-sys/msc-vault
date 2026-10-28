@@ -249,8 +249,8 @@ In this case we have an open list ordered by ascending $g+h$, and the duplicates
 >$$\text{Arad}\to \text{Sibiu}\to \text{Rimnicu}\to \text{Pitesti}\to \text{Bucharest}$$
 >which is the optimal plan.
 
->[!into] **Theorem**
->$A^{*}$ is optimal
+>[!into] **Theorem** (Optimality of $A^{*}$)
+>Let $\Theta$ be a state space, and let $h$ be a heuristic function for $\Theta$. If $h$ is consistent and goal-aware, then the plan returned by $A^{*}$ (if any) is optimal
 >
 >>[!done] Proof
 >>The idea to prove that $A^{*}$ is optimal is via a correspondence (reduction) to uniform-cost search.
@@ -262,4 +262,70 @@ In this case we have an open list ordered by ascending $g+h$, and the duplicates
 >>>- $A^{h}:=\{a[s,s']\mid a\in A,s\in S,s'\in S, (s,a,s')\in T\}$
 >>>- $c^{h}:A^{h}\to \mathbb{R}^{+}_{0}$ is defined by $c^{h}(a[s,s']):=c(a)-[h(s)-h(s')]$
 >>>- $T^{h}=\{(s,a[s,s'],s')\mid(s,a,s')\in T\}$
+>>
+>>>[!info] **Lemma**
+>>>$c^{h}$ is a valid ($\geq 0$) cost function, $c(a)-[h(s)-h{s'}]\geq 0$
+>>>
+>>>>[!done] Proof
+>>>>By consistency, $h(s)-h(s')\leq c(a)$. This implies the claim.
+>>
+>>>[!example] Finding a route from SB to Bucharest
+>>>- states → $P$ (Paris), $SB$, $DD$ (Dresden), $B$ (Bucharest)
+>>>- actions → $c(SB\to P)=400$, $c(SB\to DD)=650$, $c(DD\to B)=1500$
+>>>- heuristic (straight line distance) → $h(P)=1900$, $h(SB)=1600$, $h(DD)=1200$
+>>>
+>>>$\Theta$ and $\Theta^{h}$:
+>>>![[Pasted image 20261028170132.png]]
+>>
+>>**Step 2: Identify the correspondence**
+>>>[!info] **Lemma** (A)
+>>>$\Theta$ and $\Theta^{h}$ have the same optimal plans
+>>>
+>>>>[!done] Proof
+>>>>Let $I=\overset{a_{1}}{s_{0}\to s_{1}},\dots,\overset{a_{n}}{s_{n-1}\to s_{n}}$ be a plan in $\Theta$, $s_{n}\in S^{G}$.
+>>>>
+>>>>The cost of the same plan in $\Theta^{h}$ is:
+>>>>$$
+>>>>\begin{align}
+>>>>&[-h(s_{0})+c(a_{1})+\cancel{h(s_{1})}]+[\cancel{-h(s_{1})}+c(a_{2})+\cancel{h(s_{2})}]+ \\
+>>>>&+\dots+[\cancel{-h(s_{n-1})}+c(a_{n})+h(s_{n})]= \\
+>>>>&=\sum^{n}_{i=1}c(a_{i})-h(I)+h(s_{n})=\sum^{n}_{i=1}c(a_{i})-h(I)+0
+>>>>\end{align}
+>>>>$$
+>>>>
+>>>>Thus the cost of plans in $\Theta^{h}$ are those of $\Theta$, minus a constant. The claim follows. $\blacksquare$
+>>
+>>>[!info] **Lemma** (B)
+>>>The search space of $A^{*}$ on $\Theta$ is isomorphic to that of uniform-cost search on $\Theta^{h}$
+>>>
+>>>>[!done] Proof
+>>>>Let $I=\overset{a_{1}}{s_{0}\to s_{1}},\dots,\overset{a_{n}}{s_{n-1}\to s_{n}}$ be any path in $\Theta$.
+>>>>
+>>>>The $g+h$ value, used by $A^{*}$, is $\sum^{n}_{i=1}c(a_{i})+h(s_{n})$ ($s_{n}$ is not necessary in $S^{G}$).
+>>>>
+>>>>The $g$ value in $\Theta^{h}$, used in uniform-cost search on $\Theta^{h}$, is $\sum^{n}_{i=1}c(a_{i})-h(I)+h(s_{n})$ (same computations used in Lemma (A)).
+>>>>
+>>>>The difference $-h(I)$ is constant, so the ordering of the open list is the same.
+>>
+>>The full picture is that (B) states that $A^*$ on $\Theta$ behaves like UCS on $\Theta^h$, while (A) states that the optimal plans for $\Theta^h$ are also optimal in $\Theta$.
+>>
+>>>[!example] Finding a route from SB to Bucharest (continue)
+>>>$A^{*}$ on $\Theta$ (left) and uniform-cost search on $\Theta^{h}$ (right)
+>>>![[Pasted image 20261028173357.png]]
+>>>
+>>>The difference of the costs between the two sides remain always the same.
+>>
+>>**Step 3: Put the pieces together**
+>>
+>>Denote by $\Theta$ the state space of $\Pi$. Let $\overrightarrow{s}(A^{*},\Theta)$ be the plan returned by $A^{*}$ run on $\Theta$. Denote by $\overrightarrow{S}(UCS,\Theta^{h})$ the set of plan that could in principle be returned by uniform-cost search run on $\Theta^{h}$.
+>>
+>>By Lemma (B), $\overrightarrow{s}(A^{*}, \Theta)\in \overrightarrow{S}(UCS,\Theta^{h})$ (with an appropriate tie-breaking between nodes with identical $g$ value, uniform cost search will return $\overrightarrow{s}(A^{*}, \Theta)$).
+>>
+>>By optimality of uniform-cost search, every element of $\overrightarrow{S}(UCS,\Theta^{h})$ is an optimal plan for $\Theta^{h}$. Thus $\overrightarrow{s}(A^{*}, \Theta A)$ is an optimal plan for $\Theta^{h}$.
+>>
+>>Finally, with Lemma (A), this implies that $\overrightarrow{s}(A^{*}, \Theta)$ is an optimal plan for $\Theta$, which is what we needed to prove.
+>>$\begin{flalign}&& \blacksquare\end{flalign}$
+
+
+
 
