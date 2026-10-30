@@ -1,0 +1,1 @@
+{"path":"files/Pasted image 20261029170300.png","text":"Client Server ° Client Hello Server Hello ServerCertificate ServerKeyExchange ClientCertificateRequest ServerHelloDone e ClientCertificate ClientKeyExchange e CertificateVerify ChangeCipherSpec a Finished ChangeCipherSpec Finished","libVersion":"0.5.0","langs":"eng"}
