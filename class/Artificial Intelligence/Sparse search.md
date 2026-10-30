@@ -171,7 +171,8 @@ $Select$ must have “sufficient exploitation” → there must be a bias to max
 
 However the completeness and optimality are mainly theoretical. Typically MCTS runs out of time long before convergence, but convergence implies **anytime behavior** (MCTS can select good actions quickly, and guarantees to improve if more time is available).
 
-### Search control (exploitation vs. exploitation)
+---
+## Search control (exploitation vs. exploitation) in MCTS
 
 >[!question] How to take action decisions in $Select$? So as to guarantee convergence and obtain good practical performance?
 >There is a lot of literature on this, but **UCT** is still the canonical choice
@@ -249,15 +250,11 @@ $$
 Prefers to explore actions that appear promising according to $\hat{\pi}_{tree}$ and enhances $Q(n, a)$ knowledge with knowledge captured by $\hat{\pi}_{tree}$
 
 ### Informing $Q$-values and updates with heuristic functions
-## Informing Q-values and updates with heuristic functions
-
 Plain MCTS knows nothing about the problem: every $Q(n,a)$ starts at zero, and the only information it ever gets comes from random rollouts. In cost-optimal classical planning we usually *do* have extra knowledge, namely a heuristic $h$ that estimates the remaining cost to the goal. This slide shows two places where MCTS can use it.
-
-### Q-values: start from a guess, not from zero
+#### Q-values: start from a guess, not from zero
 By default every action starts with $Q(n,a) := 0$. With a heuristic we can start from something much more meaningful:
 $$Q(n,a) := -c(a) - h(n')$$
 where $n'$ is the successor node reached by applying $a$. The reasoning is simple. $Rewards$ are negative costs, so the value of an action is minus the total cost of the plan it starts. That cost is roughly the price of the action itself, $c(a)$, plus what is still missing from $n'$ to the goal, which is exactly what $h(n')$ estimates. So each action begins with a plausible value instead of an uninformative 0, and the averages need fewer simulations to settle (**faster convergence**).
-
 #### Updates: don't trust a single rollout alone
 Normally the update after an iteration uses only the reward $r$ of the terminal node $n_T$ reached by the rollout. One random rollout is a very noisy sample of how good the node really is. It’s useful to mix in the heuristic:
 $$\frac{r + \left(-h(n'_L)\right)}{2}$$
@@ -286,9 +283,9 @@ $$
 >
 > |   | 1 | 2 | 3 |
 > |---|---|---|---|
-> | **A** | I (start) | ■ | |
-> | **B** | | | |
-> | **C** | | ■ | G (goal) |
+> | A | I (start) | ■ | |
+> | B | | | |
+> | C | | ■ | G (goal) |
 >
 > - Actions: only S (south) and E (east). ■ = blocked cell.
 > - Applicable actions: A1: S · B1: S, E · B2: E · B3: S · C1 and C3: none (terminal).
@@ -335,4 +332,20 @@ $$
 > ```
 >
 > The search has concentrated on the plan **S, E, E, S**, which reaches the goal.
+> 
+> ![[Pasted image 20261030200156.png]]
+
+---
+## MCTS hyperparameters
+**Hyperparameters** are choices made by the algorithm designer before execution (i.e., values ​​that the algorithm neither calculates nor modifies on its own).
+
+In MCTS, $Q(n,a)$ and $N(n,a)$ are values ​​that the algorithm computes during the search process. The constant $c$ in the UCT formula, however, is set by you; it is a hyperparameter.
+
+The hyperparameters in MCTS are:
+- **terminal states, rollout horizon, reward function** → might be naturally part of the problem; but are often algorithm parameters chosen by designer for efficacy
+- **guidance** → many options; even when using UCT only, the $Select()$ function has the parameter $c$
+- **updates** → also various options (not discussed here); in particular, Bellman updates are much stronger when applicable
+- **learning** → again many options
+
+MCTS really is an algorithm schema, not an algorithm. All successful MCTS applications engineer the algorithm to their specific needs.
 
