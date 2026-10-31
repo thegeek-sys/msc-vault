@@ -1,0 +1,1 @@
+{"path":"files/Pasted image 20261031184530.png","text":"higher addresses OxTFEFFFFde000 <— rsp: frame of test 0x7fFF17dag0ee <— puts, printf, malloc 0x555555559000 <«—— once printf allocates 2| oxs55555556000 | .rodata r— |«——— \"s3cret\" at 0x555555556004 @ | 0x555555555000 | text r-x |[«——— rip = 0x5555555551a4, in test lower addresses","libVersion":"0.5.0","langs":"eng"}
