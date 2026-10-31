@@ -237,15 +237,15 @@ Their size depends on the architecture: **64 bits** on x86-64, **32 bits** on IA
 ### Important x86-64 registers
 Registers are small, fast storage units inside the CPU. There are **general purpose** and **special purpose** registers. Many more exist (FPU, SSE, ...) but they are not interesting for us.
 #### General purpose registers
-| x86-64    | IA-32 | Typical purpose                          |
-| --------- | ----- | ---------------------------------------- |
-| `rax`     | `eax` | Accumulator; holds the **return value**  |
-| `rbx`     | `ebx` | Base address for addressing              |
-| `rcx`     | `ecx` | Counter for loops, index                 |
-| `rdx`     | `edx` | Data; upper half for `mul` / `div`       |
-| `rsi`     | `esi` | Memory address for string source         |
-| `rdi`     | `edi` | Memory address for string destination    |
-| `r8`-`r15` | -    | General use (x86-64 only)                |
+| x86-64     | IA-32 | Typical purpose                         |
+| ---------- | ----- | --------------------------------------- |
+| `rax`      | `eax` | Accumulator; holds the **return value** |
+| `rbx`      | `ebx` | Base address for addressing             |
+| `rcx`      | `ecx` | Counter for loops, index                |
+| `rdx`      | `edx` | Data; upper half for `mul` / `div`      |
+| `rsi`      | `esi` | Memory address for string source        |
+| `rdi`      | `edi` | Memory address for string destination   |
+| `r8`-`r15` | -     | General use (x86-64 only)               |
 
 >[!warning] Only a convention
 >Compilers use these registers freely, but some instructions insist on specific ones, e.g. `loop` counts down `rcx`.
