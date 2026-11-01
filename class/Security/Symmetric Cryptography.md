@@ -31,7 +31,7 @@ Class: "[[Security]]"
 	- [[#Authenticated encryption#Authenticated encryption with associated data (AEAD)|Authenticated encryption with associated data (AEAD)]]
 ---
 ## Introduction
-### Goals of Cryptrography
+### Goals of Cryptography
 
 >[!warning] Composabilty
 >Confidentiality and integrity are independent goals.

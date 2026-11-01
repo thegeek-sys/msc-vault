@@ -14,59 +14,73 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "class/System Security/System Security.md",
+                "file": "class/Security/Security.md",
                 "mode": "source",
                 "source": false
               },
               "pinned": true,
               "icon": "lucide-file",
-              "title": "System Security"
+              "title": "Security"
             }
           },
           {
-            "id": "a2a54ae8c255a62b",
+            "id": "29ed0cae155e8a0b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "class/System Security/x86-64 assembly.md",
+                "file": "class/Security/TLS.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "x86-64 assembly"
+              "title": "TLS"
             }
           },
           {
-            "id": "18eada39d204ae36",
+            "id": "0c06be450cbaf82f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "System Security/Introduction.md",
+                "file": "class/Security/Cryptographic Protocols.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Introduction"
+              "title": "Cryptographic Protocols"
             }
           },
           {
-            "id": "87a999f33e4c95d8",
+            "id": "a54da2ff6f7164b5",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "flet-notes/2026-10-30-syssec.md",
+                "file": "class/Security/Asymmetric Cryptography.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-10-30-syssec"
+              "title": "Asymmetric Cryptography"
+            }
+          },
+          {
+            "id": "0844729be8e289ac",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "class/Security/Symmetric Cryptography.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Symmetric Cryptography"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -142,7 +156,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "class/Artificial Intelligence/Heuristic search.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -235,8 +248,15 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "a2a54ae8c255a62b",
+  "active": "0844729be8e289ac",
   "lastOpenFiles": [
+    "class/Security/TLS.md",
+    "class/Security/Security.md",
+    "class/Security/Cryptographic Protocols.md",
+    "class/Security/Asymmetric Cryptography.md",
+    "class/Security/Symmetric Cryptography.md",
+    "class/Artificial Intelligence/Heuristic search.md",
+    "class/System Security/x86-64 assembly.md",
     "files/Pasted image 20261031185424.png",
     "files/Pasted image 20261031185337.png",
     "files/Pasted image 20261031185318.png",
@@ -247,28 +267,20 @@
     "files/Pasted image 20261031183417.png",
     "files/Pasted image 20261031183153.png",
     "flet-notes/2026-10-30-syssec.md",
-    "class/System Security/x86-64 assembly.md",
     "files/Pasted image 20261031182932.png",
     "System Security/Introduction.md",
     "class/System Security/Untitled.md",
-    "files/Pasted image 20261031163226.png",
     "class/System Security/System Security.md",
-    "class/Artificial Intelligence/Heuristic search.md",
     "flet-notes/2026-10-29-ai.md",
     "class/Artificial Intelligence/Sparse search.md",
     "class/Artificial Intelligence/Basics, and Blind Search.md",
     "flet-notes/2026-10-23-syssec.md",
     "class/Artificial Intelligence/Artificial Intelligence.md",
-    "class/Security/TLS.md",
     "flet-notes/2026-10-28-sec.md",
-    "class/Security/Symmetric Cryptography.md",
-    "class/Security/Security.md",
-    "class/Security/Cryptographic Protocols.md",
     "class/Security/Introduction.md",
     "flet-notes/2026-10-27-ai.md",
     "flet-notes/2026-10-26-sec.md",
     "files/IMG_3754.heic",
-    "class/Security/Asymmetric Cryptography.md",
     "System Security",
     "flet-notes/2026-10-22-ai.md",
     "class/class.md",
