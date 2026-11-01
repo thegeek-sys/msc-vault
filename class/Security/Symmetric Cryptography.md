@@ -61,7 +61,7 @@ In fact security through algorithm obscurity is a bad idea because:
 - it’s easier to change a key for a single than an algorithm for everybody (containment of beaches)
 - it’s easier to communicate if everyone uses the same algorithms
 
-#### Cryptorgraphic keys
+#### Cryptographic keys
 If a key is a bit string of length $n$, the number of possible keys is $2^n$. So enumerating all of them takes time exponential in $n$.
 
 According to the Kerckoff’s principles there should be no more efficient way to break a cryptosystem then trying all possible keys
