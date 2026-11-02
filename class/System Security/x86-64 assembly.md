@@ -319,13 +319,13 @@ x86-64 has **16** general-purpose registers, each **64 bits** wide (IA-32: 8 of 
 ---
 ## Looking at a binary in practice
 ### Toolbox
-| Tool | What it shows |
-| ---- | ------------- |
-| `file sample` | file type (based on header bytes) |
-| `strings sample` | runs of **4 or more printable bytes**: library and function names, string literals, compiler |
-| `objdump -d -M intel sample` | disassembly: bytes to instructions |
-| `readelf -h sample` | ELF header |
-| `readelf -S -W sample` | section table |
+| Tool                         | What it shows                                                                                |
+| ---------------------------- | -------------------------------------------------------------------------------------------- |
+| `file sample`                | file type (based on header bytes)                                                            |
+| `strings sample`             | runs of **4 or more printable bytes**: library and function names, string literals, compiler |
+| `objdump -d -M intel sample` | disassembly: bytes to instructions                                                           |
+| `readelf -h sample`          | ELF header                                                                                   |
+| `readelf -S -W sample`       | section table                                                                                |
 
 >[!warning] Text found by `strings` can be misleading
 >It is a quick and easy first look, nothing more.
