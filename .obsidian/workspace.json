@@ -24,6 +24,20 @@
             }
           },
           {
+            "id": "d16f59b62f3cbe08",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "class/Security/Certificates.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Certificates"
+            }
+          },
+          {
             "id": "29ed0cae155e8a0b",
             "type": "leaf",
             "state": {
@@ -35,6 +49,18 @@
               },
               "icon": "lucide-file",
               "title": "TLS"
+            }
+          },
+          {
+            "id": "24fcb63f62b7ac32",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "files/Pasted image 20261029184647.png"
+              },
+              "icon": "lucide-image",
+              "title": "Pasted image 20261029184647"
             }
           },
           {
@@ -94,7 +120,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -262,17 +288,20 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "0c06be450cbaf82f",
+  "active": "d16f59b62f3cbe08",
   "lastOpenFiles": [
+    "files/Pasted image 20261103130808.png",
+    "class/Security/TLS.md",
+    "class/Security/Certificates.md",
+    "files/Pasted image 20261029184647.png",
+    "class/Security/Security.md",
+    "class/Security/Cryptographic Protocols.md",
+    "class/System Security/cheatsheet.md",
     "class/Security/Symmetric Cryptography.md",
     "class/Security/Asymmetric Cryptography.md",
     "flet-notes/2026-11-02-sec.md",
-    "class/System Security/cheatsheet.md",
     "class/System Security/System Security.md",
     "class/System Security/x86-64 assembly.md",
-    "class/Security/TLS.md",
-    "class/Security/Cryptographic Protocols.md",
-    "class/Security/Security.md",
     "class/Artificial Intelligence/Heuristic search.md",
     "files/Pasted image 20261031185424.png",
     "files/Pasted image 20261031185337.png",
@@ -284,7 +313,6 @@
     "files/Pasted image 20261031183417.png",
     "files/Pasted image 20261031183153.png",
     "flet-notes/2026-10-30-syssec.md",
-    "files/Pasted image 20261031182932.png",
     "System Security/Introduction.md",
     "class/System Security/Untitled.md",
     "flet-notes/2026-10-29-ai.md",
@@ -301,8 +329,6 @@
     "flet-notes/2026-10-22-ai.md",
     "class/class.md",
     "class/System Security",
-    "flet-notes/2026-10-21-sec.md",
-    "index.md",
     "class/Artificial Intelligence",
     "class/Security",
     "files",

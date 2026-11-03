@@ -163,6 +163,11 @@ In version 1.3 the handshake make just one roundtrip instead of two. In particul
 
 RSA key exchange was removed so that only (EC)DHE is possible, making forward secrecy a default. Only AEAD ciphers are allowed (no compression, no static RSA, no CBC)
 
+>[!bug] Semplificazione
+>![[bangdesk.gif]]
+>
+>l'authenticity viene garantita grazie a `CertificateVerify` che contiene un hash del messaggio precedente crittato con la chiave privata del server (in modo tale che il client possa verificare contemporaneamente integrity tramite l'hash e authenticity decrittando con la chiave pubblica $cert_{s}$ che gli ha appena inviato il server). Lo schema è sempliciato e non contiene `CertificateVerify`
+
 ### Session resumption (PSK) and 0-RTT
 After a full handshake the server sends a **session ticket** (session state encrypted with a server-only key) and a shared **PSK**. On the next connection the client presents the ticket, and certificate and signatures are skipped.
 
