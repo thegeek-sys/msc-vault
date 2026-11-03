@@ -2,7 +2,7 @@
   "cssTheme": "Tokyo Night",
   "enabledCssSnippets": [
     "images_center",
-    "center-images",
-    "math-emphasis"
+    "math-emphasis",
+    "center-images"
   ]
 }

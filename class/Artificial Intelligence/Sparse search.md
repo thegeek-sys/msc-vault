@@ -155,7 +155,7 @@ During each iteration proceeds as it follows:
 
 >[!note] Capiamo
 >![[bangdesk.gif]]
->treepolicy viene chiamato su radice → verifica se il nodo ha delle azioni non espanse (se si ritorna così che expandone possa espanderli) → altrimenti select seleziona uno tra i figli del nodo analizzati → viene aggiornato il nodo attualmente preso in considerazione → ricomincia il loop, quindi viene verificato se effettivamente ci sta una azione da aprire per il nuovo nodo etc.
+>treepolicy viene chiamato su radice → verifica se il nodo ha delle azioni non espanse (se si ritorna così che expandone possa espanderli) → altrimenti select seleziona uno tra i figli del nodo analizzato → viene aggiornato il nodo attualmente preso in considerazione → ricomincia il loop, quindi viene verificato se effettivamente ci sta una azione da aprire per il nuovo nodo etc.
 
 >[!info] Capiamo pt2
 >![[bangdesk.gif]]
@@ -226,7 +226,7 @@ $$
 >In probabilistic planning (MDPs) and in games, “plans” take the form of policies, because we need to specify a reaction to all possible events (action outcomes/opponent moves). Here we consider policies as a form of search guidance for MCTS
 
 >[!info] **Definition** (Stocastic action policy)
->A **stochastic action policy** is a function $\hat{\pi}:S\to \mathcal{D}(A)$, where $\sum_{a\in A(S)}\hat{\pi}(s,a)=1$ for $s\in S$ (denoting $\hat{\pi}(s)(a)$ as $\hat{\pi}(s,a)$)
+>A **stochastic action policy** is a function $\hat{\pi}:S\to \mathcal{D}(A)$, where $\sum_{a\in A(s)}\hat{\pi}(s,a)=1$ for $s\in S$ (denoting $\hat{\pi}(s)(a)$ as $\hat{\pi}(s,a)$)
 >
 >Stochastic policies capture (for our purposes here) imperfect search-guidance knowledge. In what follows, we assume stochastic policies $\hat{\pi}_{roll}$ and $\hat{\pi}_{tree}$ (obtained e.g. by learning, prior to running MCTS)
 
