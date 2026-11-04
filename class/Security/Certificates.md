@@ -20,7 +20,7 @@ The two feature we want from a certificate are:
 The SAN is an extension of the certificate with a list of valid names (e.g., `cispa.de`, `www.cispa.de`), wildcard (e.g., `*.cispa.de`), IP addresses, and email.
 
 ### X.509 (background)
-![[Pasted image 20261103130808.png|435]]o
+![[Pasted image 20261103130808.png|435]]
 
 **What it is:** the standard (ITU-T, first version 1988) that defines the **format of public-key certificates**. The Internet profile is **RFC 5280**. It is used in TLS, IPsec, S/MIME, code signing and more.
 
@@ -166,7 +166,94 @@ It falls back to the parent domain if no record exists, and CAs must check CAA b
 >4. Nobody can issue certificates for `nossl.cispa.de`
 >5. Violations of (4) should be reported to it@cispa.de
 
+>[!warning]
+>![[bangdesk.gif]]
+>
+>Il CAA serve solamente ai CA per capire chi è autorizzato ad emettere il certificato (si tratta però di un “consiglio”, un CA malevolo può fare come gli pare), non al client per capire se il certificato ottenuto è providato da un CA autorizzato dal server.
+>
+>Per fare in modo che ci sia un controllo da parte del client, bisogna usare DANE
+
 ### DNS-base Authentication of Named Entities (DANE)
 DANE replaces reliance on CAs with reliance on DNS (required DNSSEC to sign DNS records, it’s an extention of DNS that adds digital signatures to verify authenticity and integrity).
 
-The domain’s DNS publishes which certificate (or CA) is valid for the domain in a **TLSA record**, which is a specific leaf certificate or public key, or a specific CA and can also add custom trust anchors
+The domain’s DNS publishes which certificate (or CA) is valid for the domain in a **TLSA record**, which is a specific leaf certificate or public key, or a specific CA and can also add custom trust anchors. The clients verify the TLSA record with DNSSEC, and reject certificates that don’t match.
+
+It’s commonly used for email (SMTP) between servers, but not supported by browsers.
+
+>[!example]
+>1. Il proprietario pubblica nel DNS (firmato con DNSSEC):
+>	`_443._tcp.banca.it  TLSA  <hash del certificato giusto>`
+>2. Il client si connette a banca.it e riceve un certificato nell'handshake
+>3. Il client chiede il TLSA al DNS e verifica la firma DNSSEC
+>4. Confronta: il certificato ricevuto corrisponde al TLSA?
+>      sì → procede
+>      no → rifiuta, anche se la catena di CA è valida
+
+### Certificate pinning
+The idea of certificate pinning is that the client remembers (“pins“) the expected certificate or public key of a server and rejects everything else (even if it’s a valid certificate signed by a trusted CA).
+
+For websites we have **HTTP Public Key Pinning** (*HPKP*) which is used by the server to send pins in an HTTP header:
+```
+Public-Key-Pins: max-age=2592000;
+	pin-sha256="E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=";
+	pin-sha256="LPJNul+wow4m6DsqxbninhsWHlwfp0JecwQzYpOLmCQ="
+```
+
+>[!note]
+>The second pin is for backup; to change the key without blocking clients
+
+However there are few drawbacks to this approach:
+- **trust on first use** → by using HPKP the client trust whatever he receives the first time he connects; if in that moment he is talking with an attacker, the client pins the wrong key
+- difficult to manage → if you lose the pinned key and you don’t have any backup, you block your own users until the expiration of the key
+- can be abused by attackers → who temporarily compromises a server can pin it’s own key 
+
+In Chrome it’s deprecated since 2018
+
+### Certificate Transparency (CT)
+The idea behind **Certificate Transparency** is to make every issued certificate publicly visible, so that a CA cannot issue a certificate for a domain without the domain owner being albe to see it (anyone can audit and monitor which certificates were issued, mistakenly or maliciously).
+
+![[Pasted image 20261104111709.png|311]]
+
+To do so, we use *public*, *append-only logs* based on Merkle hash trees. Each CA submits each certificate to CT log server, and the log returns a *Signed Certificate Timestamp* (SCT) and a promise to include the certificate in the log. The SCT is embedded in the certificate as an X.509v3 extension, so the proof of logging travels with the certificate; the CA first submits a precertificate to get the SCTs, then issues the final certificate containing them.
+
+>[!info]
+>Since April 2018, Chrome rejects new certificates without SCTs
+
+Domain owners (or monitors) see new certificates for their domains (e.g. an unauthorized CA issues a certificate for their domain) and can react (e.g., request revocation). However CT **detects** rogue certificates; it does *not prevent* them.
+
+#### Verifying the SCT
+The clients know the log servers and their public keys (log lists, e.g., by Google, Apple) so they can verify the SCT signatures.
+
+As a further measure of security usually policies *require multiple SCTs* from independent logs, to reduce the risk of a log colluding with a CA (e.g. Chrome requires 2 or 3 SCTs depending on the certificate lifetime).
+
+Thanks to all of this suspect certificates should be detected quickly and revoked and auditors also check that logs behave correctly (append-only, consistent views).
+
+>[!warning]
+>Logs are only queried by monitors (to detect certificates issued for their domains) and auditors (to check the logs behave correctly), not by browsers during the handshake.
+>
+>Browsers just have to verify the signature using the log public key.
+
+#### Privacy issues
+However the public log reveals internal structure and services of a network (as a certificate is issued for a new URL it gets added to the log), so an attacker might try to compromise a server before the admin finished the setup.
+
+---
+## Certificate verification
+The client is responsible for verifying the certificate: **TLS security depends on correct verification by the client**. The checks are:
+- the chain leads to a trusted root CA, indeed each certificate is signed by the next one up and the root is pre-installed and self-signed
+- all certificates are valid, not expired and not revoked
+- the SAN (or CN) of the leaf matches the server contacted
+- further requirements (e.g., key usage flags)
+
+If there is **any error**, the verification fails.
+
+>[!note] CA certificates must outlive the certificates they issue
+>If the CA certificate expires before the end-entity (leaf) certificate, the chain is no longer valid from that moment, so the leaf gets rejected even if its own `not after` hasn't been reached yet. Revocation information (CRLs, OCSP responses) is signed by the CA, so it can no longer be verified either.
+>
+>That's why root and intermediate CA certificates have much longer validity (years) than end-entity ones (at most 398 days, and shrinking).
+
+### Non-browser software
+Browsers, as the primary way to access the web, have become very good at certificate verification, but non-browser software often does not:
+- Amazon's EC2 Java library, PayPal's merchant SDKs, AdMob code, Chase mobile banking, and many more had **completely broken certificate validation**
+- mobile apps are similarly broken
+
+Typical causes: **checks disabled during development** (and never re-enabled) and **misunderstood library APIs**.
