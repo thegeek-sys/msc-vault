@@ -14,99 +14,73 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "class/Security/Security.md",
+                "file": "class/Artificial Intelligence/Artificial Intelligence.md",
                 "mode": "source",
                 "source": false
               },
               "pinned": true,
               "icon": "lucide-file",
-              "title": "Security"
+              "title": "Artificial Intelligence"
             }
           },
           {
-            "id": "d16f59b62f3cbe08",
+            "id": "9848c3eba118e7d2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "class/Security/Certificates.md",
+                "file": "class/Artificial Intelligence/Sparse search.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Certificates"
+              "title": "Sparse search"
             }
           },
           {
-            "id": "29ed0cae155e8a0b",
+            "id": "89b3fdab0f95d725",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "class/Security/TLS.md",
+                "file": "class/Artificial Intelligence/Basics, and Blind Search.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "TLS"
+              "title": "Basics, and Blind Search"
             }
           },
           {
-            "id": "24fcb63f62b7ac32",
-            "type": "leaf",
-            "state": {
-              "type": "image",
-              "state": {
-                "file": "files/Pasted image 20261029184647.png"
-              },
-              "icon": "lucide-image",
-              "title": "Pasted image 20261029184647"
-            }
-          },
-          {
-            "id": "0c06be450cbaf82f",
+            "id": "1ec2ec809b68b3b1",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "class/Security/Cryptographic Protocols.md",
+                "file": "class/Artificial Intelligence/Heuristic search.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Cryptographic Protocols"
+              "title": "Heuristic search"
             }
           },
           {
-            "id": "a54da2ff6f7164b5",
+            "id": "34394565fcc835d7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "class/Security/Asymmetric Cryptography.md",
+                "file": "flet-notes/2026-11-03-ai.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Asymmetric Cryptography"
-            }
-          },
-          {
-            "id": "0844729be8e289ac",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "class/Security/Symmetric Cryptography.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Symmetric Cryptography"
+              "title": "2026-11-03-ai"
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -140,7 +114,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "bang",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -182,6 +156,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "class/Artificial Intelligence/Heuristic search.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -274,8 +249,16 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "0844729be8e289ac",
+  "active": "1ec2ec809b68b3b1",
   "lastOpenFiles": [
+    "class/Artificial Intelligence/Basics, and Blind Search.md",
+    "files/IMG_618ACAD417E3-1.jpeg",
+    "files/Pasted image 20261104145227.png",
+    "class/Artificial Intelligence/Heuristic search.md",
+    "class/Artificial Intelligence/Sparse search.md",
+    "flet-notes/2026-11-03-ai.md",
+    "class/Security/Asymmetric Cryptography.md",
+    "class/Security/Symmetric Cryptography.md",
     "flet-notes/2026-11-02-sec.md",
     "class/Security/Certificates.md",
     "files/Pasted image 20261104111709.png",
@@ -283,23 +266,15 @@
     "files/Pasted image 20261103171601.png",
     "files/Pasted image 20261103163106.png",
     "files/Pasted image 20261103162843.png",
-    "flet-notes/2026-11-03-ai.md",
-    "class/Artificial Intelligence/Heuristic search.md",
-    "class/Artificial Intelligence/Basics, and Blind Search.md",
-    "class/Artificial Intelligence/Sparse search.md",
     "files/Pasted image 20261103130808.png",
     "class/Security/TLS.md",
     "files/Pasted image 20261029184647.png",
     "class/Security/Security.md",
     "class/Security/Cryptographic Protocols.md",
     "class/System Security/cheatsheet.md",
-    "class/Security/Symmetric Cryptography.md",
-    "class/Security/Asymmetric Cryptography.md",
     "class/System Security/System Security.md",
     "class/System Security/x86-64 assembly.md",
     "files/Pasted image 20261031185424.png",
-    "files/Pasted image 20261031185337.png",
-    "files/Pasted image 20261031185318.png",
     "flet-notes/2026-10-30-syssec.md",
     "System Security/Introduction.md",
     "class/System Security/Untitled.md",

@@ -1,7 +1,7 @@
 ---
 Class: "[[Artificial Intelligence]]"
 ---
----
+
 ## Index
 - [[#Heuristic functions|Heuristic functions]]
 	- [[#Heuristic functions#Properties|Properties]]

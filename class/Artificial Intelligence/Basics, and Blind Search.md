@@ -319,6 +319,16 @@ Enumerative specifications do not, in difference to simulator and symbolic speci
 
 ![[Pasted image 20261022165758.png|500]]
 
+>[!warning]
+>![[bangdesk.gif]]
+>L’algoritmo dell’immagine non corrisponde allo pseudocode che scritto. L’algoritmo dello pseudocode quando $limit=0$ in realtà ritorna una lista vuota, non il nodo iniziale.
+>
+>Anche se non esploro un nuovo nodo (perchè arrivo a quel nodo con `limit=0`) comunque lo visito e grazie al fatto che il return del $GoalTest$ è prima del return di $limit=0$ allora se questo nodo è un goal, mi fermo
+>
+>![[IMG_618ACAD417E3-1.jpeg]]
+>
+>Ad esempio in questo caso con $limit=3$ anche se non esploro $H$ ci entro in ricorsione con $limit=0$ e visto che è un nodo goal si ritorna
+
 >[!important] Pseudocode
 >$$
 >\begin{aligned}
