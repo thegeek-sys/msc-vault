@@ -100,3 +100,107 @@ The techniques successful for satisficing vs. optimal planning are almost disjoi
 >>[!question] Is this actually the state space?
 >>No, only the reachable part. E.g., $\Theta_{\Pi}$ also includes the states $\{v(Sy)\}$ and $\{at(Sy), at(Br)\}$.
 
+---
+## PDDL
+The **Planning Domain Definition Language** (*PDDL*) is a language which variants are used by all implemented planning systems. Its syntax is inspired by Lisp programming language.
+
+```pddl
+(and (or (on A B) (on A C))
+	 (or (on B A) (on B A))
+	 (or (on C A) (on A B)))
+```
+
+The planner inputs is separated into a **domain file** (predicates, types, action schemas) and a problem file (objects, initial state, goal).
+
+>[!node] Some examples to get your feet wet
+>http://fai.cs.uni-saarland.de/hoffmann/PlanningForDummies.zip
+
+### Domain files
+A PDDL domain file consist of:
+
+```pddl
+(define (domain <name>))
+```
+
+- a *requirements* definition (use `:ald :typing` by default)
+- definitions of *types* (each object variable has a type)
+- definitions of *predicates*
+- definitions of *action schemas*
+
+>[!example] Blocksworld
+>A set of blocks sits on a table, and a robot arm can move them one at a time. Blocks can be stacked on top of each other, and the arm can hold at most one block. The goal is to rearrange the blocks into a target configuration (e.g., a tower $A$ on $B$ on $C$).
+>
+>*Domain file types and predicates*:
+>```pddl
+>(define (domain Blocksworld)
+>	(:requirements :adl :typing)
+>	; block is a subtype of object
+>	; blueblock, smallblock are subtypes of block
+>	(:types block - object
+>	        blueblock smallblock - block)
+>	; on: x is a smallblock, y is a block
+>	(:predicates (on ?x - smallblock ?y - block)
+>	             (ontable ?x - block) ; x is on the table
+>	             (clear ?x - block))  ; nothing on top of x
+>)
+>```
+>
+>*Action schema*:
+>```pddl
+>(:action fromtable
+>	:parameters (?x - smallblock ?y - block)
+>	:precondition (and (not (= ?x ?y))
+>	                   (clear ?x)
+>	                   (ontable ?x)
+>	                   (clear ?y))
+>	:effect (and (not (ontable ?x))
+>	             (not (clear ?y))
+>	             (on ?x ?y)))
+>```
+
+### Problem files
+A PDDL problem file consists of:
+
+```pddl
+(define (problem <name>)
+(:domain <name>))
+```
+
+- definitions of objects belonging to each type
+- definition of the inital state (list of *ground predicates* initially true)
+- definition of the goal (a formula like action preconditions)
+
+>[!example] Blocksworld
+>*Problem file*:
+>```pddl
+>(define (problem example)
+>	(:domain Blocksworld)
+>	(:objects a b c - smallblock)
+>			  d e - block
+>			  f - blueblock)
+>	(:init (clear a) (clear b) (clear c)
+>		   (clear d) (clear e) (clear f)
+>		   (ontable a) (ontable b) (ontable c)
+>		   (ontable d) (ontable e) (ontable f))
+>	(:goal (and (on a d) (on b e) (on c f)))
+>)
+>```
+
+>[!example] Run of FF
+>In sub-directory “hanoi” of http://fai.cs.uni-saarland.de/hoffmann/PlanningForDummies.zip
+>
+>Executing `../ff -o domain.pddl -f p-n3.pddl` gives:
+>```
+>ff: found legal plan as follows
+>step 0: MOVE D1 D2 PEG3
+>	 1: MOVE D2 D3 PEG2
+>	 2: MOVE D1 PEG3 D2
+>	 3: MOVE D3 PEG1 PEG3
+>	 4: MOVE D1 D2 PEG1
+>	 5: MOVE D2 PEG2 D3
+>	 6: MOVE D1 PEG1 D2
+>0.00 seconds total time
+>```
+
+---
+## FDR
