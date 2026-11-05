@@ -1,3 +1,4 @@
 - [[Basics, and Blind Search]]
 - [[Heuristic search]]
 - [[Sparse search]]
+- [[Symbolic planning]]

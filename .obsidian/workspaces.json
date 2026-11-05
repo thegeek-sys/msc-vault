@@ -277,7 +277,7 @@
         }
       },
       "active": "a54da2ff6f7164b5",
-      "mtime": "2026-11-04T14:28:54+01:00"
+      "mtime": "2026-11-05T01:31:35+01:00"
     },
     "ai": {
       "main": {
@@ -361,7 +361,7 @@
                 }
               }
             ],
-            "currentTab": 4
+            "currentTab": 3
           }
         ],
         "direction": "vertical"
@@ -530,8 +530,8 @@
           "obsidian-git:Open Git source control": false
         }
       },
-      "active": "34394565fcc835d7",
-      "mtime": "2026-11-03T16:20:20+01:00"
+      "active": "1ec2ec809b68b3b1",
+      "mtime": "2026-11-04T22:24:53+01:00"
     },
     "syssec": {
       "main": {
