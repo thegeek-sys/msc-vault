@@ -3,6 +3,29 @@ Class: "[[Security]]"
 Sem: WiSe 26/27
 ---
 ---
+## Index
+- [[#Introduction|Introduction]]
+	- [[#Introduction#Terminology|Terminology]]
+	- [[#Introduction#X.509 (background)|X.509 (background)]]
+- [[#Certificate Authorities and PKI|Certificate Authorities and PKI]]
+	- [[#Certificate Authorities and PKI#Chain of trust|Chain of trust]]
+	- [[#Certificate Authorities and PKI#Issuing a new certificate|Issuing a new certificate]]
+- [[#Revocation|Revocation]]
+	- [[#Revocation#Revocation mechanisms|Revocation mechanisms]]
+		- [[#Revocation mechanisms#CRLs|CRLs]]
+		- [[#Revocation mechanisms#OCSP|OCSP]]
+		- [[#Revocation mechanisms#OCSP stapling|OCSP stapling]]
+	- [[#Revocation#The trend: short-lived certificates|The trend: short-lived certificates]]
+- [[#Rogue CAs and countemeasures|Rogue CAs and countemeasures]]
+	- [[#Rogue CAs and countemeasures#DNS Certificate Authority Authorization (CAA)|DNS Certificate Authority Authorization (CAA)]]
+	- [[#Rogue CAs and countemeasures#DNS-base Authentication of Named Entities (DANE)|DNS-base Authentication of Named Entities (DANE)]]
+	- [[#Rogue CAs and countemeasures#Certificate pinning|Certificate pinning]]
+	- [[#Rogue CAs and countemeasures#Certificate Transparency (CT)|Certificate Transparency (CT)]]
+		- [[#Certificate Transparency (CT)#Verifying the SCT|Verifying the SCT]]
+		- [[#Certificate Transparency (CT)#Privacy issues|Privacy issues]]
+- [[#Certificate verification|Certificate verification]]
+	- [[#Certificate verification#Non-browser software|Non-browser software]]
+---
 ## Introduction
 The server (and optionally the client) is authenticated with a **certificate** which binds a public key to an identity (for the web it corresponds to it’s domain name). The certificate is essential for [[TLS]], indeed, without authenticity, confidentiality and integrity are “useless” (we might have a perfectly secure channel to the attacker).
 
