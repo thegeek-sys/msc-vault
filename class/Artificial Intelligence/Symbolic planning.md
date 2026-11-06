@@ -204,3 +204,7 @@ A PDDL problem file consists of:
 
 ---
 ## FDR
+
+>[!info] **Definition** (FDR planning task)
+>A finite-domain representation planning task, short FDR planning task, is a tuple $\Pi=(V,A,c,I,G)$ where:
+>- $V$ is a finite set of state variables, each $v\in V$ with a finite domain $D_{v}$.
