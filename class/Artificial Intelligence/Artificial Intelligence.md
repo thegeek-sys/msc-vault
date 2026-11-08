@@ -2,4 +2,5 @@
 - [[Heuristic search]]
 - [[Sparse search]]
 - [[Formalisms|Symbolic planning: Formalisms]]
+- [[Heuristic search basis|Symbolic planning: Heuristic search basis]]
 - 

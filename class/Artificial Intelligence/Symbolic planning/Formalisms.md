@@ -3,6 +3,21 @@ Class: "[[Artificial Intelligence]]"
 Sem: WiSe 26/27
 ---
 ---
+## Index
+- [[#Introduction|Introduction]]
+- [[#STRIPS|STRIPS]]
+- [[#PDDL|PDDL]]
+	- [[#PDDL#Domain files|Domain files]]
+	- [[#PDDL#Problem files|Problem files]]
+- [[#FDR|FDR]]
+	- [[#FDR#Semantics|Semantics]]
+- [[#STRIPS vs. FDR|STRIPS vs. FDR]]
+	- [[#STRIPS vs. FDR#Conversions|Conversions]]
+		- [[#Conversions#FDR-2-STRIPS|FDR-2-STRIPS]]
+		- [[#Conversions#STRIPS-2-FDR (naive translation) (reference only)|STRIPS-2-FDR (naive translation) (reference only)]]
+		- [[#Conversions#STRIPS-2-FDR (clever translation)|STRIPS-2-FDR (clever translation)]]
+- [[#Complexity|Complexity]]
+---
 ## Introduction
 
 >[!info] Classical planning
