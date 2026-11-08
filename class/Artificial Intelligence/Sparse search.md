@@ -2,6 +2,19 @@
 Class: "[[Artificial Intelligence]]"
 ---
 ---
+## Index
+- [[#Introduction|Introduction]]
+	- [[#Introduction#Hill-climbing|Hill-climbing]]
+- [[#MCTS (Monte-Carlo Tree Search)|MCTS (Monte-Carlo Tree Search)]]
+	- [[#MCTS (Monte-Carlo Tree Search)#Properties|Properties]]
+- [[#Search control (exploitation vs. exploitation) in MCTS|Search control (exploitation vs. exploitation) in MCTS]]
+	- [[#Search control (exploitation vs. exploitation) in MCTS#UCT algorithm|UCT algorithm]]
+	- [[#Search control (exploitation vs. exploitation) in MCTS#Action policies|Action policies]]
+	- [[#Search control (exploitation vs. exploitation) in MCTS#Informing $Q$-values and updates with heuristic functions|Informing $Q$-values and updates with heuristic functions]]
+		- [[#Informing $Q$-values and updates with heuristic functions#Q-values: start from a guess, not from zero|Q-values: start from a guess, not from zero]]
+		- [[#Informing $Q$-values and updates with heuristic functions#Updates: don't trust a single rollout alone|Updates: don't trust a single rollout alone]]
+- [[#MCTS hyperparameters|MCTS hyperparameters]]
+---
 ## Introduction
 Compared to blind and heuristic search, the sparse search renounces to the systematic of the firsts so as to be able to go deep quickly, by just using the guide information in a greedy way and limiting the exploration.
 

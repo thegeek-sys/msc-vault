@@ -445,3 +445,45 @@ For each set $\{p_{1},\dots,p_{k}\}$ found, make one FDR variable $v$ with domai
 >>>Greedy picks $a_{1}$ first (3 goals), then $a_{2},a_{3},a_{4}$ ($h=4$), but $\langle a_{2},a_{3},a_{4}\rangle$ alone already covers $G$ (optimal $=3$).
 >>
 >>Maybe a post-process removing redundant actions would do the trick?
+
+>[!info] Morale
+>![[bangdesk.gif]]
+>Non esiste un trucco semplice: trovare la soluzione ottima del problema only-adds è NP-hard, e la slide successiva lo dimostra probabilmente con una riduzione da Set Cover. Ne seguono due conseguenze:
+>- **Il planning è intrinsecamente difficile.** Se è NP-hard perfino la versione senza precondizioni e senza delete, il problema completo lo è ancora di più. Per STRIPS generale, decidere se esiste un piano è PSPACE-complete.
+>- **Ottimo e satisficing sono mondi diversi.** Trovare _una_ soluzione rilassata è facile, perché basta un greedy polinomiale. Trovare quella _ottima_ è difficile. È lo stesso discorso dell’introduzione, dove si diceva che il satisficing planning è molto più efficace in pratica.
+
+>[!info] **Definition** (PlanEx)
+>By **PlanEx**, we denote the problem of deciding a STRIPS/FDR planning task $\Pi$, whether or not there exists a plan for $\Pi$.
+>
+>Corresponds to satisficing planning.
+
+>[!info] **Definition** (PlanLen)
+>By **PlanLen**, we denote the problem of deciding, given a STRIPS/FDR planning task $\Pi$ and an integer $K$, whether or not there exists a plan $\Pi$ of length at most $K$.
+>
+>Corresponds to optimal planning.
+
+>[!info] **Theorem** (complexity of PlanEx)
+>PlanEx is **PSPACE-complete**
+>
+>Because Actions $\approx$ transition rules on small “memory” (the fact set $P/$the variables $V$) $\approx$ Turing machine with polynomially bounded space.
+>
+>>[!info] **Corollary**
+>>PlanLen is **PSPACE-complete**
+>>
+
+In general, PlanEx and PlanLen have the same complexity, however, within particular applications, bounded length plan existence (optimal planning) is often harder than plan existence (satisficing planning).
+
+In many planning benchmark domains, PlanLes is NP-complete while PlanEx is in P (e.g. blocksworld).
+
+>[!tldr]
+>In practice, optimal planning is (almost) never easy.
+
+>[!example] Elevator control
+>![[Pasted image 20261108191143.png|350]]
+>
+>- $VIP$ → served first
+>- $D$ → lift may only go down when inside; similar to $U$
+>- $NA$ → never alone; $AT$ is the attendant
+>- $A$, $B$ → never together in the same elevator
+>- $P$ → normal passenger
+
