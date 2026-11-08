@@ -207,4 +207,12 @@ A PDDL problem file consists of:
 
 >[!info] **Definition** (FDR planning task)
 >A finite-domain representation planning task, short FDR planning task, is a tuple $\Pi=(V,A,c,I,G)$ where:
->- $V$ is a finite set of state variables, each $v\in V$ with a finite domain $D_{v}$.
+>- $V$ is a finite set of **state variables**, each $v\in V$ with a *finite domain* $D_{v}$. We refer to (partial) functions on $V$, mapping each $v\in V$ into a member of $D_{v}$, as (partial) variable assignments.
+>-  $A$ is a finite se of **actions**; each $a \in A$ is a pair $(pre_{a}, eff_{a})$ of a partial variable assignments referred to as the action’s preconditions and effects; we require that $pre_{a}(v)\neq e\hspace{-0.1em}f\hspace{-0.1em}f_{a}(v)$ whenever both are defined.
+>- $c:A\to \mathbb{R}^{+}_{0}$ is the **cost function**
+>- $I$ is a complete variable assignment called the **initial state**
+>- $G$ is a partial variable assignment called the **goal**
+
+>[!tip]
+>In FDR, (partial) variable assignments represent states (e.g. $I$), conditions in $pre_{a}$ and $G$, and effect instructions in $e\hspace{-0.1em}f\hspace{-0.1em}f_{a}$
+
