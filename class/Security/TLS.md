@@ -3,6 +3,7 @@ Class: "[[Security]]"
 ---
 ---
 ## Index
+- [[#Introduction|Introduction]]
 - [[#TLS’ structure|TLS’ structure]]
 	- [[#TLS’ structure#Record protocol|Record protocol]]
 	- [[#TLS’ structure#Handshake protocol|Handshake protocol]]
@@ -12,7 +13,6 @@ Class: "[[Security]]"
 		- [[#Handshake protocol#Finish|Finish]]
 - [[#Forward secrecy|Forward secrecy]]
 - [[#Traffic analysis|Traffic analysis]]
-- [[#TLS 1.3|TLS 1.3]]
 - [[#TLS 1.3|TLS 1.3]]
 	- [[#TLS 1.3#Session resumption (PSK) and 0-RTT|Session resumption (PSK) and 0-RTT]]
 - [[#Attacks on SSL/TLS|Attacks on SSL/TLS]]
