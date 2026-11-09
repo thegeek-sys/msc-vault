@@ -94,17 +94,21 @@
             }
           },
           {
-            "id": "7114385fb1131c21",
+            "id": "118baee70efcc8fd",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "flet-notes/2026-11-05-ai.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "2026-11-05-ai"
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -274,15 +278,21 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "7114385fb1131c21",
+  "active": "43ac679c5b358181",
   "lastOpenFiles": [
-    "class/Artificial Intelligence/Symbolic planning/Heuristic search basis.md",
     "class/Artificial Intelligence/Symbolic planning/Formalisms.md",
+    "class/Artificial Intelligence/Basics, and Blind Search.md",
+    "class/Artificial Intelligence/Symbolic planning/Heuristic search basis.md",
+    "files/Pasted image 20261109101525.png",
+    "files/Pasted image 20261109101400.png",
+    "files/Pasted image 20261109100734.png",
+    "flet-notes/2026-11-05-ai.md",
+    "files/Pasted image 20261109095616.png",
+    "files/Pasted image 20261109095205.png",
+    "files/Pasted image 20261109093126.png",
+    "class/Artificial Intelligence/Symbolic planning/Symbolic planning.md",
     "files/Pasted image 20261108194505.png",
     "class/Artificial Intelligence/Artificial Intelligence.md",
-    "class/Artificial Intelligence/Basics, and Blind Search.md",
-    "flet-notes/2026-11-05-ai.md",
-    "class/Artificial Intelligence/Symbolic planning/Symbolic planning.md",
     "flet-notes/2026-11-03-ai.md",
     "class/Artificial Intelligence/Heuristic search.md",
     "class/Artificial Intelligence/Sparse search.md",
@@ -290,17 +300,11 @@
     "files/Pasted image 20261108191143.png",
     "files/Pasted image 20261108173910.png",
     "files/Pasted image 20261108172033.png",
-    "files/Pasted image 20261108170551.png",
-    "files/Pasted image 20261108165625.png",
     "class/Security/Symmetric Cryptography.md",
     "class/Security/Cryptographic Protocols.md",
     "class/Security/TLS.md",
     "class/Security/Certificates.md",
-    "files/Pasted image 20261105201957.png",
     "class/Security/Bitcoin.md",
-    "files/Pasted image 20261105172707.png",
-    "files/Pasted image 20261105170133.png",
-    "files/Pasted image 20261105170130.png",
     "class/Security/Security.md",
     "class/Security/Asymmetric Cryptography.md",
     "flet-notes/2026-11-02-sec.md",
