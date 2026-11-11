@@ -3,6 +3,13 @@ Class: "[[Artificial Intelligence]]"
 Sem: WiSe 26/27
 ---
 ---
+## Index
+- [[#Forward search|Forward search]]
+- [[#Backward search|Backward search]]
+	- [[#Backward search#STRIPS|STRIPS]]
+- [[#Pro and contra|Pro and contra]]
+- [[#How to relax in planning?|How to relax in planning?]]
+---
 ## Introduction
 
 >[!info] **Definition** (search space)

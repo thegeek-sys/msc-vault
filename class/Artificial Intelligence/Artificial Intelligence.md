@@ -3,4 +3,5 @@
 - [[Sparse search]]
 - [[Formalisms|Symbolic planning: Formalisms]]
 - [[Heuristic search basis|Symbolic planning: Heuristic search basis]]
+- [[Critical-Path heuristics|Symbolic planning: Classical-Path heuristics]]
 - 

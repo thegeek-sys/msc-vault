@@ -1,3 +1,4 @@
 - [[Formalisms]]
 - [[Heuristic search basis]]
+- [[Critical-Path heuristics]]
 - 
