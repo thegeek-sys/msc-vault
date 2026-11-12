@@ -14,101 +14,169 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "class/Artificial Intelligence/Artificial Intelligence.md",
+                "file": "class/Security/Security.md",
                 "mode": "source",
                 "source": false
               },
               "pinned": true,
               "icon": "lucide-file",
-              "title": "Artificial Intelligence"
+              "title": "Security"
             }
           },
           {
-            "id": "018f8abd45d4ddb9",
+            "id": "0ffa718bcd69dbb0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "class/Artificial Intelligence/Sparse search.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Sparse search"
-            }
-          },
-          {
-            "id": "f2b721f85b812293",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "class/Artificial Intelligence/Symbolic planning/Heuristic search basis.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Heuristic search basis"
-            }
-          },
-          {
-            "id": "8a137ebed3a9a1fe",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "class/Artificial Intelligence/Symbolic planning/Critical-Path heuristics.md",
+                "file": "class/Security/Asymmetric Cryptography.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Critical-Path heuristics"
+              "title": "Asymmetric Cryptography"
             }
           },
           {
-            "id": "bc0116b981bc5d0a",
+            "id": "13f710d0a913b8cc",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "class/Artificial Intelligence/Symbolic planning/Symbolic planning.md",
+                "file": "class/Security/OS, CPU, and Assembly.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Symbolic planning"
+              "title": "OS, CPU, and Assembly"
             }
           },
           {
-            "id": "94f5a71e4c3f623b",
+            "id": "fd7a42bf6c8335f3",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "flet-notes/2026-11-10-ai.md",
+                "file": "class/Security/Certificates.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-11-10-ai"
+              "title": "Certificates"
             }
           },
           {
-            "id": "1b178a8532aa8003",
+            "id": "e1f63b8abbf4170f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "flet-notes/2026-11-12-ai.md",
+                "file": "class/Security/TLS.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-11-12-ai"
+              "title": "TLS"
+            }
+          },
+          {
+            "id": "9fdef69cbcf7b917",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "class/Security/Bitcoin.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Bitcoin"
+            }
+          },
+          {
+            "id": "d16f59b62f3cbe08",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "class/Security/Symmetric Cryptography.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Symmetric Cryptography"
+            }
+          },
+          {
+            "id": "29ed0cae155e8a0b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "class/Security/Cryptographic Protocols.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Cryptographic Protocols"
+            }
+          },
+          {
+            "id": "24fcb63f62b7ac32",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "files/Pasted image 20261029184647.png"
+              },
+              "icon": "lucide-image",
+              "title": "Pasted image 20261029184647"
+            }
+          },
+          {
+            "id": "0c06be450cbaf82f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "class/Security/Cryptographic Protocols.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Cryptographic Protocols"
+            }
+          },
+          {
+            "id": "a54da2ff6f7164b5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "class/Security/Asymmetric Cryptography.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Asymmetric Cryptography"
+            }
+          },
+          {
+            "id": "0844729be8e289ac",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "class/Security/Symmetric Cryptography.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Symmetric Cryptography"
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -142,7 +210,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "\"state space\"",
+                "query": "hkdf",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -184,7 +252,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "class/Artificial Intelligence/Heuristic search.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -277,11 +344,15 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "1b178a8532aa8003",
+  "active": "13f710d0a913b8cc",
   "lastOpenFiles": [
+    "files/Pasted image 20261112173719.png",
+    "files/Pasted image 20261112171916.png",
+    "files/Pasted image 20261112171537.png",
+    "class/Security/Asymmetric Cryptography.md",
+    "flet-notes/2026-11-12-ai.md",
     "files/IMG_3817.jpeg",
     "class/Artificial Intelligence/Symbolic planning/Critical-Path heuristics.md",
-    "flet-notes/2026-11-12-ai.md",
     "files/IMG_3816.jpeg",
     "files/IMG_3815.jpeg.sb-e8b0a361-JNsQ6i",
     "files/IMG_3815.jpeg",
@@ -295,16 +366,12 @@
     "class/Artificial Intelligence/Heuristic search.md",
     "class/Artificial Intelligence/Symbolic planning/Symbolic planning.md",
     "class/Artificial Intelligence/Basics, and Blind Search.md",
-    "class/Security/Asymmetric Cryptography.md",
     "class/Security/Security.md",
     "class/Security/OS, CPU, and Assembly.md",
     "flet-notes/2026-11-05-ai.md",
     "files/Pasted image 20261110010139.png",
     "files/Pasted image 20261110005223.png",
     "files/Pasted image 20261110002453.png",
-    "files/Pasted image 20261110002301.png",
-    "files/Pasted image 20261110001255.png",
-    "files/Pasted image 20261109235621.png",
     "class/Security/Bitcoin.md",
     "class/System Security/x86-64 assembly.md",
     "class/System Security/cheatsheet.md",
