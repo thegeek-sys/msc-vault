@@ -178,7 +178,7 @@
                 }
               }
             ],
-            "currentTab": 1
+            "currentTab": 2
           }
         ],
         "direction": "vertical"
@@ -346,8 +346,8 @@
           "obsidian-git:Open Git source control": false
         }
       },
-      "active": "0ffa718bcd69dbb0",
-      "mtime": "2026-11-11T10:38:18+01:00"
+      "active": "13f710d0a913b8cc",
+      "mtime": "2026-11-13T18:06:15+01:00"
     },
     "ai": {
       "main": {
@@ -886,5 +886,5 @@
       "mtime": "2026-11-09T16:13:30+01:00"
     }
   },
-  "active": "security"
+  "active": "ai"
 }
