@@ -4,5 +4,6 @@
     "images_center",
     "math-emphasis",
     "center-images"
-  ]
+  ],
+  "showRibbon": true
 }

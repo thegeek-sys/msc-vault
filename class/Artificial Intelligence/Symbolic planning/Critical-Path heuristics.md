@@ -3,6 +3,16 @@ Class: "[[Artificial Intelligence]]"
 Sem: WiSe 26/27
 ---
 ---
+## Index
+- [[#A regression based characterization of $h^{*}$|A regression based characterization of $h^{*}$]]
+- [[#$h^{1}$|$h^{1}$]]
+- [[#The general definition ($h^{m}$)|The general definition ($h^{m}$)]]
+	- [[#The general definition ($h^{m}$)#Properties|Properties]]
+- [[#Dynamic programming|Dynamic programming]]
+	- [[#Dynamic programming#Iterative definition of $h^{m}$|Iterative definition of $h^{m}$]]
+		- [[#Iterative definition of $h^{m}$#Fixed point formulation (for reference)|Fixed point formulation (for reference)]]
+- [[#FDR|FDR]]
+---
 ## A regression based characterization of $h^{*}$
 
 >[!info] **Definition** ($r^{*}$)
@@ -82,7 +92,7 @@ Sem: WiSe 26/27
 
 >[!example] $h^{1}$ in "TSP" in Australia
 >
->![[Pasted image 20261109093126.png|400]]
+>![[tsp.png|400]]
 >- $P$: $at\_x$ for $x \in \{Sy, Ad, Br, Pe, Da\}$; $v\_x$ for $x \in \{Sy, Ad, Br, Pe, Da\}$.
 >- $A$: $drive\_xy$ where $x, y$ have a road.
 >$$
@@ -248,7 +258,7 @@ Next up:
 >>This is *very* inefficient! (Optimized for readability.) We can instead maintain the frontier of cheapest $m$-tuples reached so far.
 
 >[!example] $h^1$ in "Logistics" ($m=1$)
->![[Pasted image 20261108173910.png|300]]
+>![[logistics.png|300]]
 >
 >- $P$: $tx$ for $x \in \{A,B,C,D\}$; $px$ for $x \in \{A,B,C,D,T\}$.
 >- $I = \{tA, pC\}$; $G = \{tA, pD\}$.
@@ -312,7 +322,7 @@ Next up:
 >>È qui che $h^2$ vede un'interazione tra fatti che $h^1$ non vede.
 
 >[!example] $h^1$ in "TSP" in Australia ($m=1$)
->![[Pasted image 20261109093126.png|400]]
+>![[tsp.png|400]]
 >
 >- $P$: $at\_x$ for $x \in \{Sy, Ad, Br, Pe, Da\}$; $v\_x$ for $x \in \{Sy, Ad, Br, Pe, Da\}$.
 >- $A$: $drive\_xy$ where $x,y$ have a road; costs $Sy$–$Br$: $1$, $Sy$–$Ad$: $1.5$, $Ad$–$Pe$: $3.5$, $Ad$–$Da$: $4$.
@@ -368,31 +378,7 @@ Next up:
 
 #### Fixed point formulation (for reference)
 
->[!important] Pseudocode (template)
->$$
->\begin{array}{l}
->\textbf{new } \text{table } T^m(g), \text{ for } g \subseteq P \text{ with } 1 \leq |g| \leq m \\
->\textbf{for all } g \subseteq P \text{ with } |g| \leq m: \quad T^m(g) := \begin{cases} 0 & g \subseteq s \\ \infty & \text{otherwise} \end{cases} \\
->\\
->\textbf{fn } {\color{yellow}\mathit{Cost}}(g) := \begin{cases} 0 & g \subseteq s \\ T^m(g) & 1 \leq |g| \leq m \\ \max_{g' \subseteq g,\, |g'| = m} T^m(g') & |g| > m \end{cases} \\
->\\
->\textbf{fn } {\color{yellow}\mathit{Next}}(g) := \min\left[\mathit{Cost}(g),\ \min_{a \in A,\, \mathit{regr}(g,a) \neq \bot} \left[ c(a) + \mathit{Cost}(\mathit{regr}(g,a)) \right]\right] \\
->\\
->\textbf{while } \exists g \subseteq P,\, |g| \leq m : T^m(g) \neq \mathit{Next}(g) \textbf{ do}: \\
->\quad \text{select one such } g \\
->\quad T^m(g) := \mathit{Next}(g) \\
->\textbf{endwhile}
->\end{array}
->$$
->
->>[!info] **Proposition**
->>Once the algorithm stops, $h^m(s,g) = Cost(g)$ for all $g$.
->>
->>>[!done] Proof Sketch
->>>Similar to that for convergence of $h^m_i$ to $h^m$.
->
->>[!warning]
->>This algorithm is not fully specified (hence "template"): how to select $g$ s.t. $T^m(g) \neq Next(g)$? Here we use dynamic programming for simplicity.
+
 
 ---
 ## FDR

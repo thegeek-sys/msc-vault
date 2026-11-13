@@ -1,4 +1,5 @@
 - [[Formalisms]]
 - [[Heuristic search basis]]
 - [[Critical-Path heuristics]]
+- [[Delete relaxation heuristics]]
 - 

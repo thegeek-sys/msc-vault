@@ -390,7 +390,7 @@ For each set $\{p_{1},\dots,p_{k}\}$ found, make one FDR variable $v$ with domai
 >- killer app in symbolic planning (tractable fragments implies efficiently computable heuristic functions). Moreover identifying special cases (“tractable fragments”) can be solved in polynomial time making possible to relax the input into the special case to obtain a heuristic function
 
 >[!example] “Only-adds” relaxation
->![[Pasted image 20261108173910.png|300]]
+>![[logistics.png|300]]
 >
 >- $P$: $\{truck_{x}\mid x\in\{A,B,C,D\}\}\cup\{pack_{x}\mid x\in\{A,B,C,D,T\}\}$
 >- $I$: $\{truck_{A},\ pack_{C}\}$

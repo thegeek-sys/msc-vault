@@ -24,13 +24,41 @@
             }
           },
           {
+            "id": "0d6731998fffb3a2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "class/Artificial Intelligence/Symbolic planning/Heuristic search basis.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Heuristic search basis"
+            }
+          },
+          {
+            "id": "d116aadc3abed77e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "class/Artificial Intelligence/Symbolic planning/Delete relaxation heuristics.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Delete relaxation heuristics"
+            }
+          },
+          {
             "id": "8a137ebed3a9a1fe",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "class/Artificial Intelligence/Symbolic planning/Critical-Path heuristics.md",
-                "mode": "preview",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
@@ -66,7 +94,7 @@
             }
           },
           {
-            "id": "1b178a8532aa8003",
+            "id": "d67c7dbe7d4f2130",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -80,7 +108,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -139,7 +167,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "7604b1047f3aeeab",
@@ -248,33 +277,35 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "8a137ebed3a9a1fe",
+  "active": "d116aadc3abed77e",
   "lastOpenFiles": [
-    "class/Artificial Intelligence/Symbolic planning/Heuristic search basis.md",
-    "class/Artificial Intelligence/Sparse search.md",
-    "class/Artificial Intelligence/Artificial Intelligence.md",
+    "files/Pasted image 20261113210859.png",
     "flet-notes/2026-11-12-ai.md",
+    "class/Artificial Intelligence/Symbolic planning/Delete relaxation heuristics.md",
+    "class/Artificial Intelligence/Symbolic planning/Critical-Path heuristics.md",
+    "files/Pasted image 20261113204053.png",
+    "files/Pasted image 20261113203332.png",
+    "class/Artificial Intelligence/Symbolic planning/Heuristic search basis.md",
+    "class/Artificial Intelligence/Heuristic search.md",
+    "class/Artificial Intelligence/Artificial Intelligence.md",
+    "files/Pasted image 20261113201813.png",
+    "class/Artificial Intelligence/Symbolic planning/Symbolic planning.md",
+    "flet-notes/2026-11-10-ai.md",
+    "class/Artificial Intelligence/Basics, and Blind Search.md",
+    "class/Artificial Intelligence/Sparse search.md",
     "class/Security/OS, CPU, and Assembly.md",
     "files/Pasted image 20261112173719.png",
     "files/Pasted image 20261112171916.png",
     "files/Pasted image 20261112171537.png",
     "class/Security/Asymmetric Cryptography.md",
     "files/IMG_3817.jpeg",
-    "class/Artificial Intelligence/Symbolic planning/Critical-Path heuristics.md",
     "files/IMG_3816.jpeg",
     "files/IMG_3815.jpeg.sb-e8b0a361-JNsQ6i",
     "files/IMG_3815.jpeg",
     "files/IMG_3814 1.jpeg",
-    "files/IMG_3814.jpeg",
-    "flet-notes/2026-11-10-ai.md",
     "class/Artificial Intelligence/Symbolic planning/Formalisms.md",
-    "class/Artificial Intelligence/Heuristic search.md",
-    "class/Artificial Intelligence/Symbolic planning/Symbolic planning.md",
-    "class/Artificial Intelligence/Basics, and Blind Search.md",
     "class/Security/Security.md",
     "flet-notes/2026-11-05-ai.md",
-    "files/Pasted image 20261110010139.png",
-    "files/Pasted image 20261110005223.png",
     "class/Security/Bitcoin.md",
     "class/System Security/x86-64 assembly.md",
     "class/System Security/cheatsheet.md",
@@ -286,7 +317,6 @@
     "class/Artificial Intelligence/Symbolic planning",
     "flet-notes/2026-11-02-sec.md",
     "class/System Security/System Security.md",
-    "flet-notes/2026-10-30-syssec.md",
     "files/IMG_3754.heic",
     "System Security",
     "class/System Security",

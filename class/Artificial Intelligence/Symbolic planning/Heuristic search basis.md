@@ -68,7 +68,7 @@ Start at goal, and **regress** over actions to produce **subgoals**, until a sub
 >3. se un’azione ha bisogno di qualcosa e non lo cambia, quel qualcosa sarà così anche dopo; non può contraddire ciò che vuoi alla fine
 
 >[!example] Backward Search on "TSP"
->![[Pasted image 20261109093126.png|400]]
+>![[tsp.png|400]]
 >
 >- $V$: $at: \{Sy, Ad, Br, Pe, Da\}$; $v_{x}: \{T,F\}$ for $x\in\{Sy, Ad, Br, Pe, Da\}$
 >- $A$: $drive_{xy}$ where $x$, $y$ have a road
@@ -128,7 +128,7 @@ Start at goal, and **regress** over actions to produce **subgoals**, until a sub
 >FDR backward search is a lot more effective than STRIPS backward search, because its search space contains less unreachable states.
 
 >[!example] Backward Search on "TSP" (STRIPS)
->![[Pasted image 20261109093126.png|400]]
+>![[tsp.png|400]]
 >
 >- $P$: $at_{x}$ for $x\in\{Sy, Ad, Br, Pe, Da\}$; $v_{x}$ for $x\in\{Sy, Ad, Br, Pe, Da\}$
 >- $A$: $drive_{xy}$ where $x$, $y$ have a road
@@ -223,7 +223,7 @@ Given $\Pi \in\mathcal{P}$, you let $\Pi^{r}:=\mathcal{R}(\Pi)$, and estimate $h
 >- **Transformation $\mathcal{R}$**: Throw away the map
 
 >[!example] A Simple Planning Relaxation: Only-Adds ("Logistics")
->![[Pasted image.png|300]]
+>![[logistics.png|300]]
 >
 >- $P$: $\{truck_{x}\mid x\in\{A,B,C,D\}\}\cup\{pack_{x}\mid x\in\{A,B,C,D,T\}\}$
 >- $I$: $\{truck_{A},\ pack_{C}\}$
