@@ -94,7 +94,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -263,14 +263,14 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "62f454f4e4f3f5cd",
+  "active": "68bef48176d7797f",
   "lastOpenFiles": [
+    "class/System Security/04-Reverse Engineering.md",
     "files/Pasted image 20261116180458.png",
     "files/Pasted image 20261116165706.png",
     "files/Pasted image 20261116165001.png",
     "files/Pasted image 20261116164935.png",
     "files/Pasted image 20261116164659.png",
-    "class/System Security/04-Reverse Engineering.md",
     "class/System Security/System Security.md",
     "class/System Security/cheatsheet.md",
     "class/System Security/x86-64 assembly.md",
@@ -290,7 +290,6 @@
     "class/Artificial Intelligence/Sparse search.md",
     "class/Security/OS, CPU, and Assembly.md",
     "files/Pasted image 20261112173719.png",
-    "files/Pasted image 20261112171916.png",
     "class/Security/Asymmetric Cryptography.md",
     "files/IMG_3815.jpeg.sb-e8b0a361-JNsQ6i",
     "class/Artificial Intelligence/Symbolic planning/Formalisms.md",

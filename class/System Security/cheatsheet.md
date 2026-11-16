@@ -145,7 +145,8 @@ info registers edi
 
 ---
 
-## 4. Registri 
+## 4. Registri
+I registri **callee** sono quelli che devono essere preservati.
 
 ### x86-64
 #### Registri general purpose e sottoregistri (tutti e 16)
