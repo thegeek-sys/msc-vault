@@ -30,6 +30,12 @@ A **basic block** is a maximal sequence of conscutive instructions such that:
 - `taken` → conditional branch; if the jump happens
 - `fall-through` → consecutive block/conditional jump not taken (i.e. next block after a conditional jump)
 
+### Call graph
+The calls are the edges while the nodes are functions.
+
+>[!example]
+>$$main\to foo \to bar$$
+
 ### Dominators
 - **$d \text{ dom } n$** → every path from $B_{0}$ to $n$ contains $d$
 - **$d \text{ strictly dominates } n$** → $d \text{ dom }n$ and $d\neq n$
@@ -38,5 +44,12 @@ A **basic block** is a maximal sequence of conscutive instructions such that:
 
 ### Loops
 - **$h$ is the header** → dominates every node of the loop and is its only entry point
-- **$n \to h$ is a back edge** → $h \text{ dom }n$
-- **natural loop** → 
+- **$n \to h$ is a back edge** → $h \text{ dom }n$ (where $h$ is a header)
+- **natural loop** → is the set of nodes composed by the two nodes of a back edge $n\to h$ and all the nodes that can reach $n$ without passing through $h$
+
+>[!warning]
+>If there is more than one entry point (i.e., no header) of the loop there are no back edges nor natural loops.
+
+>[!example]
+>![[Pasted image 20261116180458.png|500]]
+
