@@ -145,30 +145,31 @@ info registers edi
 
 ---
 
-## 4. Registri x86-64
+## 4. Registri 
 
-### Registri general purpose e sottoregistri (tutti e 16)
+### x86-64
+#### Registri general purpose e sottoregistri (tutti e 16)
 
 Nomi delle dimensioni (terminologia Intel): **qword** = 64 bit, **dword** = 32 bit, **word** = 16 bit, **byte** = 8 bit.
 
-|64 bit (qword)|32 bit (dword)|16 bit (word)|8 bit low (byte)|8 bit high (bit 8–15)|Ruolo (System V)|Salvato da|
-|---|---|---|---|---|---|---|
-|`rax`|`eax`|`ax`|`al`|`ah`|return value, nr. syscall|caller|
-|`rbx`|`ebx`|`bx`|`bl`|`bh`|generico|**callee**|
-|`rcx`|`ecx`|`cx`|`cl`|`ch`|arg 4, contatore (`rep`, shift per `cl`)|caller|
-|`rdx`|`edx`|`dx`|`dl`|`dh`|arg 3, parte alta di `mul`/`div`|caller|
-|`rsi`|`esi`|`si`|`sil`|–|arg 2, source (string ops)|caller|
-|`rdi`|`edi`|`di`|`dil`|–|arg 1, destination (string ops)|caller|
-|`rbp`|`ebp`|`bp`|`bpl`|–|base/frame pointer|**callee**|
-|`rsp`|`esp`|`sp`|`spl`|–|stack pointer|**callee** (deve tornare uguale)|
-|`r8`|`r8d`|`r8w`|`r8b`|–|arg 5|caller|
-|`r9`|`r9d`|`r9w`|`r9b`|–|arg 6|caller|
-|`r10`|`r10d`|`r10w`|`r10b`|–|temp (arg 4 nelle syscall)|caller|
-|`r11`|`r11d`|`r11w`|`r11b`|–|temp (distrutto da `syscall`)|caller|
-|`r12`|`r12d`|`r12w`|`r12b`|–|generico|**callee**|
-|`r13`|`r13d`|`r13w`|`r13b`|–|generico|**callee**|
-|`r14`|`r14d`|`r14w`|`r14b`|–|generico|**callee**|
-|`r15`|`r15d`|`r15w`|`r15b`|–|generico|**callee**|
+| 64 bit (qword) | 32 bit (dword) | 16 bit (word) | 8 bit low (byte) | 8 bit high (bit 8–15) | Ruolo (System V)                         | Salvato da                       |
+| -------------- | -------------- | ------------- | ---------------- | --------------------- | ---------------------------------------- | -------------------------------- |
+| `rax`          | `eax`          | `ax`          | `al`             | `ah`                  | return value, nr. syscall                | caller                           |
+| `rbx`          | `ebx`          | `bx`          | `bl`             | `bh`                  | generico                                 | **callee**                       |
+| `rcx`          | `ecx`          | `cx`          | `cl`             | `ch`                  | arg 4, contatore (`rep`, shift per `cl`) | caller                           |
+| `rdx`          | `edx`          | `dx`          | `dl`             | `dh`                  | arg 3, parte alta di `mul`/`div`         | caller                           |
+| `rsi`          | `esi`          | `si`          | `sil`            | –                     | arg 2, source (string ops)               | caller                           |
+| `rdi`          | `edi`          | `di`          | `dil`            | –                     | arg 1, destination (string ops)          | caller                           |
+| `rbp`          | `ebp`          | `bp`          | `bpl`            | –                     | base/frame pointer                       | **callee**                       |
+| `rsp`          | `esp`          | `sp`          | `spl`            | –                     | stack pointer                            | **callee** (deve tornare uguale) |
+| `r8`           | `r8d`          | `r8w`         | `r8b`            | –                     | arg 5                                    | caller                           |
+| `r9`           | `r9d`          | `r9w`         | `r9b`            | –                     | arg 6                                    | caller                           |
+| `r10`          | `r10d`         | `r10w`        | `r10b`           | –                     | temp (arg 4 nelle syscall)               | caller                           |
+| `r11`          | `r11d`         | `r11w`        | `r11b`           | –                     | temp (distrutto da `syscall`)            | caller                           |
+| `r12`          | `r12d`         | `r12w`        | `r12b`           | –                     | generico                                 | **callee**                       |
+| `r13`          | `r13d`         | `r13w`        | `r13b`           | –                     | generico                                 | **callee**                       |
+| `r14`          | `r14d`         | `r14w`        | `r14b`           | –                     | generico                                 | **callee**                       |
+| `r15`          | `r15d`         | `r15w`        | `r15b`           | –                     | generico                                 | **callee**                       |
 
 > [!note] Nomi alternativi
 > 
@@ -176,7 +177,7 @@ Nomi delle dimensioni (terminologia Intel): **qword** = 64 bit, **dword** = 32 b
 > - Le sigle storiche: **a**ccumulator, **b**ase, **c**ounter, **d**ata, **s**ource **i**ndex, **d**estination **i**ndex, **b**ase **p**ointer, **s**tack **p**ointer. Per i registri "vecchi" il 32 bit ha la `e` (extended), il 64 la `r`; per `r8–r15` si usano i suffissi `d`/`w`/`b`.
 > - Solo `rax rbx rcx rdx` hanno anche il byte alto (`ah bh ch dh`): `rsi rdi rbp rsp` e `r8–r15` no.
 
-### Quale sottoregistro prende un `mov`
+#### Quale sottoregistro prende un `mov`
 
 |Istruzione|Byte scritti|Il resto del registro a 64 bit|
 |---|---|---|
@@ -213,7 +214,7 @@ Speciali: `rip` (instruction pointer, in GDB anche `$pc`), `rflags`, segmenti (`
 
 > [!tip] Perché `mov eax, 1` invece di `mov rax, 1` Risultato identico grazie alla zero-extension, ma l'encoding è più corto (5 byte vs 7: niente prefisso REX.W, immediato da 32 bit). Stessa idea per `xor eax, eax` per azzerare.
 
-### RFLAGS (i flag che servono davvero)
+#### RFLAGS (i flag che servono davvero)
 
 |Flag|Significato|Settato da|
 |---|---|---|
@@ -224,8 +225,30 @@ Speciali: `rip` (instruction pointer, in GDB anche `$pc`), `rflags`, segmenti (`
 
 Salti: `je/jz`, `jne/jnz`; **signed**: `jl jle jg jge`; **unsigned**: `jb jbe ja jae`.
 
-### 32 bit (IA-32)
+### x86 (32 bit, IA-32)
+In modalità 32 bit ci sono solo **8** registri general purpose. La dimensione massima è la **dword**, e i nomi hanno la `e` (extended).
 
+| 32 bit (dword) | 16 bit (word) | 8 bit low (byte) | 8 bit high (bit 8–15) | Ruolo (cdecl / System V i386)                      | Salvato da                       | Syscall Linux (`int 0x80`) |
+| -------------- | ------------- | ---------------- | --------------------- | -------------------------------------------------- | -------------------------------- | -------------------------- |
+| `eax`          | `ax`          | `al`             | `ah`                  | return value (parte bassa se a 64 bit)             | caller                           | nr. syscall / return       |
+| `ebx`          | `bx`          | `bl`             | `bh`                  | generico                                           | **callee**                       | arg 1                      |
+| `ecx`          | `cx`          | `cl`             | `ch`                  | contatore (`rep`, `loop`, shift per `cl`)          | caller                           | arg 2                      |
+| `edx`          | `dx`          | `dl`             | `dh`                  | parte alta di `mul`/`div`, return alto (`edx:eax`) | caller                           | arg 3                      |
+| `esi`          | `si`          | –                | –                     | source (string ops)                                | **callee**                       | arg 4                      |
+| `edi`          | `di`          | –                | –                     | destination (string ops)                           | **callee**                       | arg 5                      |
+| `ebp`          | `bp`          | –                | –                     | base/frame pointer                                 | **callee**                       | arg 6                      |
+| `esp`          | `sp`          | –                | –                     | stack pointer                                      | **callee** (deve tornare uguale) | –                          |
+
+Registri speciali: `eip` (instruction pointer, non accessibile direttamente) ed `eflags` (flag: `CF ZF SF OF`…).
+
+> [!note] Differenze rispetto a x86-64
+>
+> - **Argomenti sullo stack**, non nei registri: si pushano da destra a sinistra, quindi all'ingresso della funzione il primo argomento è a `[esp+4]` (dopo il prologo `push ebp; mov ebp, esp` sta a `[ebp+8]`). In cdecl lo stack lo pulisce il **caller**.
+> - **Callee-saved diversi**: in x86 `esi` ed `edi` sono callee-saved, mentre in x86-64 (System V) sono caller-saved perché ospitano gli argomenti.
+> - **Niente `sil dil bpl spl`**: i byte bassi di `esi edi ebp esp` richiedono il prefisso REX, che esiste solo in modalità 64 bit. Niente `r8–r15`.
+> - **Return a 64 bit** in `edx:eax`; i float tornano in `st(0)` (stack x87).
+> - **Syscall**: `int 0x80` con argomenti in `ebx ecx edx esi edi ebp` (in x86-64 si usa `syscall` con `rdi rsi rdx r10 r8 r9`). Anche i numeri di syscall sono diversi (es. `exit` = 1 in x86, 60 in x86-64).
+> - **Scrittura dei sottoregistri**: in x86-64 scrivere un registro a 32 bit (es. `eax`) **azzera** i 32 bit alti di `rax`; scrivere a 16 o 8 bit invece lascia intatto il resto, sia in x86 che in x86-64.
 Stessi nomi senza `r` e senza `r8–r15`: `eax ebx ecx edx esi edi ebp esp eip eflags`.
 
 ---
