@@ -220,11 +220,11 @@ There is also an issue of “brittleness”; indeed greedy relaxed planning may 
 >$\text{PlanOpt}^{+}$ is **NP**-complete.
 >
 >>[!done] Proof
->>**Membership.** In a relaxed plan every action is needed at most once (applying it again adds nothing new), so an optimal relaxed plan has length $\le |A|$. Guess an action sequence of length $\le |A|$ and check in polynomial time that it is a relaxed plan with cost $\le B$.
+>>**Membership in $NP$.** In a relaxed plan every action is needed at most once (applying it again adds nothing new), so an optimal relaxed plan has length $\le |A|$. Guess an action sequence of length $\le |A|$ and check in polynomial time that it is a relaxed plan with cost $\le B$.
 >>
->>**Hardness.** By reduction from SAT.
+>>**Hardness.** By reduction from SAT. I.e. $\varphi$ è soddisfacibile $\iff$ $\Pi_{\varphi}$ ha un piano rilassato con costo $\le B$
 >>
->>>[!example] Example: $X_1 \wedge \neg X_1$
+>>>[!example] Example: $X_1 \wedge \neg X_1$ (insoddisfacibile, costo $> B$)
 >>>Given a CNF formula with variables $X_1,\dots,X_n$ and clauses $C_1,\dots,C_m$, build (with unit costs):
 >>>- **Actions setting variables to T:** $setT_{X_i}$: pre $\emptyset$, add $\{X_i T,\ X_i set\}$
 >>>- **Actions setting variables to F:** $setF_{X_i}$: pre $\emptyset$, add $\{X_i F,\ X_i set\}$
