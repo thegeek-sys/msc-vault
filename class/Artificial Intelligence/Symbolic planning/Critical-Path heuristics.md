@@ -4,12 +4,12 @@ Sem: WiSe 26/27
 ---
 ---
 ## Index
-- [[#A regression based characterization of $h^{*}$|A regression based characterization of $h^{*}$]]
-- [[#$h^{1}$|$h^{1}$]]
-- [[#The general definition ($h^{m}$)|The general definition ($h^{m}$)]]
+- [[#A regression based characterization of $h^{*}$|A regression based characterization of h*]]
+- [[#$h^{1}$|h^1]]
+- [[#The general definition ($h^{m}$)|The general definition (h^m)]]
 	- [[#The general definition ($h^{m}$)#Properties|Properties]]
 - [[#Dynamic programming|Dynamic programming]]
-	- [[#Dynamic programming#Iterative definition of $h^{m}$|Iterative definition of $h^{m}$]]
+	- [[#Dynamic programming#Iterative definition of $h^{m}$|Iterative definition of h^m]]
 		- [[#Iterative definition of $h^{m}$#Fixed point formulation (for reference)|Fixed point formulation (for reference)]]
 - [[#FDR|FDR]]
 ---
@@ -59,7 +59,7 @@ Sem: WiSe 26/27
 >[!tip] Differenze con $r^{*}$
 >$r^{*}$ regredisce il sottobiettivo g **intero**. Se $g = \{p, q\}$, cerca un’azione che renda vero (una parte di) $g$ e regredisce tutto l’insieme. Così tiene conto che _tutti_ i fatti di $g$ vanno ottenuti, e il costo di ciascuno si somma lungo il piano.
 >
->$h^{*}$ regredisce solo i **singleton**. Quando incontra un insieme con più fatti lo spezza e prende il costo del fatto **più costoso** (il max). È come dire: “per avere $\{p, q\}$ mi basta pagare il più caro tra $p$ e $q$”. In pratica fa finta che, ottenuto il fatto più difficile, gli altri arrivino gratis.
+>$h^{1}$ regredisce solo i **singleton**. Quando incontra un insieme con più fatti lo spezza e prende il costo del fatto **più costoso** (il max). È come dire: “per avere $\{p, q\}$ mi basta pagare il più caro tra $p$ e $q$”. In pratica fa finta che, ottenuto il fatto più difficile, gli altri arrivino gratis.
 >
 >Il minimo va bene: è ammissibile e non sovrastima mai. Il problema è che è **molto meno informativo**, e un’euristica poco informativa aiuta poco la ricerca.
 >
@@ -72,14 +72,14 @@ Sem: WiSe 26/27
 >[!warning]
 >![[bangdesk.gif]]
 >
->Se si ha un fatto contenuto sia negli $add$ che nelle $pre$ è l’implementazione dell’algoritmo è eager questo va in loop. Infatti:
+>Se si ha un fatto contenuto sia negli $add$ che nelle $pre$ (uno stato che ritorna in sé stesso) è l’implementazione dell’algoritmo è eager questo va in loop. Infatti:
 >$$
 >h^{1}(s, \{p\}) = \min(\dots, c(a) + h^{1}(s, \{p\}), \dots)
 >$$
 >
 >Invece in termini di formula matematica non si hanno problemi infatti $c(a)+ h^{1}(s, \{p\})>h^{1}(s,\{p\})$ (quindi non verrebbe mai selezionato dalla funzione di $\min$) a patto che $c(a)>0$.
 >
->Per le azioni con costo $0$, l’equazione diventa $h^{1}(s,\{p\}=0+h^{1}(s,\{p\}))$ che è soddisfatta per qualsiasi valore ma $p$ è irraggiungibile quindi il valore corretto è $\infty$. Partendo dal valore più grande si ottiene $\infty$.
+>Per le azioni con costo $0$, l’equazione diventa $h^{1}(s,\{p\})=0+h^{1}(s,\{p\})$ che è soddisfatta per qualsiasi valore ma $p$ è irraggiungibile quindi il valore corretto è $\infty$. Partendo dal valore più grande si ottiene $\infty$.
 >
 >Partire da $\infty$ e scendere fa sì che ci si fermi al **più grande** punto fisso, cioè esattamente quello richiesto dalla definizione. Se partissi da $0$, ti fermeresti subito alla soluzione sbagliata.
 >
