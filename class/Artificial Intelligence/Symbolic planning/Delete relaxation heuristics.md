@@ -278,3 +278,380 @@ The delete relaxation heuristic we want is $h^{+}$. Unfortunately, this is hard 
 >$\rightarrow$ Both $h^{\text{max}}$ and $h^{\text{add}}$ approximate $h^{+}$ by assuming that singleton subgoal facts are achieved **independently**.
 >- $h^{\text{max}}$ estimates *optimistically* by the most costly singleton subgoal.
 >- $h^{\text{add}}$ estimates *pessimistically* by summing over all singleton subgoals.
+
+>[!info] **Proposition** ($h^{max}$ and $h^{add}$ agree with $h^{+}$ on $\infty$)
+>For all STRPIS planning tasks $\Pi$ and states $s$ in $\Pi$, $h^{+}(s)=\infty \iff h^{max}(s)=\infty \iff h^{add}(s)=\infty$
+>
+>>[!done] Proof
+>>$h^{max}$ and $h^{add}$ agree on states with infinite heuristic value simply because their only difference lies in the use of the max vs. $\\sum$ operations which does not affect this property.
+>>
+>>- $h^{max}=\infty \implies h^{+}+\infty$ because $h^{max}\leq h^{+}$
+>>- $h^{max}(s)<\infty \implies h^{+}(s)<\infty$ because $h^{max}$ can then be used to generate a closed well-founded best-supporter function, from which a relaxed plan can be extracted (cf. [[#Relaxed plan heuristic|relaxed plan heuristic]])
+>
+>>[!tldr]
+>>States for which no relaxed plan exists are easy to recognize, and that is done both by $h^{max}$ and $h^{add}$. Approximation is needed only for the cost of an optimal relaxed plan, if it exists
+
+>[!info] **Proposition** ($h^{max}=h^{1}$)
+>>[!done] Proof
+>>Say $g=\{g'\}$. By definition, $regr(\{g'\},a)\neq \bot$ if $add_{a} \cap \{g'\}\neq \varnothing$ and $del_a\cap \{g'\}=\varnothing$; then, $regr(g,a)=(\{g'\}\backslash add_{a})\cup pre_{a}$. With $add_{a}\cap del_{a}=\varnothing$ and $\{g'\}\subseteq add_{a}$, this is the same as “$g'\in add_{a}$, and $regr(g,a)=pre_{a}$”
+>
+>Given this the dynamic programming algorithm to compute $h^{add}$ is substantially the same as the one used for $h^{max}$ (so for $h^{1}$).
+>
+>>[!important] Pseudocode
+>>$$
+>>\begin{array}{l}
+>>\textbf{new } \text{table } T^{\text{add}}_0(g), \text{ for } g \in P \\
+>>\textbf{for all } g \in P: \quad T^{\text{add}}_0(g) := \begin{cases} 0 & g \in s \\ \infty & \text{otherwise} \end{cases} \\
+>>\\
+>>\textbf{fn } {\color{yellow}\mathit{Cost}_i}(g) := \begin{cases} T^{\text{add}}_i(g) & |g| = 1 \\ {\color{red}\sum_{g' \in g}} T^{\text{add}}_i(g') & |g| > 1 \end{cases} \\
+>>\\
+>>\textbf{fn } {\color{yellow}\mathit{Next}_i}(g) := \min\left[\mathit{Cost}_i(g),\ \min_{a \in A,\, g \in \mathit{add}_a} \left[ c(a) + \mathit{Cost}_i(\mathit{pre}_a) \right]\right] \\
+>>\\
+>>i := 0 \\
+>>\textbf{do forever}: \\
+>>\quad \textbf{new } \text{table } T^{\text{add}}_{i+1}(g), \text{ for } g \in P \\
+>>\quad \textbf{for all } g \in P: \quad T^{\text{add}}_{i+1}(g) := \mathit{Next}_i(g) \\
+>>\quad \textbf{if } T^{\text{add}}_{i+1} = T^{\text{add}}_i \textbf{ then stop endif} \\
+>>\quad i := i + 1 \\
+>>\textbf{enddo}
+>>\end{array}
+>>$$
+
+>[!info] **Proposition**
+>Let $\Pi=(P,A,c,I,G)$ be a STRPIS planning task. Then the series $\{Cost_{i}(g)\}_{i=0,\dots}$ converges to $h^{add}(s,g)$, for all $g\subseteq P$
+
+>[!example] $h^{add}$ in “Logistics”
+>![[logistics.png|300]]
+>
+>- $P = \{t\_A, t\_B, t\_C, t\_D, p\_T, p\_A, p\_B, p\_C, p\_D\}$
+>- $I = \{tA, pC\}$; $G = \{tA, pD\}$.
+>- $A$ (unit-cost):
+>	- $dr_{xy}$ ($x,y$ adjactent): pre $t_x$; add $t_y$; del $t_x$
+>	- $lo_x$: pre $t_x, p_x$; add $pT$; del $p_x$
+>	- $ul_x$: pre $t_x, pT$; add $p_x$; del $pT$
+>
+>| $i$ | tA | tB | tC | tD | pT | pA | pB | pC | pD |
+>|---|---|---|---|---|---|---|---|---|---|
+>| 0 | 0 | ∞ | ∞ | ∞ | ∞ | ∞ | ∞ | 0 | ∞ |
+>| 1 | 0 | 1<sub>drAB</sub> | ∞ | ∞ | ∞ | ∞ | ∞ | 0 | ∞ |
+>| 2 | 0 | 1 | 2<sub>drBC</sub> | ∞ | ∞ | ∞ | ∞ | 0 | ∞ |
+>| 3 | 0 | 1 | 2 | 3<sub>drCD</sub> | 3<sub>loC</sub> | ∞ | ∞ | 0 | ∞ |
+>| 4 | 0 | 1 | 2 | 3 | 3 | 4<sub>ulA</sub> | $\color{red}5$<sub>ulB</sub> | 0 | $\color{red}7$<sub>ulD</sub> |
+>| 5 | 0 | 1 | 2 | 3 | 3 | 4 | $\color{red}5$ | 0 | $\color{red}7$ |
+>
+>(in $\color{red}\text{red}$ the values different from $T^1_i$, i.e., from $h^{max}$)
+>
+>So $h^{add}(I) = tA + pD = 0 + 7 = 7$,  while $h^*(I) = 8 > 7 = h^{add}(I) > h^+(I) = 5$.
+>
+>>[!note]- Azioni per riga
+>>- $i=1$: $tB = 1 + tA(0)$ via $drAB$
+>>- $i=2$: $tC = 1 + tB(1)$ via $drBC$
+>>- $i=3$:
+>>	- $tD = 1 + tC(2)$ via $drCD$
+>>	- $pT = 1 + [tC(2) + pC(0)] = 3$ via $loC$
+>>- $i=4$ (tutte con $ul_x$, pre $\{t_x, pT\}$ → **somma**):
+>>	- $pA = 1 + [tA(0) + pT(3)] = 4$ via $ulA$
+>>	- $pB = 1 + [tB(1) + pT(3)] = 5$ via $ulB$ (con $h^{max}$: $1 + \max(1,3) = 4$)
+>>	- $pD = 1 + [tD(3) + pT(3)] = 7$ via $ulD$ (con $h^{max}$: $1 + \max(3,3) = 4$)
+>>	- $pC$: $ulC$ darebbe $1 + [2 + 3] = 6$, ma resta $0$ (min con valore attuale)
+>>- $i=5$: nessun cambiamento → punto fisso, stop.
+>
+>>[!question]- Why is $h^{add}(I) > h^+(I)$? (over-counting)
+>>- $h^+(I) = 5$: optimal relaxed plan $drAB, drBC, loC, drCD, ulD$ ($tA$ is never deleted, so there is no need to drive back).
+>>- $h^*(I) = 8$: the same plan plus the way back $drDC, drCB, drBA$.
+>>- $pD = 7$ sums the supports of the two preconditions of $ulD$ **independently**:
+>>	- $tD(3)$: $drAB, drBC, drCD$
+>>	- $pT(3)$: $drAB, drBC, loC$
+>>	- → $drAB$ and $drBC$ are counted **twice**.
+>>- With 100 packages at $C$ and all goals at $D$: $h^{add}(I) = 100 \cdot 7 = 700$, but $h^*(I) = 206$ ($2$ drives to $C$ + $100$ loads + $1$ drive + $100$ unloads + $3$ drives back). For each package, $h^{add}$ counts $5$ drive actions ($2 \times drAB + 2 \times drBC + 1 \times drCD$).
+>>
+>>>[!tldr]
+>>>$tD$ and $pT$ already share the previous steps but by using $h^{add}$ i count it two times (even if it’s not necessary)
+
+### Summary
+Summary of typical issues in practice with $h^{add}$ and $h^{max}$:
+- both $h^{add}$ and $h^{max}$ can be computed reasonably quickly
+- $h^{max}$ is admissible, but is typically far too optimistic
+- $h^{add}$ is not admissible, but is typically a lot more informed than $h^{max}$
+- $h^{add}$ overcounts by ignoring positive interactions, i.e., sub-plans shared between subgoals (such overcounting can result in dramatic over-estimates of $h^{*}$)
+
+The relaxed plan heuristic keeps $h^{add}$’s informativity but avoids over-counting.
+
+---
+## Relaxed plan heuristic
+The idea is to first compute a **best-supporter function $bs$**, which for every fact $p \in P$ returns an action that is deemed to be the cheapest achiever of $p$ (within the relaxation). Then *extract a relaxed plan* from that function, by applying $bs$ to singleton subgoals and collecting all the actions.
+
+And now for the details:
+- to be concrete: the best-supporter functions we will use
+- how to extract a relaxed plan given best-supporter function
+- what is a best-supporter function, in general? what properties does it need to have for relaxed plan extraction to work as intended?
+- wrapping up: correctness of relaxed plan extraction, correctness of our best-supporter functions, definition of relaxed plan heuristic, discussion of its properties
+
+### The best-supporter functions we will use
+
+>[!info] **Definition** (best supporters for $h^{max}$ and $h^{add}$)
+>Let $\Pi=(P,A,c,I,G)$ be a STRIPS planning task, and let $s$ be a state ($bs_{s}$ is the action that minimized the expression for $max$ and for $add$).
+>
+>The *$h^{max}$ supporter function* $bs_{s}^{max}: \{p \in P \mid 0<h^{max}(s,\{p\})<\infty\} \to A$ is defined by **$bs^{max}_{s}(p)=\text{arg min}_{a\in A,p \in add_{a}}c(a)+h^{max}(s,pre_{a})$**
+>
+>The *$h^{add}$ supporter function* $bs_{s}^{add}: \{p \in P \mid 0<h^{add}(s,\{p\})<\infty\} \to A$ is defined by **$bs^{add}_{s}(p)=\text{arg min}_{a\in A,p \in add_{a}}c(a)+h^{add}(s,pre_{a})$**
+>
+>In both definitions $0$ and $\infty$ are avoided for two different reasons. $h(s,\{p\})=0$ means that $p \in s$ (if a fact is true does not need a supporter), while if $h(s,\{p\})=\infty$ means that $p$
+ is not reachable in the relaxed task ()
+ 
+>[!example] $h^{add}$ in "Logistics": best-supporter function
+>**Heuristic values:**
+>
+>| | tA | tB | tC | tD | pT | pA | pB | pC | pD |
+>|---|---|---|---|---|---|---|---|---|---|
+>| $h^{add}$ | 0 | 1 | 2 | 3 | 3 | 4 | 5 | 0 | 7 |
+>
+>**Yield best-supporter function:**
+>
+>| | tA | tB | tC | tD | pT | pA | pB | pC | pD |
+>|---|---|---|---|---|---|---|---|---|---|
+>| $bs^{add}$ | – | $drAB$ | $drBC$ | $drCD$ | $loC$ | $ulA$ | $ulB$ | – | $ulD$ |
+>
+>>[!note]- How $bs^{add}$ is read off
+>>- For each fact $p \notin s$: $bs(p) := \arg\min_{a \in A,\, p \in add_a} \left[ c(a) + h^{add}(s, pre_a) \right]$, i.e. the action that gave $p$ its final value in the table.
+>>- For $p \in s$ ($tA$, $pC$): no supporter needed (–), since $h^{add}(s,p) = 0$.
+>>- e.g. $bs(pD) = ulD$ because $1 + [tD(3) + pT(3)] = 7 = h^{add}(pD)$.
+
+
+#### Correctness
+
+>[!info] **Proposition**
+>Let $\Pi=(P,A,c,I,G)$ be a STRIPS planning task such that, $\text{for all } a \in A,\ c(a) > 0$. Let $s$ be a state where $h^{+}(s) < \infty$. Then both $bs^{max}_{s}$ and  $bs^{add}_{s}$ are closed well-founded best-supporter functions for $s$.
+>
+>>[!done] Proof
+>>**Closed.** $h^{+}(s) < \infty$ implies $h^{max}(s) < \infty$ ($h^{+}$, $h^{max}$ and $h^{add}$ agree on $\infty$). Hence $bs^{max}_{s}$ is closed: $h^{max}(s,G) < \infty$, so every goal $g \in G \setminus s$ has $0 < h^{max}(s,\{g\}) < \infty$ and $bs^{max}_s(g)$ is defined. Recursively, $h^{max}(s,pre_{a}) < \infty$ for the best supporters $a$, so each of their preconditions not in $s$ is again in the domain of $bs^{max}_s$, and so on.
+>>
+>>**Well-founded.** If $a = bs^{max}_{s}(p)$, then $a$ is the action yielding
+>>$$0 < c(a) + h^{max}(s, pre_{a}) = h^{max}(s,\{p\}) < \infty$$
+>>in the $h^{max}$ equation. ${\color{red}\text{Since } c(a) > 0}$, we have ${\color{red}h^{max}(s,pre_{a}) < h^{max}(s,\{p\})}$ and thus, for all $q \in pre_{a}$, ${\color{red}h^{max}(s,\{q\}) < h^{max}(s,\{p\})}$ (because $h^{max}(s, pre_a) = \max_{q \in pre_a} h^{max}(s,\{q\})$).
+>>
+>>So every step "fact → action → fact" in the support graph ($q \to a$ because $q \in pre_a$, $a \to p$ because $a = bs(p)$) **strictly increases** $h^{max}$:
+>>$$q \longrightarrow a \longrightarrow p \quad\Rightarrow\quad h^{max}(s,\{q\}) < h^{max}(s,\{p\})$$
+>>Transitively, if the support graph contains a path from fact vertex $r$ to fact vertex $t$, then $h^{max}(s,\{r\}) < h^{max}(s,\{t\})$. A cycle through $r$ would give $h^{max}(s,\{r\}) < h^{max}(s,\{r\})$, which is impossible → there can't be cycles in the support graph, and $bs^{max}_{s}$ is well-founded.
+>>
+>>**Similar for $bs^{add}_{s}$**: $h^{add}(s,pre_a) = \sum_{q \in pre_a} h^{add}(s,\{q\}) \geq h^{add}(s,\{q\})$ for every $q \in pre_a$ (all terms are $\geq 0$), so again $c(a) > 0$ gives $h^{add}(s,\{q\}) < h^{add}(s,\{p\})$.
+>>
+>>>[!note] 0-cost actions
+>>>One can also use $h^{max}$ and $h^{add}$ for 0-cost actions, by appropriate tie-breaking in cases where $h^{max}(s,\{p\}) = h^{max}(s,pre_{a})$. Details omitted.
+>>
+>>>[!tldr]
+>>>Lungo ogni cammino del support graph il valore $h$ dei fatti **cresce strettamente** (grazie a $c(a) > 0$). Un ciclo dovrebbe tornare al valore di partenza, cosa impossibile. Quindi le $bs$ ricavate da $h^{max}$/$h^{add}$ sono **sempre** well-founded, e closed perché $h^+(s) < \infty$.
+
+### Relaxed plan extraction
+
+>[!important] Pseudocode
+>$$
+>\begin{array}{l}
+>\mathit{Open} := G \setminus s; \quad \mathit{Closed} := \emptyset; \quad \mathit{RPlan} := \emptyset \\
+>\textbf{while } \mathit{Open} \neq \emptyset \textbf{ do}: \\
+>\quad \textbf{select } g \in \mathit{Open} \\
+>\quad \mathit{Open} := \mathit{Open} \setminus \{g\}; \quad \mathit{Closed} := \mathit{Closed} \cup \{g\} \\
+>\quad \mathit{RPlan} := \mathit{RPlan} \cup \{{\color{red}bs(g)}\}; \quad \mathit{Open} := \mathit{Open} \cup \left(\mathit{pre}_{bs(g)} \setminus (s \cup \mathit{Open} \cup \mathit{Closed})\right) \\
+>\textbf{endwhile} \\
+>\textbf{return } \mathit{RPlan}
+>\end{array}
+>$$
+>
+>→ Starting with the top-level goals, iteratively close open singleton subgoals by selecting the best supporter. We start from $G\backslash s$ because $s$ is already true, and then we only add the facts that are in $pre_{a}$ and that are not yet true.
+
+>[!question] Fast, but is it correct?
+>**Fast:** the number of iterations is bounded by $|P|$, and each one takes near-constant time.
+>
+>- What if $g \notin add_{bs(g)}$? → doesn't make sense → **Condition (A)**
+>- What if $bs(g)$ is undefined? → segmentation fault → **Condition (B)**
+>- What if the support for $g$ eventually requires $g$ itself as a precondition (by then already in $\mathit{Closed}$ and the algorithm would not add it again to the list of the $Open$, i.e., $bs(g)=a_{1}$ with $g'\in pre_{a_{1}}$, and $bs(g')=a_{2}$ with $g\in pre_{a_{2}}$)? → this does not yield a relaxed plan → **Condition (C)**
+
+>[!example]
+>![[logistics.png|300]]
+>- $I = \{tA, pC\}$; $G = \{tA, pD\}$; $A$: $dr_{xy}, lo_x, ul_x$.
+>
+>| | tA | tB | tC | tD | pT | pA | pB | pC | pD |
+>|---|---|---|---|---|---|---|---|---|---|
+>| $bs^{add}$ | – | $drAB$ | $drBC$ | $drCD$ | $loC$ | $ulA$ | $ulB$ | – | $ulD$ |
+>
+>**Extracting a relaxed plan** (start: $\mathit{Open} = G \setminus s = \{pD\}$):
+>1. $bs^{add}_s(pD) = ulD$; opens $\color{red}tD, pT$
+>2. $bs^{add}_s(tD) = drCD$; opens $\color{red}tC$
+>3. $bs^{add}_s(pT) = loC$; opens nothing new ($pC \in s$, $tC \in \mathit{Open}$)
+>4. $bs^{add}_s(tC) = drBC$; opens $\color{red}tB$
+>5. $bs^{add}_s(tB) = drAB$; opens nothing ($tA \in s$)
+>
+>>[!note]- Trace of Open / Closed / RPlan
+>>| step | $g$ | $\mathit{Open}$ (after) | $\mathit{Closed}$ (after) | added to $\mathit{RPlan}$ |
+>>|---|---|---|---|---|
+>>| 0 | – | $\{pD\}$ | $\emptyset$ | – |
+>>| 1 | $pD$ | $\{tD, pT\}$ | $\{pD\}$ | $ulD$ |
+>>| 2 | $tD$ | $\{pT, tC\}$ | $\{pD, tD\}$ | $drCD$ |
+>>| 3 | $pT$ | $\{tC\}$ | $\{pD, tD, pT\}$ | $loC$ |
+>>| 4 | $tC$ | $\{tB\}$ | $\{pD, tD, pT, tC\}$ | $drBC$ |
+>>| 5 | $tB$ | $\emptyset$ | $\{pD, tD, pT, tC, tB\}$ | $drAB$ |
+>
+>>[!success]- Result
+>>$\mathit{RPlan} = \{drAB, drBC, loC, drCD, ulD\}$, so $h^{FF}(I) = 5 = h^+(I)$, whereas $h^{add}(I) = 7$.
+>>$drAB$ and $drBC$ are counted **once**: $tC$ is already in $\mathit{Open}$ when $loC$ is selected, so its support is not added a second time. This removes the over-counting of $h^{add}$.
+
+#### Correctness
+
+>[!info] **Proposition**
+>Let $\Pi=(P,A,c,I,G)$ be a STRIPS planning task, let $s$ be a state, and let $bs$ be a closed well-founded best-supporter function for $s$. Then the actions set $RPlan$ returned by the relaxed plan extraction can be sequenced into a relaxed plan $\vec{a}^{+}$ for $s$.
+>
+>>[!done] Proof
+>>Order $a$ before $a'$ whenever the support graph contains a path from $a$ to $a'$. Since the support graph is acyclic, such a sequencing $\vec{a}:=\langle a_{0},\dots,a_{n-1} \rangle$ exists (topological ordering).
+>>
+>>Assume the opposite, i.e., $p \in pre_{a_{0}} \setminus s$ (i.e., $a_{0}$ needs a fact $p$ that is not in $s$. Then $p$ ends up in $Open$ (it is inserted when processing the fact supported by $a_0$, or it is already in $Open$, or already in $Closed$), and every fact in $Open$ is eventually selected, so $RPlan$ contains $bs(p)$ (defined since $bs$ is closed). The support graph then contains the edges $bs(p) \to p$ (because $bs(p)$ supports $p$) and $p \to a_{0}$ (because $p \in pre_{a_0} \setminus s$):
+>>$$bs(p)\longrightarrow p \longrightarrow a_{0}$$
+>>Since $bs(p) \in RPlan$, we have $bs(p) = a_k$ for some $k \geq 0$:
+>>- $k \geq 1$ → the path $a_k \to p \to a_0$ forces $a_k$ to be ordered **before** $a_0$, but $a_k$ comes **after** $a_0$ in the sequence → contradiction with the topological ordering
+>>- $k = 0$ → the support graph contains the cycle $a_{0}\to p\to a_{0}$ → contradiction with $bs$ being well-founded (acyclic support graph)
+>>
+>>Hence $pre_{a_0} \subseteq s$.
+>>
+>>The same argument shows that $p \in s\cup add_{a_{1}}$ for all $p \in pre_{a_{2}}$: else $bs(p)\neq a_{1}$ would necessarily be ordered before $a_{2}$.
+>>
+>>Iterate the argument for $pre_{a_{n}}$, $2\leq i\leq n$, with $pre_{a_{n}}:=G$ and using $s\cup add_{a_{1}}\cup\dots \cup add_{i-1}$ in each step.
+>>
+>>>[!tldr]
+>>>**la prima azione dell’ordine topologico è una sorgente del grafo**, e le sorgenti sono esattamente le azioni con tutte le precondizioni in s.
+
+### Best-supporter functions
+For relaxed plan extraction to make sense, it requires a *closed well-founded* best supporter function
+
+>[!info] **Definition** (best-supporter function)
+>Let $\Pi=(P,A,c,I,G)$ be a STRIPS planning task, and let $s$ be a state. A best-supporter function for $s$ is a partial function $bs:(P\backslash s)\to A$ such that $p \in add_{a}$ whenever $a=bs(p)$.
+>
+>The **support graph** of $bs$ is the directed graph with vertices $(P\backslash s)\cup A$ and arcs $\{(a,p)\mid a=bs(p)\}\cup \{(p,a)\mid p \in pre_{a}\backslash s\}$.
+>
+>We say that $bs$ is **closed** if $bs(p)$ is defined for every $p \in (P\backslash s)$ that has a path to a goal $g\in G$ in the support graph.
+>
+>We say that $bs$ is **well-founded** if the support graph is acyclic.
+>
+>- “$p \in add_{a}$ whenever $a=bs(p)$” → **Condition (A)**
+>- $bs$ is closed → **Condition (B)** (“$bs$ will be defined wherever it takes us to“)
+>- $bs$ is well-founded → **Condition (C)**; relaxed plan extraction starts at the goals, and chains backwards in the support graph. If there are cycles, then this backchaining may not reach the currently true state $s$, and thus not yield a relaxed plan
+
+>[!example] Support graphs and Condition (C) in "Logistics"
+>- Map: $A - B - C - D$ (line).
+>- $I = \{tA\}$; $G = \{tD\}$; $A$: $drXY$ for adjacent $X, Y$ (pre $tX$; add $tY$; del $tX$).
+>- **Support graph** of $bs$: vertices $(P \setminus s) \cup A$, arcs
+>	- $a \to p$ if $a = bs(p)$ (the supporter produces $p$)
+>	- $p \to a$ if $p \in pre_a \setminus s$ ($p$ is needed by $a$)
+>
+>**How to do it (well-founded)**
+>
+>| $p$ | $bs(p)$ |
+>|---|---|
+>| $tB$ | $drAB$ |
+>| $tC$ | $drBC$ |
+>| $tD$ | $drCD$ |
+>
+>```mermaid
+>graph LR
+>  drAB --> tB --> drBC --> tC --> drCD --> tD
+>  tB --> drBA
+>  tC --> drCB
+>  tD --> drDC
+>```
+>
+>- No cycles. Backchaining from $tD$: $tD \leftarrow drCD \leftarrow tC \leftarrow drBC \leftarrow tB \leftarrow drAB$, and $drAB$ needs only $tA \in s$ (no incoming arc), so the chain **reaches $s$**.
+>- $\mathit{RPlan} = \{drCD, drBC, drAB\}$, executable in the order $drAB \to drBC \to drCD$ ✓
+>
+>**How NOT to do it (not well-founded)**
+>
+>| $p$ | $bs(p)$ |
+>|---|---|
+>| $tB$ | $\color{red}drCB$ |
+>| $tC$ | $drBC$ |
+>| $tD$ | $drCD$ |
+>
+>```mermaid
+>graph LR
+>  drAB
+>  drCB --> tB --> drBC --> tC --> drCD --> tD
+>  tC --> drCB
+>  tB --> drBA
+>  tD --> drDC
+>  classDef cyc stroke:#e24b4a,color:#e24b4a
+>  class tB,drBC,tC,drCB cyc
+>```
+>
+>- **Cycle**: $tB \to drBC \to tC \to drCB \to tB$ ($tB$ is supported by $drCB$, which needs $tC$, which is supported by $drBC$, which needs $tB$).
+>- $drAB$ is now isolated: it is nobody's supporter, so backchaining never gets back to $tA \in s$.
+>
+>>[!note]- Trace of relaxed plan extraction (not well-founded case)
+>>| step | $g$ | $bs(g)$ | $\mathit{Closed}$ (after) | added to $\mathit{Open}$ |
+>>|---|---|---|---|---|
+>>| 0 | – | – | $\emptyset$ | $\{tD\}$ |
+>>| 1 | $tD$ | $drCD$ | $\{tD\}$ | $\{tC\}$ |
+>>| 2 | $tC$ | $drBC$ | $\{tD, tC\}$ | $\{tB\}$ |
+>>| 3 | $tB$ | $drCB$ | $\{tD, tC, tB\}$ | $\{tC\} \setminus \mathit{Closed} = \emptyset$ |
+>>
+>>- Returns $\{drCD, drBC, drCB\}$: the algorithm **terminates** (thanks to $\mathit{Closed}$), but the result is **not** a relaxed plan. Starting from $\{tA\}$ no action is applicable: $drCB$ needs $tC$, $drBC$ needs $tB$, $drCD$ needs $tC$.
+>>- $bs$ is **closed** (defined on $tB, tC, tD$), and Condition (A) holds, but it is **not well-founded** → Condition (C) is violated.
+>>- This $bs$ can never come from $h^{max}$/$h^{add}$: there $h(tB) = 1$ via $drAB$, while $drCB$ would give $1 + h(tC) = 3$, so the argmin always picks $drAB$.
+
+### Relaxed plan heuristic
+
+>[!info] **Definition** (relaxed plan heuristic)
+>A heuristic function is called **relaxed plan heuristic**, denoted $h^{FF}$, if, given a state $s$, it returns $\infty$ if not relaxed plan exists, and otherwise returns $\sum_{a\in RPlan} c(a)$ where $RPlan$ is the action set returned by relaxed plan extraction on a closed well-founded best-supporter function for $s$.
+
+Relaxed plan heuristic $h^{FF}$: algorithmically
+1. Run $h^{max}$ or $h^{add}$ on $s$. If no relaxed plan exists, then $h^{max} = h^{add} = \infty$ ($h^+$, $h^{max}$, $h^{add}$ agree on $\infty$) → **return $\infty$**.
+2. Otherwise, $h^{max}$/$h^{add}$ yields a **closed well-founded** best-supporter function $bs$.
+3. Relaxed plan extraction on $bs$ yields a relaxed plan $\mathit{RPlan}$
+4. **Return $\sum_{a \in \mathit{RPlan}} c(a)$**.
+
+>[!note] Name
+>The name "$h^{FF}$" is historically motivated: FF is the name of the first planning system using this heuristic [Hoffmann and Nebel (2001)].
+
+#### Properties
+
+>[!info] **Proposition** ($h^{FF}$ is pessimistic and agrees with $h^{+}$ on $\infty$)
+>For all STRIPS planning tasks $\Pi$, $h^{FF} \geq h^{+}$; for all states $s$, $h^{+}(s) = \infty$ if and only if $h^{FF}(s) = \infty$. There exist $\Pi$ and $s$ so that $h^{FF}(s) > h^{*}(s)$.
+>
+>>[!done] Proof
+>>- **$h^{FF} \geq h^{+}$**: follows from the [[#Relaxed plan heuristic|previous paragraph]]. $\mathit{RPlan}$ can be sequenced into a relaxed plan for $s$, and $h^{+}(s)$ is the cost of an **optimal** relaxed plan, so $h^{FF}(s) = \sum_{a \in \mathit{RPlan}} c(a) \geq h^{+}(s)$.
+>>- **Agrees with $h^{+}$ on $\infty$**: direct from the definition. $h^{FF}$ returns $\infty$ exactly when no relaxed plan exists, i.e., when $h^{+}(s) = \infty$.
+>>- **Inadmissibility**: when $bs$ makes sub-optimal choices. Since $bs$ picks supporters **one fact at a time**, it can miss an action that achieves several goals at once.
+>>
+>>>[!example]- Inadmissibility example
+>>>$s = \emptyset$, $G = \{g_1, g_2\}$, no deletes:
+>>>- $a$: add $\{g_1, g_2\}$, cost $3$
+>>>- $b_1$: add $\{g_1\}$, cost $2$
+>>>- $b_2$: add $\{g_2\}$, cost $2$
+>>>
+>>>Per fact: $h(g_1) = \min(3, 2) = 2$ via $b_1$, $h(g_2) = 2$ via $b_2$ → $bs(g_1) = b_1$, $bs(g_2) = b_2$.
+>>>$\mathit{RPlan} = \{b_1, b_2\}$ → $h^{FF}(s) = 4 > 3 = h^{*}(s) = h^{+}(s)$ (just apply $a$).
+>
+>→ Relaxed plan heuristics have the same theoretical properties as $h^{add}$.
+
+>[!question] So what's the point?
+>- Example "Logistics" with $100$ packages at $C$ that need to go to $D$: $h^{FF}(I) = 203 \ll 700 = h^{add}(I)$, because relaxed plan extraction counts each drive action only once.
+>	- $203 = 3$ drives ($drAB, drBC, drCD$) $+\ 100 \times lo_C + 100 \times ul_D$; here $h^{FF}(I) = h^{+}(I)$, while $h^{*}(I) = 206$ ($+3$ drives back to $A$).
+>- $h^{FF} \text{ never overcounts}$ (each action is counted at most once), as relaxed plan extraction returns a **set** of actions.
+>- In practice, $h^{FF}$ typically is close to $h^{+}$ and does not over-estimate $h^{*}$.
+>	- → $h^{FF}$ can be inadmissible, just like $h^{add}$, but for more subtle reasons.
+>
+>>[!tldr]
+>>Sulla carta $h^{FF}$ ha le stesse proprietà di $h^{add}$: $\geq h^+$, esatto su $\infty$, non ammissibile. In pratica è molto migliore, perché non conta due volte la stessa azione. Sbaglia solo quando $bs$, scegliendo un fatto alla volta, non vede un'azione che soddisfa più goal insieme.
+
+>[!info]- Helpful Actions Pruning (for Reference)
+>**Idea**: in search, expand only those actions contained in the relaxed plan.
+>- e.g. relaxed plan = "Go to supermarket, Buy milk, …" → from the current state, consider only the actions that appear in it.
+>- e.g. *Schedule* domain (many tools, many objects): the relaxed plan doesn't drill holes into objects that need to be painted, so those actions are never expanded.
+>
+>>[!info] **Definition** (Helpful Actions)
+>>Let $h^{FF}$ be a relaxed plan heuristic, let $s$ be a state, and let $\mathit{RPlan}$ be the action set returned by relaxed plan extraction on the closed well-founded best-supporter function for $s$ which underlies $h^{FF}$. Then an action $a$ **applicable to $s$** is called **helpful** if it is contained in $\mathit{RPlan}$.
+>
+>**Remarks**:
+>- Initially introduced in FF [Hoffmann and Nebel (2001)], restricting search to use only the helpful actions.
+>- There is **no guarantee** that the actually needed actions will be helpful → this does **not preserve completeness** (cf. slide 61: in the Tiger task, $jumpTiger$ is the only helpful action in $\{alive, haveTiger\}$, but it kills you).
+>- Fast Downward uses the term **preferred operators** for similar concepts, for a broad variety of heuristic functions $h$, and offers several ways of using them.
+>- Preferred operators may have **more impact on performance** than different heuristic functions [Richter and Helmert (2009)].
+>
+>>[!tldr]
+>>$h^{FF}$ restituisce, oltre al valore, anche un **insieme di azioni**. Le azioni applicabili subito che compaiono in $\mathit{RPlan}$ sono quelle "utili", e si possono espandere solo quelle. In pratica aiuta tantissimo, ma si perde la completezza: l'azione davvero necessaria potrebbe non comparire nel piano rilassato.
