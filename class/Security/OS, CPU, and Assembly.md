@@ -3,6 +3,34 @@ Class: "[[Security]]"
 Sem: WiSe 26/27
 ---
 ---
+## Index
+- [[#Virtual memory|Virtual memory]]
+	- [[#Virtual memory#Canonical addressing|Canonical addressing]]
+		- [[#Canonical addressing#Privilege rings|Privilege rings]]
+- [[#Process memory layout|Process memory layout]]
+	- [[#Process memory layout#Memory separation in Windows/Linux|Memory separation in Windows/Linux]]
+- [[#x64 assembly|x64 assembly]]
+	- [[#x64 assembly#Register|Register]]
+		- [[#Register#The flags register|The flags register]]
+	- [[#x64 assembly#Intel assembly notation|Intel assembly notation]]
+		- [[#Intel assembly notation#Moving data|Moving data]]
+		- [[#Intel assembly notation#Arithmetic and logic|Arithmetic and logic]]
+		- [[#Intel assembly notation#Signed vs. unsigned (background)|Signed vs. unsigned (background)]]
+- [[#Control flow in assembly|Control flow in assembly]]
+	- [[#Control flow in assembly#Comparisons: cmp and test|Comparisons: cmp and test]]
+	- [[#Control flow in assembly#High-level constructs (background)|High-level constructs (background)]]
+- [[#gdb|gdb]]
+	- [[#gdb#Typical workflow|Typical workflow]]
+	- [[#gdb#Command cheat sheet|Command cheat sheet]]
+	- [[#gdb#Extensions|Extensions]]
+- [[#The stack|The stack]]
+	- [[#The stack#Function calls|Function calls]]
+- [[#Linux calling convention (System V AMD64 ABI)|Linux calling convention (System V AMD64 ABI)]]
+	- [[#Linux calling convention (System V AMD64 ABI)#Prologue and epilogue|Prologue and epilogue]]
+	- [[#Linux calling convention (System V AMD64 ABI)#Stack frame layout|Stack frame layout]]
+	- [[#Linux calling convention (System V AMD64 ABI)#Frame pointer omission (background)|Frame pointer omission (background)]]
+- [[#System calls|System calls]]
+---
 ## OS
 The OS is a layer of abstraction over the hardware and the process is an abstraction for a program in execution (OS keeps a lot of context per process, e.g., registers, files, etc. and processes are isolated from each other).
 
