@@ -66,6 +66,13 @@ Start at goal, and **regress** over actions to produce **subgoals**, until a sub
 >1. deve aggiungere qualcosa per raggiungere $g$
 >2. ciò che l’azione cambia, non deve cambiarlo nel valore sbagliato (altrimenti dopo l’azione l’obiettivo è falso)
 >3. se un’azione ha bisogno di qualcosa e non lo cambia, quel qualcosa sarà così anche dopo; non può contraddire ciò che vuoi alla fine
+>
+>>[!example]
+>>![[Pasted image 20261118125340.png]]
+>>
+>>![[Pasted image 20261118125356.png]]
+>>
+>>![[Pasted image 20261118125406.png]]
 
 >[!example] Backward Search on "TSP"
 >![[tsp.png|400]]
@@ -288,5 +295,3 @@ Given $\Pi \in\mathcal{P}$, you let $\Pi^{r}:=\mathcal{R}(\Pi)$, and estimate $h
 >
 >>[!info] Capiamo
 >>Le azioni applicate sono quelle del problema originale, non quelle del problema rilassato (devono rispettare $pre_{a}$ e $del_{a}$)
-
-
