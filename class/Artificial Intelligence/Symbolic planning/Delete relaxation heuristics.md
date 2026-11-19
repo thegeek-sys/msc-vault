@@ -655,3 +655,25 @@ Relaxed plan heuristic $h^{FF}$: algorithmically
 >
 >>[!tldr]
 >>$h^{FF}$ restituisce, oltre al valore, anche un **insieme di azioni**. Le azioni applicabili subito che compaiono in $\mathit{RPlan}$ sono quelle "utili", e si possono espandere solo quelle. In pratica aiuta tantissimo, ma si perde la completezza: l'azione davvero necessaria potrebbe non comparire nel piano rilassato.
+
+---
+## Delete relaxation for FDR
+In FDR the variables change their values, so in order to apply the delete relaxation, we need to make them accumulate. In practice (in particular in the Fast Downward implementation), simply formulate the algorithms relative to the “FDR facts” $v=d$.
+
+>[!info] **Definition** (delete relaxed FDR)
+>Let $\Pi=(V,A,c,I,G)$ be and FDR planning task. Denote by $P_{V}:=\{v=d\mid v\in V, d\in D_{v}\}$ the set of (FDR) facts.
+>
+>The **relaxed state space** of $\Pi$ is the tuple $\Theta^{+}_{\Pi}=(S^{+},A,c,T,I,S^{+G})$ where:
+>- the states (also relaxed states) $S^{+}=2^{P_{V}}$ are the subsets $s^{+}$ of $P_{V}$
+>- the action $A$ and cost function $c$ are those of $\Pi$
+>- the transitions are $T=\{s^{+}\overset{a}{\to}s'^{+}\mid pre_{a}\subseteq s^{+}, s'^{+}=s^{+}\cup eff_{a}\}$
+>- the initial state $I$ is identical to that of $\Pi$
+>- the goal states are $S^{+G}=\{s^{+}\in S^{+}\mid G\subseteq s^{+}\}$
+>
+>An (optimal) relaxed plan for $s^{+}\in S^{+}$ is an (optimal) solution  for $s^{+}$ in $\Theta t^{+}_{\Pi}$. A relaxed plan for $I$ is also called a relaxed plan for $\Pi$.
+>
+>Let $\Theta_{\Pi}=(S,A,c,T,I,G)$ be a state of $\Pi$. The *optimal delete relaxation heuristic $h^{+}$* for $\Pi$ is the function $h^{+}:S\to \mathbb{R}_{0}^{+}\cup \{\infty\}$ where $h^{+}(s)$ is defined as the cost of an optimal relaxed plan for $s$
+>
+>>[!tldr]
+>>FDR relaxed states may contain several values (facts) for a single variable, and transitions accumulate the values.
+

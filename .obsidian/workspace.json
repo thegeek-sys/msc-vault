@@ -122,7 +122,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -291,11 +291,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "b21fd902aac452ec",
+  "active": "08c703e60a76dcba",
   "lastOpenFiles": [
+    "class/Artificial Intelligence/Symbolic planning/Delete relaxation heuristics.md",
     "flet-notes/2026-11-17-ai.md",
     "class/Artificial Intelligence/Symbolic planning/Symbolic planning.md",
-    "class/Artificial Intelligence/Symbolic planning/Delete relaxation heuristics.md",
     "class/Artificial Intelligence/Symbolic planning/Critical-Path heuristics.md",
     "class/Artificial Intelligence/Symbolic planning/Heuristic search basis.md",
     "class/Artificial Intelligence/Artificial Intelligence.md",
