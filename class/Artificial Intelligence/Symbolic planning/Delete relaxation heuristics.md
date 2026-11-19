@@ -257,6 +257,35 @@ The delete relaxation heuristic we want is $h^{+}$. Unfortunately, this is hard 
 >h^{\text{max}}(s,g)=\begin{cases} 0 & g\subseteq s \\ \min_{a\in A,\, g'\in add_a}\left[c(a)+h^{\text{max}}(s,pre_a)\right] & g=\{g'\} \\ {\color{red}\max_{g'\in g}}\, h^{\text{max}}(s,\{g'\}) & |g|>1 \end{cases}
 >$$
 
+>[!example] $bs^{max} \neq bs^{add}$
+>![[Pasted image 20261119124240.png|500]]
+>- $s = \{x\}$; $G = \{p\}$.
+>- $A$:
+>	- $mq_1$: pre $x$; add $q_1$; cost $2$
+>	- $mq_2$: pre $x$; add $q_2$; cost $2$
+>	- $mr$: pre $x$; add $r$; cost $3$
+>	- $a$: pre $q_1, q_2$; add $p$; cost $1$ ("assemble $p$ from two parts")
+>	- $b$: pre $r$; add $p$; cost $1$ ("build $p$ from one bigger part")
+>
+>| | x | q₁ | q₂ | r | p |
+>|---|---|---|---|---|---|
+>| $h^{max}$ | 0 | 2 | 2 | 3 | 3<sub>a</sub> |
+>| $h^{add}$ | 0 | 2 | 2 | 3 | 4<sub>b</sub> |
+>
+>Candidates for $p$:
+>- via $a$: $h^{max}$: $1 + \max(2, 2) = \mathbf{3}$, $h^{add}$: $1 + (2 + 2) = 5$
+>- via $b$: $h^{max}$: $1 + 3 = 4$, $h^{add}$: $1 + 3 = \mathbf{4}$
+>
+>→ $bs^{max}_s(p) = a$, but $bs^{add}_s(p) = b$.
+>
+>>[!note]- Consequence on $h^{FF}$
+>>- From $bs^{max}$: $\mathit{RPlan} = \{a, mq_1, mq_2\}$ → $h^{FF}(s) = 1 + 2 + 2 = 5$
+>>- From $bs^{add}$: $\mathit{RPlan} = \{b, mr\}$ → $h^{FF}(s) = 1 + 3 = 4$
+>>- Here $h^{+}(s) = h^{*}(s) = 4$ (no deletes at all) → $h^{FF}$ from $bs^{max}$ **over-estimates** $h^*$: a concrete case of "$bs$ makes sub-optimal choices".
+>
+>>[!tldr]
+>>$h^{max}$ guarda solo la precondizione più cara, come se le altre fossero gratis. Per questo preferisce l'azione con tante precondizioni economiche. $h^{add}$ le somma tutte, e preferisce l'azione con una sola precondizione un po' più costosa.
+
 ### Properties
 
 ![[Pasted image 20261113210859.png]]
@@ -595,6 +624,7 @@ For relaxed plan extraction to make sense, it requires a *closed well-founded* b
 >>- This $bs$ can never come from $h^{max}$/$h^{add}$: there $h(tB) = 1$ via $drAB$, while $drCB$ would give $1 + h(tC) = 3$, so the argmin always picks $drAB$.
 
 ### Relaxed plan heuristic
+![[Pasted image 20261119122854.png]]
 
 >[!info] **Definition** (relaxed plan heuristic)
 >A heuristic function is called **relaxed plan heuristic**, denoted $h^{FF}$, if, given a state $s$, it returns $\infty$ if not relaxed plan exists, and otherwise returns $\sum_{a\in RPlan} c(a)$ where $RPlan$ is the action set returned by relaxed plan extraction on a closed well-founded best-supporter function for $s$.

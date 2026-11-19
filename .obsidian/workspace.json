@@ -122,7 +122,7 @@
             }
           }
         ],
-        "currentTab": 7
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -291,10 +291,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "08c703e60a76dcba",
+  "active": "b21fd902aac452ec",
   "lastOpenFiles": [
-    "class/Artificial Intelligence/Symbolic planning/Delete relaxation heuristics.md",
+    "files/Pasted image 20261119124240.png",
+    "files/Pasted image 20261119122854.png",
     "flet-notes/2026-11-17-ai.md",
+    "class/Artificial Intelligence/Symbolic planning/Delete relaxation heuristics.md",
     "class/Artificial Intelligence/Symbolic planning/Symbolic planning.md",
     "class/Artificial Intelligence/Symbolic planning/Critical-Path heuristics.md",
     "class/Artificial Intelligence/Symbolic planning/Heuristic search basis.md",
@@ -311,7 +313,6 @@
     "class/Security/Security.md",
     "class/Security/OS, CPU, and Assembly.md",
     "files/IMG_3834.jpeg",
-    "files/IMG_3833.jpeg",
     "flet-notes/2026-11-10-ai.md",
     "flet-notes/2026-11-12-ai.md",
     "class/System Security/cheatsheet.md",
