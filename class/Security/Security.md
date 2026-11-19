@@ -7,4 +7,5 @@
 - [[Bitcoin]]
 - [[OS, CPU, and Assembly]]
 - [[Memory Corruption]]
+- [[Code reuse and defenses]]
 - 

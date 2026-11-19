@@ -3,6 +3,24 @@ Class: "[[Security]]"
 Sem: WiSe 26/27
 ---
 ---
+## Index
+- [[#Introduction|Introduction]]
+	- [[#Introduction#Is it still relevant?|Is it still relevant?]]
+- [[#Stack buffer overflow|Stack buffer overflow]]
+	- [[#Stack buffer overflow#Shellcode|Shellcode]]
+	- [[#Stack buffer overflow#Reverse shells|Reverse shells]]
+- [[#Tools|Tools]]
+	- [[#Tools#pwntools|pwntools]]
+		- [[#pwntools#Shellcode to full exploit chain|Shellcode to full exploit chain]]
+- [[#Other memory-corruption classes|Other memory-corruption classes]]
+	- [[#Other memory-corruption classes#Integer overflows|Integer overflows]]
+	- [[#Other memory-corruption classes#Heap corruption|Heap corruption]]
+	- [[#Other memory-corruption classes#Use-after-free|Use-after-free]]
+	- [[#Other memory-corruption classes#More classes (background)|More classes (background)]]
+- [[#Format-string vulnerabilities|Format-string vulnerabilities]]
+	- [[#Format-string vulnerabilities#Read primitive|Read primitive]]
+	- [[#Format-string vulnerabilities#Write primitive|Write primitive]]
+---
 ## Introduction
 Memory corruption is still one of the most widely used ways to compromise systems (especially legacy and embedded systems without countermeasures). The root cause is that C/C++ give the programmer manual memory management and no bounds checking (reading or writing outside the object’s bounds corrupts adjacent memory).
 
