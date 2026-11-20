@@ -1,0 +1,1 @@
+{"path":"files/Pasted image 20261120122941.png","text":"Normal Stack Full Shadow Stack Dense Shadow Stack sub [shad_sp], 8 (padding) mov rcx, [rbp+8] mov [shad_sp], rcx call <myfun> Dense Shadow Stack local vars, P (padding)","libVersion":"0.5.0","langs":"eng"}

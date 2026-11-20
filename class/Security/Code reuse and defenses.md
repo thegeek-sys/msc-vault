@@ -3,6 +3,18 @@ Class: "[[Security]]"
 Sem: WiSe 26/27
 ---
 ---
+## Index
+- [[#Non-executable stack|Non-executable stack]]
+- [[#Code reuse attacks|Code reuse attacks]]
+	- [[#Code reuse attacks#Return-to-libc|Return-to-libc]]
+	- [[#Code reuse attacks#Return-oriented programming (ROP)|Return-oriented programming (ROP)]]
+		- [[#Return-oriented programming (ROP)#Finding gadgets|Finding gadgets]]
+- [[#Stack canaries|Stack canaries]]
+	- [[#Stack canaries#Variants|Variants]]
+	- [[#Stack canaries#Limits|Limits]]
+- [[#Return-address XORing|Return-address XORing]]
+- [[#Shadow stack|Shadow stack]]
+---
 ## Non-executable stack
 Classic shellcode works only because the stack is executable, so if we mark the stack (and heap, and data) **non-executable** we can avoid it.
 
@@ -86,4 +98,75 @@ payload = b’A’*72 + rop.chain()
 
 ---
 ## Stack canaries
-The idea is to place a secret canary value between the local buffers and the saved RBP/return address.
+The idea is to place a secret canary value between the local buffers and the saved RBP/return address (the prologue writes it, and the epilogue checks it before `ret`), so that a linear overflow that reaches the return address must overwrite the canary first creating a mismatch that leads to an abort (`__stack_chk_fail`).
+
+gcc/LLVM store the reference canary in thread-local storage (`fs:0x28`).
+
+>[!info] Capiamo
+>![[bangdesk.gif]]
+>
+>Lo shellcode viene comunque scritto nel buffer: il canary non impedisce nessuna scrittura. Funziona perché sta **tra il buffer e il return address**, quindi un overflow lineare che vuole arrivare al return address deve per forza passarci sopra e modificarlo. Nell’epilogo, prima del `ret`, la funzione confronta il valore sullo stack con quello originale (in `fs:0x28`). Se sono diversi chiama `__stack_chk_fail`, che termina il processo. Il `ret` non viene mai eseguito, quindi il return address manipolato non viene mai usato.
+
+### Variants
+- **random canary** → a random value chosen at program start (the attacker must guess or leak it, but a random 64-bit canary is infeasible to guess in one try, for each new process a new canary is generated)
+- **terminator canary** → bytes that terminate C string functions (e.g., `0x00`, `0x0a`, `0xff`); a string-based overflow cannot write past them without stopping
+
+These two techniques are often combined (a random canary with a NUL low byte).
+
+### Limits
+The canary only protect the saved RBP/return address, *not* local variables or functions pointers and neither *non-linear* writes.
+
+A format-string `%n` write, or an arbitrary-write primitive, jumps straight to the return address completely bypassing the canaries
+
+Furthermore it is **leakable**: any info-leak (e.g., format-string `%s`) reveals the canary.
+
+Finally, on **forking servers** the children keep the parent's canary, which enables a **byte-by-byte brute force**: a *crash vs. no-crash* oracle, ~256 tries per byte.
+
+![[Pasted image 20261120121725.png|555]]
+
+>[!info] Capiamo
+>Un canary a 64 bit non si indovina: $2^{64}$ tentativi. Il brute force funziona solo se puoi riprovare molte volte **contro lo stesso valore**, ed è proprio quello che un server con `fork()` ti regala: ogni figlio è una copia del padre, quindi tutti condividono **lo stesso canary**. Se un figlio crasha, il padre ne genera un altro col canary immutato (al contrario di un re-`exec`, che lo rigenererebbe daccapo).
+>
+>Non leggi il canary, lo **indovini un byte alla volta**. Il trucco: fai traboccare l'overflow solo fino al byte che stai testando, così i byte più profondi restano intatti — e quindi corretti — e l'unica variabile è quello che stai indovinando. Byte sbagliato → `__stack_chk_fail` → crash; byte giusto → nessun crash. Fissato un byte, allunghi l'overflow di uno e passi al successivo.
+>
+>Costo: al massimo $256$ tentativi per byte su $8$ byte,
+>$$256 \times 8 \approx 2048 \approx 2^{11} \quad\text{invece di}\quad 2^{64}$$
+>cioè da **esponenziale** a **lineare**.
+
+---
+## Return-address XORing
+Another counter measure, similar to stack canaries, is to XOR the saved return address with a random secret (generated new for each new execution of the process). In practice, the prologue stores `rip xor key` and the epilogue XORs again  before the `ret`.
+
+An attacker who overwrites the saved address cannot predict the result after the decryption, as the XOR clobbers their value into a wrong (likely invalid) address. This method also relies on keeping the key secret
+
+```asm
+myfun:
+	push rbp
+	mov rbp, rsp
+	mov rcx, [xorsecret]
+	xor [rbp+8], rcx ; encrypt rip
+	xor rcx, rcx ; wipe key
+	...
+	mov rcx, [xorsecret]
+	xor [rbp+8], rcx ; decrypt rip
+	xor rcx, rcx
+	leave
+	ret
+```
+
+>[!info] XORing vs. stack canary
+>Both rely on a **random secret** chosen at program start and shared by all functions for the whole execution, so both must be kept secret.
+>- **Where the secret lives**: the canary is an *extra value* placed between the buffers and the saved RBP/return address; XORing adds nothing to the stack and **encrypts the return address itself** (`rip ⊕ key`).
+>- **How the attack is stopped**: the canary *detects* the overflow (mismatch → `__stack_chk_fail` → abort, `ret` never runs); XORing doesn't detect anything, it **corrupts** the attacker's value at decryption, so `ret` jumps to an unpredictable (likely invalid) address and the program crashes.
+>- **What is protected**: the canary also covers the saved RBP, since it sits below it; XORing protects only the return address.
+
+---
+## Shadow stack
+The last countermeasure we analyze is the **shadow stack**. This method consists in storing the return address twice:
+- on the normal stack (which the attacker can corrupt)
+- on a separate, protected *shadow stack* (the address is chosen randomly far from the stack at runtime for each new execution).
+
+
+![[Pasted image 20261120122941.png|568]]
+
+In practice, on `call` the return address is pushed to both, and on `ret` these two addresses are compared. If there is a mismatch the process aborts. In such way, it is possible to detect any corruption of the saved return address (there is also hardware support with Intel).

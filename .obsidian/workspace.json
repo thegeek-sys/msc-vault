@@ -86,7 +86,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "hkdf",
+                "query": "%n",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -107,7 +107,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -223,13 +224,16 @@
   },
   "active": "2b5aeccf5b9d91c1",
   "lastOpenFiles": [
+    "files/Pasted image 20261120122941.png",
+    "files/Pasted image 20261120121725.png",
+    "class/Security/Memory Corruption.md",
+    "class/Security/Untitled.md",
+    "class/Security/Code reuse and defenses.md",
     "files/Pasted image 20261119191257.png",
     "files/Pasted image 20261119190936.png",
     "class/Security/OS, CPU, and Assembly.md",
-    "class/Security/Code reuse and defenses.md",
     "files/Pasted image 20261119184843.png",
     "files/Pasted image 20261119182522.png",
-    "class/Security/Memory Corruption.md",
     "files/Pasted image 20261119171853.png",
     "class/Security/Security.md",
     "class/Security/Asymmetric Cryptography.md",
@@ -248,8 +252,6 @@
     "class/Artificial Intelligence/Symbolic planning/Heuristic search basis.md",
     "class/Artificial Intelligence/Artificial Intelligence.md",
     "files/Pasted image 20261118125406.png",
-    "files/Pasted image 20261118125356.png",
-    "files/Pasted image 20261118125340.png",
     "flet-notes/2026-11-10-ai.md",
     "flet-notes/2026-11-12-ai.md",
     "class/System Security/cheatsheet.md",
@@ -258,7 +260,6 @@
     "class/System Security/x86-64 assembly.md",
     "class/Artificial Intelligence/Heuristic search.md",
     "class/Artificial Intelligence/Basics, and Blind Search.md",
-    "class/Artificial Intelligence/Sparse search.md",
     "files/IMG_3815.jpeg.sb-e8b0a361-JNsQ6i",
     "class/Artificial Intelligence/Symbolic planning",
     "files/IMG_3754.heic",
