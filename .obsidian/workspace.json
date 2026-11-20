@@ -14,41 +14,139 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "class/Security/Security.md",
+                "file": "class/Artificial Intelligence/Artificial Intelligence.md",
                 "mode": "source",
                 "source": false
               },
               "pinned": true,
               "icon": "lucide-file",
-              "title": "Security"
+              "title": "Artificial Intelligence"
             }
           },
           {
-            "id": "2b5aeccf5b9d91c1",
+            "id": "9345dab8f6129fa0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "class/Security/Code reuse and defenses.md",
+                "file": "class/Artificial Intelligence/Heuristic search.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Code reuse and defenses"
+              "title": "Heuristic search"
             }
           },
           {
-            "id": "9dad7f403eb4b59d",
+            "id": "9aece96495786399",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "class/Security/Memory Corruption.md",
+                "file": "class/Artificial Intelligence/Heuristic search.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Memory Corruption"
+              "title": "Heuristic search"
+            }
+          },
+          {
+            "id": "97437fd67bb5bc39",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "class/Artificial Intelligence/Symbolic planning/Delete relaxation heuristics.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Delete relaxation heuristics"
+            }
+          },
+          {
+            "id": "cd5619834f0b70dd",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "class/Artificial Intelligence/Symbolic planning/Critical-Path heuristics.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Critical-Path heuristics"
+            }
+          },
+          {
+            "id": "0d6731998fffb3a2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "class/Artificial Intelligence/Symbolic planning/Heuristic search basis.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Heuristic search basis"
+            }
+          },
+          {
+            "id": "8a137ebed3a9a1fe",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "class/Artificial Intelligence/Symbolic planning/Critical-Path heuristics.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Critical-Path heuristics"
+            }
+          },
+          {
+            "id": "bc0116b981bc5d0a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "class/Artificial Intelligence/Symbolic planning/Symbolic planning.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Symbolic planning"
+            }
+          },
+          {
+            "id": "94f5a71e4c3f623b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "flet-notes/2026-11-10-ai.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2026-11-10-ai"
+            }
+          },
+          {
+            "id": "08c703e60a76dcba",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "flet-notes/2026-11-17-ai.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2026-11-17-ai"
             }
           }
         ],
@@ -86,7 +184,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "%n",
+                "query": "greedy best first",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -112,8 +210,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "7604b1047f3aeeab",
@@ -129,7 +226,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "class/Security/Code reuse and defenses.md",
+                "file": "class/Artificial Intelligence/Symbolic planning/Delete relaxation heuristics.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -222,20 +319,26 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "2b5aeccf5b9d91c1",
+  "active": "9345dab8f6129fa0",
   "lastOpenFiles": [
+    "class/Artificial Intelligence/Symbolic planning/Formalisms.md",
+    "class/Artificial Intelligence/Artificial Intelligence.md",
+    "class/Artificial Intelligence/Heuristic search.md",
+    "class/Artificial Intelligence/Symbolic planning/Delete relaxation heuristics.md",
+    "class/Artificial Intelligence/Sparse search.md",
+    "class/Artificial Intelligence/Symbolic planning/Critical-Path heuristics.md",
+    "class/Security/Security.md",
+    "class/Security/Memory Corruption.md",
+    "class/Security/Code reuse and defenses.md",
     "files/Pasted image 20261120122941.png",
     "files/Pasted image 20261120121725.png",
-    "class/Security/Memory Corruption.md",
     "class/Security/Untitled.md",
-    "class/Security/Code reuse and defenses.md",
     "files/Pasted image 20261119191257.png",
     "files/Pasted image 20261119190936.png",
     "class/Security/OS, CPU, and Assembly.md",
     "files/Pasted image 20261119184843.png",
     "files/Pasted image 20261119182522.png",
     "files/Pasted image 20261119171853.png",
-    "class/Security/Security.md",
     "class/Security/Asymmetric Cryptography.md",
     "class/Security/Certificates.md",
     "class/Security/TLS.md",
@@ -243,23 +346,17 @@
     "class/Security/Symmetric Cryptography.md",
     "class/Security/Cryptographic Protocols.md",
     "files/Pasted image 20261029184647.png",
-    "class/Artificial Intelligence/Symbolic planning/Delete relaxation heuristics.md",
     "files/Pasted image 20261119124240.png",
     "files/Pasted image 20261119122854.png",
     "flet-notes/2026-11-17-ai.md",
     "class/Artificial Intelligence/Symbolic planning/Symbolic planning.md",
-    "class/Artificial Intelligence/Symbolic planning/Critical-Path heuristics.md",
     "class/Artificial Intelligence/Symbolic planning/Heuristic search basis.md",
-    "class/Artificial Intelligence/Artificial Intelligence.md",
-    "files/Pasted image 20261118125406.png",
     "flet-notes/2026-11-10-ai.md",
     "flet-notes/2026-11-12-ai.md",
     "class/System Security/cheatsheet.md",
     "class/System Security/04-Reverse Engineering.md",
     "class/System Security/System Security.md",
     "class/System Security/x86-64 assembly.md",
-    "class/Artificial Intelligence/Heuristic search.md",
-    "class/Artificial Intelligence/Basics, and Blind Search.md",
     "files/IMG_3815.jpeg.sb-e8b0a361-JNsQ6i",
     "class/Artificial Intelligence/Symbolic planning",
     "files/IMG_3754.heic",

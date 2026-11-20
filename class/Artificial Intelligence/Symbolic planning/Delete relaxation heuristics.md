@@ -3,6 +3,25 @@ Class: "[[Artificial Intelligence]]"
 Sem: WiSe 26/27
 ---
 ---
+## Index
+- [[#The delete relaxation|The delete relaxation]]
+	- [[#The delete relaxation#State dominance|State dominance]]
+	- [[#The delete relaxation#Greedy Relaxed Planning|Greedy Relaxed Planning]]
+- [[#$h^{+}$ (optimal delete relaxation heuristic)|$h^{+}$ (optimal delete relaxation heuristic)]]
+	- [[#$h^{+}$ (optimal delete relaxation heuristic)#How to compute $h^{+}$|How to compute $h^{+}$]]
+- [[#$h^{add}$ and $h^{max}$|$h^{add}$ and $h^{max}$]]
+	- [[#$h^{add}$ and $h^{max}$#Properties|Properties]]
+	- [[#$h^{add}$ and $h^{max}$#Summary|Summary]]
+- [[#Relaxed plan heuristic|Relaxed plan heuristic]]
+	- [[#Relaxed plan heuristic#The best-supporter functions we will use|The best-supporter functions we will use]]
+		- [[#The best-supporter functions we will use#Correctness|Correctness]]
+	- [[#Relaxed plan heuristic#Relaxed plan extraction|Relaxed plan extraction]]
+		- [[#Relaxed plan extraction#Correctness|Correctness]]
+	- [[#Relaxed plan heuristic#Best-supporter functions|Best-supporter functions]]
+	- [[#Relaxed plan heuristic#Relaxed plan heuristic|Relaxed plan heuristic]]
+		- [[#Relaxed plan heuristic#Properties|Properties]]
+- [[#Delete relaxation for FDR|Delete relaxation for FDR]]
+---
 ## The delete relaxation
 
 >[!info] **Definition** (delete relaxation)
