@@ -52,7 +52,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -128,6 +128,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "class/Security/Code reuse and defenses.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -220,14 +221,18 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "9dad7f403eb4b59d",
+  "active": "2b5aeccf5b9d91c1",
   "lastOpenFiles": [
+    "files/Pasted image 20261119191257.png",
+    "files/Pasted image 20261119190936.png",
+    "class/Security/OS, CPU, and Assembly.md",
     "class/Security/Code reuse and defenses.md",
-    "files/Pasted image 20261119171853.png",
+    "files/Pasted image 20261119184843.png",
+    "files/Pasted image 20261119182522.png",
     "class/Security/Memory Corruption.md",
+    "files/Pasted image 20261119171853.png",
     "class/Security/Security.md",
     "class/Security/Asymmetric Cryptography.md",
-    "class/Security/OS, CPU, and Assembly.md",
     "class/Security/Certificates.md",
     "class/Security/TLS.md",
     "class/Security/Bitcoin.md",
@@ -245,9 +250,6 @@
     "files/Pasted image 20261118125406.png",
     "files/Pasted image 20261118125356.png",
     "files/Pasted image 20261118125340.png",
-    "files/Pasted image 20261118125206.png",
-    "files/Pasted image 20261118000715.png",
-    "files/Pasted image 20261117234613.png",
     "flet-notes/2026-11-10-ai.md",
     "flet-notes/2026-11-12-ai.md",
     "class/System Security/cheatsheet.md",

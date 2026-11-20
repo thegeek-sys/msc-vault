@@ -1,0 +1,1 @@
+{"path":"files/Pasted image 20261119190936.png","text":"Program Code Program Stack attacker-controlled Sequence 1 POpPREG1; « Value 1 &gadget 3 POPREG2; « Value 2 ret &gadget 2 > Sequence 2 ret Sequence 3 asm_ins SP: &gadget 1 - ' l ret —P>each ret pops the next gadget address off the stack","libVersion":"0.5.0","langs":"eng"}
