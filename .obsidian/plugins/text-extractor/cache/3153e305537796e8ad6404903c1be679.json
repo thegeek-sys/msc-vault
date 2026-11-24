@@ -1,0 +1,1 @@
+{"path":"files/Pasted image 20261124113311.png","text":"Assembly code PLT GOT call myfunc@PLT PLT[0]: // special entry GOT[n]: <addr> (address lookup) PLT[1]: // n’th PLT entry jmp *GOT[n] (prepare lookup) I AR imp PLT[O] Assembly code","libVersion":"0.5.0","langs":"eng"}

@@ -1,0 +1,1 @@
+{"path":"files/Pasted image 20261124112543.png","text":"$ gcc -shared -fPIC -o pic.so pic.c Global Offset Table (.got) 200989: [ ... C code Assembly code extern int ext_var; 6b0: 55 push rbp 6b1: 48 89 e5 mov rbp,rsp int my_local_fun(void) { 6ba: 8b o5 [ mov rax, [rip+0x2002ce] return ext_var; 6bb: 8b 00 ] } 67a: b5d pop rbp 67b: c¢3 ret","libVersion":"0.5.0","langs":"eng"}

@@ -8,4 +8,5 @@
 - [[OS, CPU, and Assembly]]
 - [[Memory Corruption]]
 - [[Code reuse and defenses]]
+- [[Mitigations and memory safety]]
 - 
