@@ -285,9 +285,6 @@ Fortunately there is no need to commit to a single $\alpha$, as we can combine s
 >>$$\sum_{i=1}^{n}h^{\alpha_{i}}(s)\leq\sum_{i=1}^{n}h^{\alpha_{i}}(s')+c(a)$$
 >>
 >>*Key step:* because of orthogonality, $\alpha_{i}(s)\neq\alpha_{i}(s')$ for **at most one** $i\in\{1,\dots,n\}$.
->>- By contradiction: assume there are $i\neq j$ s.t. $\alpha_{i}(s)\neq\alpha_{i}(s')$ and $\alpha_{j}(s)\neq\alpha_{j}(s')$.
->>- Then $a$ induces a non-self-loop transition in both $\Theta^{\alpha_{i}}$ and $\Theta^{\alpha_{j}}$, i.e. $a$ affects both.
->>- $\Rightarrow$ $\alpha_{i}$ and $\alpha_{j}$ are not orthogonal, contradiction.
 >>
 >>*Case 1:* $\alpha_{i}(s)=\alpha_{i}(s')$ for all $i$ ($a$ is a self-loop everywhere). Then:
 >>$$\begin{aligned}
@@ -319,7 +316,7 @@ Fortunately there is no need to commit to a single $\alpha$, as we can combine s
 >Senza ortogonalità invece una stessa azione potrebbe far scendere due termini di $c(a)$ ciascuno: la somma scenderebbe di $2c(a)$, cioè l'azione verrebbe pagata due volte. È esattamente il problema del blank nel 15-Puzzle: ogni mossa cambia $b$, quindi viene contata in entrambe le abstraction.
 
 >[!example] Orthogonality and additivity: yet another "Logistics"
->![[logistics_2packages.png|300]]
+>![[Pasted image 20261125105021.png|300]]
 >
 >- $V$: $\{p_{1},\ p_{2},\ t\}$
 >	- $D_{p_{1}}=D_{p_{2}}=\{L,R,T\}$ ($T$ = inside the truck)
@@ -330,13 +327,13 @@ Fortunately there is no need to commit to a single $\alpha$, as we can combine s
 >State $p_{1}=x$, $p_{2}=y$, $t=z$ is depicted as $xyz$.
 >
 >Concrete state space $\Theta$:
->![[logistics_2packages_theta.png|500]]
+>![[Pasted image 20261125105047.png|500]]
 >
 >Abstraction $\alpha_{1}$: only consider position of package 1
->![[logistics_2packages_alpha1.png|500]]
+>![[Pasted image 20261125105116.png|500]]
 >
 >Abstraction $\alpha_{2}$: only consider position of package 2
->![[logistics_2packages_alpha2.png|500]]
+>![[Pasted image 20261125105148.png|500]]
 >
 >>[!question] Why are $\alpha_{1}$ and $\alpha_{2}$ orthogonal?
 >>- $load$/$unload$ of package 1: change $p_{1}$ $\Rightarrow$ affect **only** $\alpha_{1}$ (self-loops in $\alpha_{2}$)
