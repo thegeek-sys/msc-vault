@@ -435,6 +435,82 @@ And now for the details:
 - what is a best-supporter function, in general? what properties does it need to have for relaxed plan extraction to work as intended?
 - wrapping up: correctness of relaxed plan extraction, correctness of our best-supporter functions, definition of relaxed plan heuristic, discussion of its properties
 
+### Best-supporter functions
+For relaxed plan extraction to make sense, it requires a *closed well-founded* best supporter function
+
+>[!info] **Definition** (best-supporter function)
+>Let $\Pi=(P,A,c,I,G)$ be a STRIPS planning task, and let $s$ be a state. A best-supporter function for $s$ is a partial function $bs:(P\backslash s)\to A$ such that $p \in add_{a}$ whenever $a=bs(p)$.
+>
+>The **support graph** of $bs$ is the directed graph with vertices $(P\backslash s)\cup A$ and arcs $\{(a,p)\mid a=bs(p)\}\cup \{(p,a)\mid p \in pre_{a}\backslash s\}$.
+>
+>We say that $bs$ is **closed** if $bs(p)$ is defined for every $p \in (P\backslash s)$ that has a path to a goal $g\in G$ in the support graph.
+>
+>We say that $bs$ is **well-founded** if the support graph is acyclic.
+>
+>- “$p \in add_{a}$ whenever $a=bs(p)$” → **Condition (A)**
+>- $bs$ is closed → **Condition (B)** (“$bs$ will be defined wherever it takes us to“)
+>- $bs$ is well-founded → **Condition (C)**; relaxed plan extraction starts at the goals, and chains backwards in the support graph. If there are cycles, then this backchaining may not reach the currently true state $s$, and thus not yield a relaxed plan
+
+>[!example] Support graphs and Condition (C) in "Logistics"
+>- Map: $A - B - C - D$ (line).
+>- $I = \{tA\}$; $G = \{tD\}$; $A$: $drXY$ for adjacent $X, Y$ (pre $tX$; add $tY$; del $tX$).
+>- **Support graph** of $bs$: vertices $(P \setminus s) \cup A$, arcs
+>	- $a \to p$ if $a = bs(p)$ (the supporter produces $p$)
+>	- $p \to a$ if $p \in pre_a \setminus s$ ($p$ is needed by $a$)
+>
+>**How to do it (well-founded)**
+>
+>| $p$ | $bs(p)$ |
+>|---|---|
+>| $tB$ | $drAB$ |
+>| $tC$ | $drBC$ |
+>| $tD$ | $drCD$ |
+>
+>```mermaid
+>graph LR
+>  drAB --> tB --> drBC --> tC --> drCD --> tD
+>  tB --> drBA
+>  tC --> drCB
+>  tD --> drDC
+>```
+>
+>- No cycles. Backchaining from $tD$: $tD \leftarrow drCD \leftarrow tC \leftarrow drBC \leftarrow tB \leftarrow drAB$, and $drAB$ needs only $tA \in s$ (no incoming arc), so the chain **reaches $s$**.
+>- $\mathit{RPlan} = \{drCD, drBC, drAB\}$, executable in the order $drAB \to drBC \to drCD$ ✓
+>
+>**How NOT to do it (not well-founded)**
+>
+>| $p$ | $bs(p)$ |
+>|---|---|
+>| $tB$ | $\color{red}drCB$ |
+>| $tC$ | $drBC$ |
+>| $tD$ | $drCD$ |
+>
+>```mermaid
+>graph LR
+>  drAB
+>  drCB --> tB --> drBC --> tC --> drCD --> tD
+>  tC --> drCB
+>  tB --> drBA
+>  tD --> drDC
+>  classDef cyc stroke:#e24b4a,color:#e24b4a
+>  class tB,drBC,tC,drCB cyc
+>```
+>
+>- **Cycle**: $tB \to drBC \to tC \to drCB \to tB$ ($tB$ is supported by $drCB$, which needs $tC$, which is supported by $drBC$, which needs $tB$).
+>- $drAB$ is now isolated: it is nobody's supporter, so backchaining never gets back to $tA \in s$.
+>
+>>[!note]- Trace of relaxed plan extraction (not well-founded case)
+>>| step | $g$ | $bs(g)$ | $\mathit{Closed}$ (after) | added to $\mathit{Open}$ |
+>>|---|---|---|---|---|
+>>| 0 | – | – | $\emptyset$ | $\{tD\}$ |
+>>| 1 | $tD$ | $drCD$ | $\{tD\}$ | $\{tC\}$ |
+>>| 2 | $tC$ | $drBC$ | $\{tD, tC\}$ | $\{tB\}$ |
+>>| 3 | $tB$ | $drCB$ | $\{tD, tC, tB\}$ | $\{tC\} \setminus \mathit{Closed} = \emptyset$ |
+>>
+>>- Returns $\{drCD, drBC, drCB\}$: the algorithm **terminates** (thanks to $\mathit{Closed}$), but the result is **not** a relaxed plan. Starting from $\{tA\}$ no action is applicable: $drCB$ needs $tC$, $drBC$ needs $tB$, $drCD$ needs $tC$.
+>>- $bs$ is **closed** (defined on $tB, tC, tD$), and Condition (A) holds, but it is **not well-founded** → Condition (C) is violated.
+>>- This $bs$ can never come from $h^{max}$/$h^{add}$: there $h(tB) = 1$ via $drAB$, while $drCB$ would give $1 + h(tC) = 3$, so the argmin always picks $drAB$.
+
 ### The best-supporter functions we will use
 
 >[!info] **Definition** (best supporters for $h^{max}$ and $h^{add}$)
@@ -464,7 +540,6 @@ And now for the details:
 >>- For each fact $p \notin s$: $bs(p) := \arg\min_{a \in A,\, p \in add_a} \left[ c(a) + h^{add}(s, pre_a) \right]$, i.e. the action that gave $p$ its final value in the table.
 >>- For $p \in s$ ($tA$, $pC$): no supporter needed (–), since $h^{add}(s,p) = 0$.
 >>- e.g. $bs(pD) = ulD$ because $1 + [tD(3) + pT(3)] = 7 = h^{add}(pD)$.
-
 
 #### Correctness
 
@@ -566,81 +641,6 @@ And now for the details:
 >>>[!tldr]
 >>>**la prima azione dell’ordine topologico è una sorgente del grafo**, e le sorgenti sono esattamente le azioni con tutte le precondizioni in s.
 
-### Best-supporter functions
-For relaxed plan extraction to make sense, it requires a *closed well-founded* best supporter function
-
->[!info] **Definition** (best-supporter function)
->Let $\Pi=(P,A,c,I,G)$ be a STRIPS planning task, and let $s$ be a state. A best-supporter function for $s$ is a partial function $bs:(P\backslash s)\to A$ such that $p \in add_{a}$ whenever $a=bs(p)$.
->
->The **support graph** of $bs$ is the directed graph with vertices $(P\backslash s)\cup A$ and arcs $\{(a,p)\mid a=bs(p)\}\cup \{(p,a)\mid p \in pre_{a}\backslash s\}$.
->
->We say that $bs$ is **closed** if $bs(p)$ is defined for every $p \in (P\backslash s)$ that has a path to a goal $g\in G$ in the support graph.
->
->We say that $bs$ is **well-founded** if the support graph is acyclic.
->
->- “$p \in add_{a}$ whenever $a=bs(p)$” → **Condition (A)**
->- $bs$ is closed → **Condition (B)** (“$bs$ will be defined wherever it takes us to“)
->- $bs$ is well-founded → **Condition (C)**; relaxed plan extraction starts at the goals, and chains backwards in the support graph. If there are cycles, then this backchaining may not reach the currently true state $s$, and thus not yield a relaxed plan
-
->[!example] Support graphs and Condition (C) in "Logistics"
->- Map: $A - B - C - D$ (line).
->- $I = \{tA\}$; $G = \{tD\}$; $A$: $drXY$ for adjacent $X, Y$ (pre $tX$; add $tY$; del $tX$).
->- **Support graph** of $bs$: vertices $(P \setminus s) \cup A$, arcs
->	- $a \to p$ if $a = bs(p)$ (the supporter produces $p$)
->	- $p \to a$ if $p \in pre_a \setminus s$ ($p$ is needed by $a$)
->
->**How to do it (well-founded)**
->
->| $p$ | $bs(p)$ |
->|---|---|
->| $tB$ | $drAB$ |
->| $tC$ | $drBC$ |
->| $tD$ | $drCD$ |
->
->```mermaid
->graph LR
->  drAB --> tB --> drBC --> tC --> drCD --> tD
->  tB --> drBA
->  tC --> drCB
->  tD --> drDC
->```
->
->- No cycles. Backchaining from $tD$: $tD \leftarrow drCD \leftarrow tC \leftarrow drBC \leftarrow tB \leftarrow drAB$, and $drAB$ needs only $tA \in s$ (no incoming arc), so the chain **reaches $s$**.
->- $\mathit{RPlan} = \{drCD, drBC, drAB\}$, executable in the order $drAB \to drBC \to drCD$ ✓
->
->**How NOT to do it (not well-founded)**
->
->| $p$ | $bs(p)$ |
->|---|---|
->| $tB$ | $\color{red}drCB$ |
->| $tC$ | $drBC$ |
->| $tD$ | $drCD$ |
->
->```mermaid
->graph LR
->  drAB
->  drCB --> tB --> drBC --> tC --> drCD --> tD
->  tC --> drCB
->  tB --> drBA
->  tD --> drDC
->  classDef cyc stroke:#e24b4a,color:#e24b4a
->  class tB,drBC,tC,drCB cyc
->```
->
->- **Cycle**: $tB \to drBC \to tC \to drCB \to tB$ ($tB$ is supported by $drCB$, which needs $tC$, which is supported by $drBC$, which needs $tB$).
->- $drAB$ is now isolated: it is nobody's supporter, so backchaining never gets back to $tA \in s$.
->
->>[!note]- Trace of relaxed plan extraction (not well-founded case)
->>| step | $g$ | $bs(g)$ | $\mathit{Closed}$ (after) | added to $\mathit{Open}$ |
->>|---|---|---|---|---|
->>| 0 | – | – | $\emptyset$ | $\{tD\}$ |
->>| 1 | $tD$ | $drCD$ | $\{tD\}$ | $\{tC\}$ |
->>| 2 | $tC$ | $drBC$ | $\{tD, tC\}$ | $\{tB\}$ |
->>| 3 | $tB$ | $drCB$ | $\{tD, tC, tB\}$ | $\{tC\} \setminus \mathit{Closed} = \emptyset$ |
->>
->>- Returns $\{drCD, drBC, drCB\}$: the algorithm **terminates** (thanks to $\mathit{Closed}$), but the result is **not** a relaxed plan. Starting from $\{tA\}$ no action is applicable: $drCB$ needs $tC$, $drBC$ needs $tB$, $drCD$ needs $tC$.
->>- $bs$ is **closed** (defined on $tB, tC, tD$), and Condition (A) holds, but it is **not well-founded** → Condition (C) is violated.
->>- This $bs$ can never come from $h^{max}$/$h^{add}$: there $h(tB) = 1$ via $drAB$, while $drCB$ would give $1 + h(tC) = 3$, so the argmin always picks $drAB$.
 
 ### Relaxed plan heuristic
 ![[Pasted image 20261119122854.png]]
