@@ -2,4 +2,5 @@
 - [[Heuristic search basis]]
 - [[Critical-Path heuristics]]
 - [[Delete relaxation heuristics]]
+- [[Abstraction heuristics]]
 - 
