@@ -53,8 +53,8 @@ There are two broad families:
 
 Given a property $\varphi$ we want to check (e.g. "no out-of-bounds access"), deciding $\varphi$ exactly is in general **undecidable** (Rice's theorem), so every tool **approximates** and is necessarily wrong in one direction.
 
-> [!info]
-> Rice's theorem (background) Any non-trivial semantic property of programs (i.e. a property of _what the program does_, not of how it's written) is undecidable. It's a generalization of the halting problem: if we could decide "this program never accesses out of bounds", we could also decide whether a program halts.
+> [!info] Rice's theorem (background)
+> Any non-trivial semantic property of programs (i.e. a property of _what the program does_, not of how it's written) is undecidable. It's a generalization of the halting problem: if we could decide "this program never accesses out of bounds", we could also decide whether a program halts.
 
 ### Soundness vs completeness
 A tool checking property $\varphi$ can err in one of two ways:
@@ -69,7 +69,8 @@ A tool checking property $\varphi$ can err in one of two ways:
 
 You usually can't have both, so tools pick a side. In practice bug-finding tools often favor **few false positives**, since developers quickly ignore noisy tools.
 
-> [!warning] Be careful: in the literature the meaning of _sound_/_complete_ depends on the point of view (verification vs bug finding), and some papers use them the other way around. For this course: **sound = no missed bugs**, **complete = no false alarms**.
+> [!warning] Be careful
+> In the literature the meaning of _sound_/_complete_ depends on the point of view (verification vs bug finding), and some papers use them the other way around. For this course: **sound = no missed bugs**, **complete = no false alarms**.
 
 ### Static analysis
 **Static analysis** analyzes the source (or the binary) without running it, with techniques like:
