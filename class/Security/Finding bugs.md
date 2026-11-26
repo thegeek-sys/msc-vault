@@ -247,14 +247,17 @@ Embedded firmware is hard to fuzz: there's often **no source** and **no OS** to 
 
 This connects to the research area of fuzzing embedded/ICS (Industrial Control Systems) firmware.
 
----
+![[Pasted image 20261126161103.png]]
 
+---
 ## Symbolic execution
 The goal of **symbolic execution** is to find the **input that reaches a certain program location**.
 
 The program is interpreted with **symbolic inputs** (variables like $\alpha$, $\beta$) instead of concrete values:
 - each branch adds a **path constraint** on the symbolic input
 - at the target location, the accumulated constraints are given to an **SMT solver** (e.g. Z3), which returns a **concrete input** satisfying them
+
+![[Pasted image 20261126161509.png|395]]
 
 It explores many paths **systematically**, not by luck (unlike fuzzing).
 
@@ -298,36 +301,35 @@ Symbolic execution is powerful, but it **does not scale**:
 
 When something is too hard to handle symbolically (e.g. a library call), the concrete value is used instead, so execution never gets stuck. Examples: KLEE, SAGE (Microsoft), and hybrid fuzzers like Driller (AFL + angr).
 
-### angr
-**angr** is a Python framework for binary analysis and symbolic execution.
-
-Example: find the valid verification number of a binary (find the address that prints "Number validated!", avoid the one of the failure branch):
-
-```python
-import angr
-
-project = angr.Project('main.elf')
-state   = project.factory.full_init_state()
-simgr   = project.factory.simgr(state)
-
-simgr.explore(find=GOOD_ADDR, avoid=BAD_ADDR)   # symbolic exploration
-
-s = simgr.found[0]
-print("Valid number: %s" % s.posix.dumps(0)[:12])   # stdin that reaches GOOD_ADDR
-```
-
-(the slide also adds constraints so that each of the 12 input bytes is a digit `'0'..'9'`)
-
-```
-$ python solve.py
-Valid number: 430009016964        # ~26 s
-$ ./main.elf
-Enter verification number 430009016964
-Number validated!
-```
+>[!tldr] `angr`
+>**angr** is a Python framework for binary analysis and symbolic execution.
+>
+>Example: find the valid verification number of a binary (find the address that prints "Number validated!", avoid the one of the failure branch):
+>
+>```python
+>import angr
+>
+>project = angr.Project('main.elf')
+>state   = project.factory.full_init_state()
+>simgr   = project.factory.simgr(state)
+>
+>simgr.explore(find=GOOD_ADDR, avoid=BAD_ADDR)   # symbolic exploration
+>
+>s = simgr.found[0]
+>print("Valid number: %s" % s.posix.dumps(0)[:12])   # stdin that reaches GOOD_ADDR
+>```
+>
+>(the slide also adds constraints so that each of the 12 input bytes is a digit `'0'..'9'`)
+>
+>```
+>$ python solve.py
+>Valid number: 430009016964        # ~26 s
+>$ ./main.elf
+>Enter verification number 430009016964
+>Number validated!
+>```
 
 ---
-
 ## Reverse engineering
 **Reverse engineering** recovers understanding (and sometimes source) from a binary, in order to:
 - find bugs or hidden features when no source is available

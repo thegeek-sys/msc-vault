@@ -1,0 +1,1 @@
+{"path":"files/Pasted image 20261126161509.png","text":"m Symbolic Execution X = read(); X=A y=x*2; y=2*A =y+4 =2%\\+4 z=y z m*& Je.g L @] . 2 % if(2==12){ N @ 4 bug(); }else { Symbolic Executionfl Symbolic Execution ) bug()","libVersion":"0.5.0","langs":"eng"}
