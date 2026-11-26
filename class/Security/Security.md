@@ -9,4 +9,5 @@
 - [[Memory Corruption]]
 - [[Code reuse and defenses]]
 - [[Mitigations and memory safety]]
+- [[Finding bugs]]
 - 
