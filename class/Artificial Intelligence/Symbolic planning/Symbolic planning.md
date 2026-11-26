@@ -3,4 +3,5 @@
 - [[Critical-Path heuristics]]
 - [[Delete relaxation heuristics]]
 - [[Abstraction heuristics]]
+- [[Pattern Database heuristics]]
 - 

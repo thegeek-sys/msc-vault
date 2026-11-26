@@ -3,7 +3,8 @@
   "enabledCssSnippets": [
     "images_center",
     "math-emphasis",
-    "center-images"
+    "center-images",
+    "hide-block-ids"
   ],
   "showRibbon": true
 }

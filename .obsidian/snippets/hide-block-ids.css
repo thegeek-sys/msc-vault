@@ -1,0 +1,4 @@
+/* Nasconde i block ID (^abc123) in Live Preview, tranne sulla riga dove c'è il cursore */
+.markdown-source-view.mod-cm6 .cm-line:not(.cm-active) .cm-blockid {
+  display: none;
+}

@@ -6,4 +6,5 @@
 - [[Critical-Path heuristics|Symbolic planning: Classical-Path heuristics]]
 - [[Delete relaxation heuristics|Symbolic planning: Delete relaxation heuristics]]
 - [[Abstraction heuristics|Symbolic planning: Abstraction heuristics]]
+- [[Pattern Database heuristics|Symbolic planning: Pattern database heuristics]]
 - 

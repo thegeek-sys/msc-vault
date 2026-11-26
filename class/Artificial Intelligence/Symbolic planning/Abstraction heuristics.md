@@ -3,6 +3,21 @@ Class: "[[Artificial Intelligence]]"
 Sem: WiSe 26/27
 ---
 ---
+## Index
+- [[#Introduction|Introduction]]
+- [[#Abstraction basics|Abstraction basics]]
+	- [[#Abstraction basics#Abstraction heuristic|Abstraction heuristic]]
+		- [[#Abstraction heuristic#Properties|Properties]]
+	- [[#Abstraction basics#Abstraction as quotient systems|Abstraction as quotient systems]]
+- [[#Pathologies|Pathologies]]
+	- [[#Pathologies#One-state abstraction|One-state abstraction]]
+	- [[#Pathologies#Identity abstraction|Identity abstraction]]
+	- [[#Pathologies#Perfect abstraction|Perfect abstraction]]
+- [[#Additive abstraction|Additive abstraction]]
+	- [[#Additive abstraction#Orthogonal abstractions|Orthogonal abstractions]]
+	- [[#Additive abstraction#Orthogonality and additivity|Orthogonality and additivity]]
+- [[#Refinements|Refinements]]
+---
 ## Introduction
 
 >[!tldr]
@@ -12,11 +27,14 @@ An **abstraction** of a transition system $\Theta$ is defined by a function $\al
 
 The **abstract state space $\Theta^{\alpha}$** on the image of $\alpha$ is defined by homomorphically mapping the goal states and transitions of $\Theta$ to $\Theta^{\alpha}$, thus preserving all solutions. The **abstract remaining cost**, i.e., remaining cost in $\Theta^{\alpha}$, is an estimate *$h^{\alpha}$* for remaining cost in $\Theta$. As we preserve all solutions $h^{\alpha}$ is admissible.
 
+>[!question] Is $\Theta^{\alpha}$ a classical-planning state space? I.e., is $T^{\alpha}$ deterministic?
+>**No**. $T^{\alpha}$ is not deterministic: if $(s,a,s')\in T$ and $(t,a,t')\in T$ with $\alpha(s)=\alpha(t)$ but $\alpha(s')\neq \alpha(t')$, then $a$ labels two distinct outgoing transitions from the same abstract state, namely $(\alpha(s),a,\alpha(s'))$ and $(\alpha(t),a,\alpha(t'))$
+
 ---
 ## Abstraction basics
 
 >[!example] "Logistics mal anders": One Package, Two Trucks
->![[Pasted image 20261124231729.png|300]]
+>![[logistics_mal_anders.png|300]]
 >
 >- $V$: $\{p,\ t_{A},\ t_{B}\}$
 >	- $D_{p}=\{L,R,A,B\}$
@@ -73,6 +91,49 @@ The **abstract state space $\Theta^{\alpha}$** on the image of $\alpha$ is defin
 >
 >>[!tip]
 >>A transition between concrete states is “**spurious**” if it exists in the abstract but not in the concrete state space. E.g. we can go in a single step from LRR to LLL; same for ALR to RRR etc.
+
+>[!example] Projecting Majestix
+>- $V$: $\{M,\ S_{1},\ S_{2}\}$
+>	- $D_{M}=\{MajHome,\ Bar,\ Pool,\ Shield\}$
+>	- $D_{S_{1}}=D_{S_{2}}=\{MajHome,\ Bar,\ Pool\}$
+>- $I$: $\{M=Bar,\ S_{1}=MajHome,\ S_{2}=MajHome\}$
+>- $G$: $\{M=MajHome\}$
+>- $A$: (notated as "precondition $\Rightarrow$ effect")
+>	- $lift_{x}$: "$S_{1}=x,\ S_{2}=x,\ M=x\Rightarrow M=Shield$"
+>	- $drop_{x}$: "$S_{1}=x,\ S_{2}=x,\ M=Shield\Rightarrow M=x$"
+>	- $go_{ixy}$: "$S_{i}=x\Rightarrow S_{i}=y$"
+>
+>>[!info] Reading the variables
+>>- $M$: where Majestix is; $M=Shield$ means he is **on the shield**, carried by the two shield-bearers.
+>>- $S_{1}, S_{2}$: positions of the two **shield-bearers**.
+>>
+>>$\Rightarrow$ To move Majestix, both bearers must be at his location ($lift$), and both must be at the destination ($drop$).
+>
+>>[!question] Say $\alpha$ projects onto $\{M\}$, i.e. $\alpha(s)=\alpha(t)$ iff $s$ and $t$ agree on $M$. What is $h^{\alpha}(I)$?
+>>![[Pasted image 20261126173728.png|500]]
+>>
+>>- $\Theta^{\alpha}$ has one block state for each value of $M$: $MajHome$, $Bar$, $Pool$, $Shield$ (with $S_{1}=S_{2}=*$)
+>>- $go_{ixy}$ only changes $S_{i}$ $\Rightarrow$ **self-loop** in every block
+>>- $lift_{Bar}$: $Bar\to Shield$, then $drop_{MajHome}$: $Shield\to MajHome$
+>>
+>>$\Rightarrow$ $h^{\alpha}(I)=2$
+>>
+>>>[!tip]
+>>>$h^{*}(I)=6$: both bearers have to go to the $Bar$ (2), $lift_{Bar}$ (1), both go back to $MajHome$ (2), $drop_{MajHome}$ (1).
+>>>The abstraction "forgets" where the bearers are, so $lift_{Bar}$ looks always applicable: the 4 $go$ actions are never counted.
+>
+>>[!question] And if $\alpha$ projects onto $\{S_{1},S_{2}\}$?
+>>![[Pasted image 20261126173807.png|500]]
+>>
+>>- every block state has $M=*$, so it contains a state with $M=MajHome$, i.e. a goal state
+>>- $\Rightarrow$ **every** block state is an abstract goal state
+>>
+>>$\Rightarrow$ $h^{\alpha}(I)=0$, completely uninformative (same as the one-state abstraction)
+>>
+>>>[!tip]
+>>>The same holds for any projection onto variables on which no goal is defined.
+>
+>$\Rightarrow$ This is a **pattern database abstraction**
 
 #### Properties
 
@@ -246,6 +307,13 @@ Fortunately there is no need to commit to a single $\alpha$, as we can combine s
 >[!info] **Definition** (orthogonal abstractions)
 >Let $a_{1}$ and $a_{2}$ be abstractions of $\Theta$. We say that $a_{1}$ and $a_{2}$ are **orthogonal** if no action of $\Theta$ affects both $a_{1}$ and $a_{2}$
 
+>[!example]
+>![[Pasted image 20261126191142.png]]
+>
+>$\alpha_{1}$ (yellow) and $\alpha_{2}$ (blue) are additive: every action affects **at most one** of them (in the other it is a self-loop).
+>
+>$\Rightarrow$ Each action is counted at most once in the sum: $h^{\alpha_{1}}(I)+h^{\alpha_{2}}(I)=3+2=5\leq h^{*}(I)$
+
 >[!example] Orthogonal Abstractions: Example 15-Puzzle
 >![[Pasted image 20261125010348.png]]
 >
@@ -305,6 +373,8 @@ Fortunately there is no need to commit to a single $\alpha$, as we can combine s
 >>Consistent and goal-aware $\Rightarrow$ admissible and safe.
 >>
 
+^e85763
+
 >[!info] Capiamo
 >![[bangdesk.gif]]
 >La consistency chiede che, facendo un passo $a$, la somma delle heuristic **non scenda più di $c(a)$**.
@@ -348,4 +418,55 @@ Fortunately there is no need to commit to a single $\alpha$, as we can combine s
 >>- $h^{*}(I)=6$ (drive to $L$, load both, drive to $R$, unload both)
 >>
 >>$\Rightarrow$ $h^{\alpha_{1}}(I)+h^{\alpha_{2}}(I)=4\leq6$: admissible. The drives are self-loops in both abstractions, so **no one counts them**.
+
+---
+## Refinements
+
+>[!info] **Proposition** (transitivity of abstractions)
+>Let $\Theta$ be a state space. If $\alpha$ is an abstraction of $\Theta$ and $\alpha'$ is an abstraction of $\Theta^{\alpha}$, then $\alpha'\circ \alpha$ is an abstraction of $\Theta$.
+>
+>>[!done] Proof
+>>All we need to prove is that $\alpha'\circ \alpha$ is surjective. This follows directly from surjectivity of $\alpha$ and $\alpha'$.
+
+>[!info] Terminology
+>![[Pasted image 20261126171247.png|500]]
+>
+>Let $\Theta$ be a state space, $\alpha$ an abstraction of $\Theta$, and $\alpha'$ an abstraction of $\Theta^{\alpha}$. Then:
+>- $\alpha'\circ \alpha$ is called a **coarsening** of $\alpha$
+>- $\alpha$ is called a **refinement** of $\alpha'\circ\alpha$
+
+>[!tip]
+>Abstractions are often obtained by incrementally refining or coarsening some initial abstraction until a termination criterion applies
+
+>[!example]
+>State space $\Theta$
+>![[Pasted image 20261126171347.png|400]]
+>
+>State space $\Theta^{\alpha}$ as an abstraction of $\Theta$
+>![[Pasted image 20261126171426.png|400]]
+>
+>State space $\Theta^{\alpha\circ\alpha}$ as an abstraction of $\Theta^{\alpha}$
+>![[Pasted image 20261126171440.png|400]]
+>
+>State space $\Theta^{\alpha'\circ\alpha}$ as an abstraction of $\Theta$
+>![[Pasted image 20261126171604.png|400]]
+
+>[!info] **Theorem** (refinements improve the heuristic)
+>Let $h^{\alpha}$ and $h^{\alpha''}$ be an abstraction heuristics of $\Theta$, such that $\alpha$ is a refinement of $\alpha''$. Then $h^{\alpha}$ dominates $h^{\alpha''}$, i.e., $h^{\alpha}\geq h^{\alpha''}$.
+>
+>>[!done] Proof
+>>Since $\alpha$ is a refinement of $\alpha''$, there exists a mapping $\alpha'$ such that $\alpha''=\alpha'\circ\alpha$. For any state $s$, we get:
+>>$$
+>>\begin{align}
+>>h^{\alpha''}(s)&=h^{*}_{\Theta^{\alpha''}}(\alpha''(s)) \\
+>>&=h^{*}_{\Theta^{\alpha''}}(\alpha'(\alpha(s))) \\
+>>&=h^{*}_{(\Theta^{\alpha})^{\alpha'}}(\alpha(s)) \\
+>>&=h^{\alpha'}(\alpha(s)) \\
+>>&\leq h^{*}_{\Theta^{\alpha}}(\alpha(s)) \\
+>>&=h^{\alpha}(s)
+>>\end{align}
+>>$$
+>>
+>>Where the inequality holds because $h^{\alpha'}$ is an admissible heuristic in the state space $\Theta^{\alpha}$.
+
 
