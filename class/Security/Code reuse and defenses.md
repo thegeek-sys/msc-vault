@@ -64,7 +64,6 @@ A **gadget** is a short instruction sequence ending in `ret` e.g., `pop rdi; ret
 
 The attacker, thanks to the overflow, place on the stack a sequence of gadget’s addresses. In this way each `ret` does the `pop` of the next address on the stack and jumps to it, making the stack a list of gadget to execute instead of “data”.
 
-
 >[!info]
 >È il `ret` che fa da “motore” che avanza da un gadget al successivo. Per questo si chiama _return_-oriented programming: il flusso è guidato da una catena di `ret`.
 
